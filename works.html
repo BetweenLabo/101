@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fal Uniformity - Between</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --white: #ffffff;
+            --beige: #f7f3e5;
+            --light-gray: #cccccc;
+            --black: #000000;
+            --accent: #8985cf;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--black);
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--white);
+            text-decoration: none;
+            padding: 15px 30px;
+        }
+
+        .mobile-menu .start-project-mobile {
+            border: 1px solid var(--white);
+            border-radius: 9999px;
+            padding: 15px 30px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 24px;
+            right: 48px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Section 1: Navigation -->
+    <header style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #000000;
+        padding: 24px 48px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    ">
+        <a href="/" style="display: block;">
+            <img src="./assets/Between-logo-white.png" alt="Between Logo" style="height: 52px; width: auto;">
+        </a>
+        
+        <nav style="display: flex; gap: 48px; align-items: center;">
+            <a href="/works" style="
+                font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
+                font-weight: 500;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: #ffffff;
+                text-decoration: none;
+            ">WORKS</a>
+            <a href="/about" style="
+                font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
+                font-weight: 500;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: #ffffff;
+                text-decoration: none;
+            ">ABOUT</a>
+            <a href="mailto:betweenlabo@gmail.com" style="
+                font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
+                font-weight: 500;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: #ffffff;
+                text-decoration: none;
+                border: 1px solid #ffffff;
+                border-radius: 9999px;
+                padding: 12px 20px;
+            ">START A PROJECT</a>
+        </nav>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMobileMenu()">&times;</button>
+        <a href="/works">WORKS</a>
+        <a href="/about">ABOUT</a>
+        <a href="mailto:betweenlabo@gmail.com" class="start-project-mobile">START A PROJECT</a>
+    </div>
+
+    <!-- Section 2: Client + Project Info -->
+    <section id="section2" style="
+        background-color: #000000;
+        padding: 120px 48px 80px;
+        text-align: center;
+        margin-top: 100px;
+    ">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <!-- CLIENT -->
+            <div style="margin-bottom: 40px;">
+                <p style="
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                    color: #ffffff;
+                    margin-bottom: 16px;
+                ">CLIENT:</p>
+                <img src="./assets/fal-logo-white.png" alt="fal Logo" style="width: 100px; height: auto;">
+            </div>
+
+            <!-- PROJECT -->
+            <div style="margin-bottom: 40px;">
+                <p style="
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                    color: #ffffff;
+                    margin-bottom: 16px;
+                ">PROJECT:</p>
+                <h1 style="
+                    font-family: 'Georgia', 'Times New Roman', serif;
+                    font-size: 28px;
+                    font-weight: 500;
+                    color: #ffffff;
+                    margin-bottom: 32px;
+                ">fal Uniformity</h1>
+            </div>
+
+            <!-- Vertical Divider -->
+            <div style="
+                width: 1px;
+                height: 40px;
+                background-color: #ffffff;
+                margin: 0 auto 32px;
+            "></div>
+
+            <!-- Description -->
+            <p style="
+                font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.6;
+                letter-spacing: 0.01em;
+                color: #ffffff;
+                max-width: 800px;
+            ">Human Form × Agent Function. Translate fal digital essence into wearable and tactile forms for the AI-native generation</p>
+        </div>
+    </section>
+
+    <!-- Section 3: Product Photos (Black Background) -->
+    <section id="section3" style="
+        background-color: #000000;
+        padding: 80px 48px;
+        text-align: center;
+    ">
+        <!-- Main Image -->
+        <div style="margin-bottom: 64px;">
+            <img src="./assets/Sorona-tee-fal.png" alt="Sorona Tee" style="
+                max-width: 400px;
+                width: 100%;
+                height: auto;
+            ">
+        </div>
+
+        <!-- 2x2 Grid (Staggered) -->
+        <div style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px 32px;
+            max-width: 800px;
+            margin: 0 auto;
+            align-items: start;
+        ">
+            <div style="justify-self: end;">
+                <img src="./assets/socks-fal.png" alt="fal Socks" style="
+                    max-width: 250px;
+                    width: 100%;
+                    height: auto;
+                ">
+            </div>
+            <div style="justify-self: start; margin-top: 20px;">
+                <img src="./assets/tee-socks-fal.png" alt="Tee and Socks" style="
+                    max-width: 250px;
+                    width: 100%;
+                    height: auto;
+                ">
+            </div>
+            <div style="justify-self: end; margin-top: 48px;">
+                <img src="./assets/keyboard-fal.png" alt="fal Keyboard" style="
+                    max-width: 250px;
+                    width: 100%;
+                    height: auto;
+                ">
+            </div>
+            <div style="justify-self: start; margin-top: 68px;">
+                <img src="./assets/pin-gold-fal.png" alt="Gold Pin" style="
+                    max-width: 150px;
+                    width: 100%;
+                    height: auto;
+                ">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Product Mockups (White Background) -->
+    <section id="section4" style="
+        background-color: #ffffff;
+        padding: 80px 100px;
+    ">
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        ">
+            <!-- First Row -->
+            <img src="./assets/leatherjacket-fal.jpg" alt="Leather Jacket" style="
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            ">
+            <img src="./assets/cap-fal.jpg" alt="Cap" style="
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            ">
+            <img src="./assets/sorona-tee-studio-fal.jpg" alt="Sorona Tee Studio" style="
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            ">
+            
+            <!-- Second Row (60px gap) -->
+            <img src="./assets/Magnet-cardholder-fal.png" alt="Magnet Card Holder" style="
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                margin-top: 60px;
+            ">
+            <img src="./assets/cardholder-grey-fal.png" alt="Grey Card Holder" style="
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                margin-top: 60px;
+            ">
+            <img src="./assets/mug-purple-fal.png" alt="Purple Mug" style="
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                margin-top: 60px;
+            ">
+        </div>
+    </section>
+
+    <!-- Section 7: Our Process (Black Background) -->
+    <section id="section7" style="
+        background-color: #000000;
+        padding: 100px 48px;
+        text-align: center;
+    ">
+        <h2 style="
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 80px;
+        ">Our Process</h2>
+        
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        ">
+            <!-- Step 1 -->
+            <div>
+                <h3 style="
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: #ffffff;
+                    margin-bottom: 20px;
+                ">1</h3>
+                <h4 style="
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: #cccccc;
+                    margin-bottom: 16px;
+                ">LEARN</h4>
+                <p style="
+                    font-size: 13px;
+                    line-height: 1.5;
+                    color: #cccccc;
+                    max-width: 300px;
+                    margin: 0 auto;
+                ">First, let's connect and learn as much as possible about your brand and the story that makes it unique. Through research and insight, we'll bring to light the ways we can clarify and inspire your brand.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div>
+                <h3 style="
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: #ffffff;
+                    margin-bottom: 20px;
+                ">2</h3>
+                <h4 style="
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: #cccccc;
+                    margin-bottom: 16px;
+                ">VISUALIZE</h4>
+                <p style="
+                    font-size: 13px;
+                    line-height: 1.5;
+                    color: #cccccc;
+                    max-width: 300px;
+                    margin: 0 auto;
+                ">With your intuition and our expertise, we'll explore, experiment, uncover, and craft artful solutions that set your image apart from the rest. Your instinctual visual preferences and vision will guide the way.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div>
+                <h3 style="
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: #ffffff;
+                    margin-bottom: 20px;
+                ">3</h3>
+                <h4 style="
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: #cccccc;
+                    margin-bottom: 16px;
+                ">MAKE IT REAL</h4>
+                <p style="
+                    font-size: 13px;
+                    line-height: 1.5;
+                    color: #cccccc;
+                    max-width: 300px;
+                    margin: 0 auto;
+                ">We then refine and finalize your chosen designs. We help guide the production and application and make your project a reality. Show-off your new brand with the world!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Contact Links -->
+    <section id="section8" style="
+        background-color: #f7f3e5;
+        padding: 80px 100px;
+        text-align: center;
+    ">
+        <div style="
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            align-items: center;
+        ">
+            <a href="https://www.instagram.com/betweenlabo/" target="_blank" rel="noopener noreferrer" style="
+                font-family: var(--body-font);
+                font-size: 18px;
+                font-weight: 500;
+                color: #000000;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                border-bottom: 2px solid transparent;
+            " onmouseover="this.style.color='#8985cf'; this.style.borderBottomColor='#8985cf';" 
+               onmouseout="this.style.color='#000000'; this.style.borderBottomColor='transparent';">INSTAGRAM</a>
+            
+            <a href="https://x.com/home?lang=en" target="_blank" rel="noopener noreferrer" style="
+                font-family: var(--body-font);
+                font-size: 18px;
+                font-weight: 500;
+                color: #000000;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                border-bottom: 2px solid transparent;
+            " onmouseover="this.style.color='#8985cf'; this.style.borderBottomColor='#8985cf';" 
+               onmouseout="this.style.color='#000000'; this.style.borderBottomColor='transparent';">X</a>
+            
+            <a href="mailto:betweenlabo@gmail.com" style="
+                font-family: var(--body-font);
+                font-size: 18px;
+                font-weight: 500;
+                color: #000000;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                border-bottom: 2px solid transparent;
+            " onmouseover="this.style.color='#8985cf'; this.style.borderBottomColor='#8985cf';" 
+               onmouseout="this.style.color='#000000'; this.style.borderBottomColor='transparent';">EMAIL</a>
+        </div>
+    </section>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            mobileMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Responsive handling
+        window.addEventListener('resize', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (window.innerWidth > 768) {
+                mobileMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Show/hide hamburger menu based on screen size
+        function handleResize() {
+            const nav = document.querySelector('nav');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (window.innerWidth <= 768) {
+                nav.style.display = 'none';
+                hamburger.style.display = 'flex';
+            } else {
+                nav.style.display = 'flex';
+                hamburger.style.display = 'none';
+            }
+        }
+
+        // Initial check
+        handleResize();
+        window.addEventListener('resize', handleResize);
+    </script>
+
+    <style>
+        @media (max-width: 768px) {
+            header {
+                padding: 24px 24px !important;
+            }
+            
+            #section2 {
+                padding: 120px 24px 80px !important;
+            }
+            
+            #section3 {
+                padding: 80px 24px !important;
+            }
+            
+            #section3 > div:first-child img {
+                max-width: 300px !important;
+            }
+            
+            #section3 > div:last-child {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            
+            #section3 > div:last-child div {
+                justify-self: center !important;
+                margin-top: 0 !important;
+            }
+            
+            #section4 {
+                padding: 80px 24px !important;
+            }
+            
+            #section4 > div {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            
+            #section4 img {
+                margin-top: 0 !important;
+            }
+            
+            #section7 {
+                padding: 100px 24px !important;
+            }
+            
+            #section7 > div:last-child {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            
+            #section8 {
+                padding: 80px 24px !important;
+            }
+            
+            #section8 > div {
+                flex-direction: column !important;
+                gap: 40px !important;
+            }
+        }
+    </style>
+</body>
+</html>
