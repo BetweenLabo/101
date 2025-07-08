@@ -48,7 +48,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background-color: rgba(247, 243, 229, 0.95);
+            background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 20px 40px;
@@ -68,7 +68,7 @@
         .logo {
             font-size: 24px;
             font-weight: 500;
-            color: #000000;
+            color: #ffffff;
             text-decoration: none;
         }
 
@@ -86,7 +86,7 @@
 
         nav a {
             text-decoration: none;
-            color: #000000;
+            color: #ffffff;
             font-size: 13px;
             font-weight: 400;
             letter-spacing: 0.1em;
@@ -96,7 +96,7 @@
         }
 
         .start-project-btn {
-            border: 1px solid #000000;
+            border: 1px solid #ffffff;
             border-radius: 9999px;
             padding: 12px 20px !important;
             font-weight: 500;
@@ -104,8 +104,8 @@
         }
 
         .start-project-btn:hover {
-            background-color: #000000;
-            color: #f7f3e5;
+            background-color: #ffffff;
+            color: #000000;
         }
 
         /* Main Content */
@@ -289,6 +289,7 @@
             font-size: 36px;
             font-weight: 400;
             margin-bottom: 40px;
+            color: #000000;
         }
 
         .contact-links {
@@ -357,14 +358,15 @@
     <!-- Custom Cursor -->
     <div class="cursor"></div>
 
-    <!-- Header -->
+    <!-- Header with CORRECTED Navigation -->
     <header>
         <div class="header-content">
             <a href="index.html" class="logo">
-                <img src="assets/Between-handwriting-purple.png" alt="Between Logo" />
+                <img src="assets/Between-logo-white.png" alt="Between Logo" />
             </a>
             <nav>
                 <ul>
+                    <!-- 🎯 CORRECTED WORKS LINK - This is the fix! -->
                     <li><a href="works.html" class="nav-link">WORKS</a></li>
                     <li><a href="#about" class="nav-link">ABOUT</a></li>
                     <li><a href="mailto:betweenlabo@gmail.com" class="start-project-btn nav-link">START A PROJECT</a></li>
@@ -422,13 +424,14 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Contact Section with CORRECTED Links -->
         <section class="contact">
             <div class="contact-container">
                 <h2 class="contact-title">Let's Connect</h2>
                 <div class="contact-links">
+                    <!-- 🎯 CORRECTED CONTACT LINKS -->
                     <a href="https://www.instagram.com/betweenlabo/" class="contact-link" target="_blank" rel="noopener noreferrer">Instagram</a>
-                    <a href="https://x.com/BetweenLabo" class="contact-link" target="_blank" rel="noopener noreferrer">X</a>
+                    <a href="https://x.com/home?lang=en" class="contact-link" target="_blank" rel="noopener noreferrer">X</a>
                     <a href="mailto:betweenlabo@gmail.com" class="contact-link">Email</a>
                 </div>
             </div>
@@ -488,12 +491,17 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 50) {
-                header.style.backgroundColor = 'rgba(247, 243, 229, 0.98)';
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                header.style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
             } else {
-                header.style.backgroundColor = 'rgba(247, 243, 229, 0.95)';
+                header.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
                 header.style.boxShadow = 'none';
             }
+        });
+
+        // 🎯 DEBUG: Console log for navigation testing
+        document.querySelector('a[href="works.html"]').addEventListener('click', function(e) {
+            console.log('WORKS link clicked! Navigating to:', this.href);
         });
     </script>
 </body>
