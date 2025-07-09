@@ -447,8 +447,8 @@
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
+    <!-- 自定义鼠标元素 -->
+    <div id="custom-cursor"></div>
 
     <!-- 统一响应式导航栏 -->
     <header class="navbar">
@@ -525,24 +525,53 @@
     </main>
 
     <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const navLinks = document.querySelectorAll('.nav-links a');
+        // 自定义鼠标交互逻辑
+        const cursor = document.getElementById("custom-cursor");
+        const navLinks = document.querySelectorAll(".nav-links a");
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+        // 鼠标跟随移动
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
         });
 
+        // 导航链接 hover 效果
         navLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursor.classList.add('expand');
+            link.addEventListener("mouseenter", () => {
+                document.body.classList.add("nav-hover");
             });
             
-            link.addEventListener('mouseleave', () => {
-                cursor.classList.remove('expand');
+            link.addEventListener("mouseleave", () => {
+                document.body.classList.remove("nav-hover");
             });
         });
+
+        // 背景颜色检测和鼠标图案切换
+        const observer = new MutationObserver(updateCursorStyle);
+        observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+
+        function updateCursorStyle() {
+            const bgColor = getComputedStyle(document.body).backgroundColor;
+            const isLight = isLightColor(bgColor);
+            
+            if (!document.body.classList.contains("nav-hover")) {
+                cursor.style.backgroundImage = isLight ? 
+                    "url('assets/mouse/mouse-brush-black.png')" : 
+                    "url('assets/mouse/mouse-brush-white.png')";
+            }
+        }
+
+        function isLightColor(rgb) {
+            const match = rgb.match(/\d+/g);
+            if (!match) return false;
+            
+            const [r, g, b] = match.map(Number);
+            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+            return brightness > 200;
+        }
+
+        // 初始化鼠标样式
+        window.addEventListener('load', updateCursorStyle);
 
         // Hero Slideshow
         const slides = document.querySelectorAll('.slide');
