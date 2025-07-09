@@ -31,78 +31,41 @@
             overflow-x: hidden;
         }
 
-        /* Mobile menu styles */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: var(--black);
-            z-index: 9999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .mobile-menu.active {
+        /* Image fallback styling */
+        .image-placeholder {
+            background-color: #333;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            border: 1px dashed #666;
         }
 
-        .mobile-menu a {
-            font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
-            font-weight: 500;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--white);
-            text-decoration: none;
-            padding: 15px 30px;
+        .logo-placeholder {
+            width: 100px;
+            height: 60px;
+            margin: 0 auto;
         }
 
-        .mobile-menu .start-project-mobile {
-            border: 1px solid var(--white);
-            border-radius: 9999px;
-            padding: 15px 30px;
+        .product-placeholder {
+            width: 100%;
+            height: 300px;
         }
 
-        .hamburger {
+        .mockup-placeholder {
+            width: 100%;
+            height: 400px;
+        }
+
+        /* Image error handling */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        img[src=""], img:not([src]), img[src*="placeholder"] {
             display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 2px;
-            background-color: var(--white);
-            transition: all 0.3s ease;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        .close-menu {
-            position: absolute;
-            top: 24px;
-            right: 48px;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 24px;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -121,12 +84,15 @@
         z-index: 1000;
         box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     ">
-        <a href="/" style="display: block;">
-            <img src="./assets/Between-logo-white.png" alt="Between Logo" style="height: 52px; width: auto;">
+        <a href="index.html" style="display: block;">
+            <!-- Fallback for missing logo -->
+            <img src="assets/Between-logo-white.png" alt="Between Logo" style="height: 52px; width: auto;" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div style="display: none; color: white; font-size: 24px; font-weight: bold;">Between</div>
         </a>
         
         <nav style="display: flex; gap: 48px; align-items: center;">
-            <a href="/works" style="
+            <a href="works.html" style="
                 font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
                 font-weight: 500;
                 font-size: 14px;
@@ -135,7 +101,7 @@
                 color: #ffffff;
                 text-decoration: none;
             ">WORKS</a>
-            <a href="/about" style="
+            <a href="#about" style="
                 font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
                 font-weight: 500;
                 font-size: 14px;
@@ -157,21 +123,7 @@
                 padding: 12px 20px;
             ">START A PROJECT</a>
         </nav>
-
-        <div class="hamburger" onclick="toggleMobileMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
     </header>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="close-menu" onclick="toggleMobileMenu()">&times;</button>
-        <a href="/works">WORKS</a>
-        <a href="/about">ABOUT</a>
-        <a href="mailto:betweenlabo@gmail.com" class="start-project-mobile">START A PROJECT</a>
-    </div>
 
     <!-- Section 2: Client + Project Info -->
     <section id="section2" style="
@@ -190,7 +142,14 @@
                     color: #ffffff;
                     margin-bottom: 16px;
                 ">CLIENT:</p>
-                <img src="./assets/fal-logo-white.png" alt="fal Logo" style="width: 100px; height: auto;">
+                <!-- fal Logo with fallback -->
+                <div style="display: flex; justify-content: center;">
+                    <img src="assets/fal-logo-white.png" alt="fal Logo" style="width: 100px; height: auto;" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder logo-placeholder" style="display: none;">
+                        <span>fal</span>
+                    </div>
+                </div>
             </div>
 
             <!-- PROJECT -->
@@ -240,11 +199,16 @@
     ">
         <!-- Main Image -->
         <div style="margin-bottom: 64px;">
-            <img src="./assets/Sorona-tee-fal.png" alt="Sorona Tee" style="
-                max-width: 400px;
-                width: 100%;
-                height: auto;
-            ">
+            <div style="max-width: 400px; margin: 0 auto;">
+                <img src="assets/fal-project/Sorona-tee-fal.png" alt="Sorona Tee" style="
+                    max-width: 400px;
+                    width: 100%;
+                    height: auto;
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder product-placeholder" style="display: none; max-width: 400px; margin: 0 auto;">
+                    <span>Sorona Tee Product Image</span>
+                </div>
+            </div>
         </div>
 
         <!-- 2x2 Grid (Staggered) -->
@@ -257,32 +221,44 @@
             align-items: start;
         ">
             <div style="justify-self: end;">
-                <img src="./assets/socks-fal.png" alt="fal Socks" style="
+                <img src="assets/fal-project/socks-fal.png" alt="fal Socks" style="
                     max-width: 250px;
                     width: 100%;
                     height: auto;
-                ">
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder" style="display: none; max-width: 250px; height: 200px;">
+                    <span>fal Socks</span>
+                </div>
             </div>
             <div style="justify-self: start; margin-top: 20px;">
-                <img src="./assets/tee-socks-fal.png" alt="Tee and Socks" style="
+                <img src="assets/fal-project/tee-socks-fal.png" alt="Tee and Socks" style="
                     max-width: 250px;
                     width: 100%;
                     height: auto;
-                ">
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder" style="display: none; max-width: 250px; height: 200px;">
+                    <span>Tee and Socks</span>
+                </div>
             </div>
             <div style="justify-self: end; margin-top: 48px;">
-                <img src="./assets/keyboard-fal.png" alt="fal Keyboard" style="
+                <img src="assets/fal-project/keyboard-fal.png" alt="fal Keyboard" style="
                     max-width: 250px;
                     width: 100%;
                     height: auto;
-                ">
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder" style="display: none; max-width: 250px; height: 200px;">
+                    <span>fal Keyboard</span>
+                </div>
             </div>
             <div style="justify-self: start; margin-top: 68px;">
-                <img src="./assets/pin-gold-fal.png" alt="Gold Pin" style="
+                <img src="assets/fal-project/pin-gold-fal.png" alt="Gold Pin" style="
                     max-width: 150px;
                     width: 100%;
                     height: auto;
-                ">
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder" style="display: none; max-width: 150px; height: 150px;">
+                    <span>Gold Pin</span>
+                </div>
             </div>
         </div>
     </section>
@@ -300,45 +276,75 @@
             margin: 0 auto;
         ">
             <!-- First Row -->
-            <img src="./assets/leatherjacket-fal.jpg" alt="Leather Jacket" style="
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-            ">
-            <img src="./assets/cap-fal.jpg" alt="Cap" style="
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-            ">
-            <img src="./assets/sorona-tee-studio-fal.jpg" alt="Sorona Tee Studio" style="
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-            ">
+            <div>
+                <img src="assets/fal-project/leatherjacket-fal.jpg" alt="Leather Jacket" style="
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none;">
+                    <span style="color: #666;">Leather Jacket</span>
+                </div>
+            </div>
+            <div>
+                <img src="assets/fal-project/cap-fal.jpg" alt="Cap" style="
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none;">
+                    <span style="color: #666;">Cap</span>
+                </div>
+            </div>
+            <div>
+                <img src="assets/fal-project/sorona-tee-studio-fal.jpg" alt="Sorona Tee Studio" style="
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none;">
+                    <span style="color: #666;">Sorona Tee Studio</span>
+                </div>
+            </div>
             
-            <!-- Second Row (60px gap) -->
-            <img src="./assets/Magnet-cardholder-fal.png" alt="Magnet Card Holder" style="
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-                margin-top: 60px;
-            ">
-            <img src="./assets/cardholder-grey-fal.png" alt="Grey Card Holder" style="
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-                margin-top: 60px;
-            ">
-            <img src="./assets/mug-purple-fal.png" alt="Purple Mug" style="
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-                margin-top: 60px;
-            ">
+            <!-- Second Row -->
+            <div>
+                <img src="assets/fal-project/Magnet-cardholder-fal.png" alt="Magnet Card Holder" style="
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    margin-top: 60px;
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none; margin-top: 60px;">
+                    <span style="color: #666;">Magnet Card Holder</span>
+                </div>
+            </div>
+            <div>
+                <img src="assets/fal-project/cardholder-grey-fal.png" alt="Grey Card Holder" style="
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    margin-top: 60px;
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none; margin-top: 60px;">
+                    <span style="color: #666;">Grey Card Holder</span>
+                </div>
+            </div>
+            <div>
+                <img src="assets/fal-project/mug-purple-fal.png" alt="Purple Mug" style="
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    margin-top: 60px;
+                " onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none; margin-top: 60px;">
+                    <span style="color: #666;">Purple Mug</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Section 7: Our Process (Black Background) -->
+    <!-- Section 7: Our Process -->
     <section id="section7" style="
         background-color: #000000;
         padding: 100px 48px;
@@ -480,45 +486,6 @@
         </div>
     </section>
 
-    <script>
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const hamburger = document.querySelector('.hamburger');
-            
-            mobileMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        }
-
-        // Responsive handling
-        window.addEventListener('resize', function() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const hamburger = document.querySelector('.hamburger');
-            
-            if (window.innerWidth > 768) {
-                mobileMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-
-        // Show/hide hamburger menu based on screen size
-        function handleResize() {
-            const nav = document.querySelector('nav');
-            const hamburger = document.querySelector('.hamburger');
-            
-            if (window.innerWidth <= 768) {
-                nav.style.display = 'none';
-                hamburger.style.display = 'flex';
-            } else {
-                nav.style.display = 'flex';
-                hamburger.style.display = 'none';
-            }
-        }
-
-        // Initial check
-        handleResize();
-        window.addEventListener('resize', handleResize);
-    </script>
-
     <style>
         @media (max-width: 768px) {
             header {
@@ -533,20 +500,6 @@
                 padding: 80px 24px !important;
             }
             
-            #section3 > div:first-child img {
-                max-width: 300px !important;
-            }
-            
-            #section3 > div:last-child {
-                grid-template-columns: 1fr !important;
-                gap: 40px !important;
-            }
-            
-            #section3 > div:last-child div {
-                justify-self: center !important;
-                margin-top: 0 !important;
-            }
-            
             #section4 {
                 padding: 80px 24px !important;
             }
@@ -554,10 +507,6 @@
             #section4 > div {
                 grid-template-columns: 1fr !important;
                 gap: 40px !important;
-            }
-            
-            #section4 img {
-                margin-top: 0 !important;
             }
             
             #section7 {
