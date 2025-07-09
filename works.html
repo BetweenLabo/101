@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Between - Beyond Boundaries, Within Balance</title>
+    <title>fal Uniformity - Between</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --white: #ffffff;
+            --beige: #f7f3e5;
+            --light-gray: #cccccc;
+            --black: #000000;
+            --accent: #8985cf;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,37 +25,153 @@
         }
 
         body {
-            font-family: "Helvetica Neue", "Inter", "Satoshi", sans-serif;
-            background-color: #000000;
-            color: #000000;
-            cursor: none;
+            font-family: var(--body-font);
+            background-color: var(--black);
+            color: var(--white);
             overflow-x: hidden;
-            animation: bodyFadeIn 0.5s ease-in forwards;
+            cursor: none; /* 隐藏默认鼠标指针 */
         }
 
-        @keyframes bodyFadeIn {
-            from { background-color: #000000; }
-            to { background-color: #f7f3e5; }
-        }
-
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 12px;
-            height: 12px;
-            background-color: #8985cf;
-            border-radius: 50%;
+        /* 自定义鼠标动画 */
+        .custom-cursor {
             pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.3s ease;
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: url('assets/images/mouse-brush-white.png') no-repeat center center;
+            background-size: contain;
+            z-index: 10000;
+            mix-blend-mode: screen;
+            transition: transform 0.08s ease, opacity 0.3s ease;
             transform: translate(-50%, -50%);
+            opacity: 1;
         }
 
-        .cursor.expand {
-            transform: translate(-50%, -50%) scale(4);
+        /* 回退图片路径 */
+        .custom-cursor {
+            background-image: url('assets/images/mouse-brush-white.png'), url('assets/mouse-animation.jpg');
         }
 
-        /* 响应式导航栏样式 */
+        /* Hover 导航栏时的黑色图案 */
+        .custom-cursor.nav-hover {
+            background-image: url('assets/images/mouse-brush-black.png'), url('assets/mouse-animation-black.jpg');
+            mix-blend-mode: normal;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* 在白色背景区域使用黑色图案 */
+        .white-bg .custom-cursor {
+            background-image: url('assets/images/mouse-brush-black.png');
+            mix-blend-mode: multiply;
+        }
+
+        /* 移动设备隐藏自定义鼠标 */
+        @media (hover: none) and (pointer: coarse) {
+            body {
+                cursor: auto;
+            }
+            
+            .custom-cursor {
+                display: none;
+            }
+        }
+
+        /* 针对触摸设备的额外检查 */
+        @media (max-width: 1024px) {
+            .custom-cursor {
+                display: none;
+            }
+            
+            body {
+                cursor: auto;
+            }
+        }
+
+        /* Logo 链接样式 */
+        .logo-link {
+            display: block;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-link:hover .logo {
+            transform: scale(1.05);
+        }
+
+        /* 响应式图片统一样式 */
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        /* 图片容器样式 */
+        .image-container {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 产品图片容器 */
+        .product-image-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* 小产品图片容器 */
+        .small-product-container {
+            max-width: 250px;
+            width: 100%;
+        }
+
+        /* 迷你产品图片容器 */
+        .mini-product-container {
+            max-width: 150px;
+            width: 100%;
+        }
+
+        /* Mockup 图片容器 */
+        .mockup-container {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* Image fallback styling */
+        .image-placeholder {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            border: 1px dashed #666;
+        }
+
+        .logo-placeholder {
+            width: 100px;
+            height: 60px;
+            margin: 0 auto;
+        }
+
+        .product-placeholder {
+            width: 100%;
+            height: 300px;
+        }
+
+        .mockup-placeholder {
+            width: 100%;
+            height: 400px;
+        }
+
+        /* Image error handling */
+        img[src=""], img:not([src]), img[src*="placeholder"] {
+            display: none;
+        }
+
+        /* 统一响应式导航栏样式 */
         .navbar {
             position: fixed;
             top: 0;
@@ -57,8 +186,7 @@
             backdrop-filter: blur(10px);
             z-index: 1000;
             transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 0.5s ease-in 0.5s forwards;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .navbar-container {
@@ -95,6 +223,11 @@
             padding: 4px 8px;
         }
 
+        .nav-links a:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
         .start-project-btn {
             border: 1px solid #ffffff;
             border-radius: 9999px;
@@ -108,225 +241,114 @@
             color: #000000;
         }
 
-        /* Main Content */
-        main {
-            margin-top: calc(6vw + 3vw); /* Logo height + padding */
-            min-margin-top: 90px;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 40px 60px;
-            text-align: left;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .slogan {
-            font-family: "Circular Std", "Suisse Int'l", "Manrope", sans-serif;
-            font-size: 48px;
-            font-weight: 400;
-            letter-spacing: 0em;
-            line-height: 1.3;
-            color: #000000;
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeIn 1s ease-in 0.5s forwards;
-        }
-
-        .cta-button {
-            background-color: #f48d45;
-            color: #000000;
-            padding: 16px 32px;
-            border: none;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            opacity: 0;
-            animation: fadeIn 1s ease-in 1s forwards;
-        }
-
-        .cta-button:hover {
-            background-color: #e67c2f;
-            transform: translateY(-2px);
-        }
-
-        /* Hero Slideshow */
-        .hero-slideshow {
-            max-width: 1280px;
-            margin: 80px auto;
-            padding: 0 40px;
-            position: relative;
-            height: auto;
-            min-height: 600px;
-            background-color: #f7f3e5;
-            border-radius: 12px;
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeIn 1s ease-in 1s forwards;
-        }
-
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background-size: cover;
-            background-position: center;
-            border-radius: 12px;
-        }
-
-        .slide.active {
-            opacity: 1;
-        }
-
-        /* Slide Images */
-        .slide1 { background-image: url('assets/slides/slide1.jpg'); }
-        .slide2 { background-image: url('assets/slides/slide2.jpg'); }
-        .slide3 { background-image: url('assets/slides/slide3.jpg'); }
-        .slide4 { background-image: url('assets/slides/slide4.jpg'); }
-        .slide5 { background-image: url('assets/slides/slide5.jpg'); }
-
-        /* Fallback gradients */
-        .slide1:not([style*="background-image"]) { background-image: linear-gradient(45deg, #8985cf, #f48d45); }
-        .slide2:not([style*="background-image"]) { background-image: linear-gradient(135deg, #f48d45, #8985cf); }
-        .slide3:not([style*="background-image"]) { background-image: linear-gradient(225deg, #8985cf, #f7f3e5); }
-        .slide4:not([style*="background-image"]) { background-image: linear-gradient(315deg, #f48d45, #f7f3e5); }
-        .slide5:not([style*="background-image"]) { background-image: linear-gradient(90deg, #8985cf, #f48d45); }
-
-        /* Our Process Section */
-        .our-process {
-            background-color: #f48d45;
-            padding: 100px 40px;
-            color: #000000;
-        }
-
-        .process-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .process-title {
-            font-size: 48px;
-            font-weight: 300;
-            margin-bottom: 80px;
-            color: #ffffff;
-        }
-
-        .process-steps {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: stretch;
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .process-step {
-            flex: 1;
-            text-align: center;
+        /* Section 3 新样式 */
+        .section-3 {
+            background-color: black;
+            padding: 4vw 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
         }
 
-        .step-number {
-            font-size: 72px;
-            font-weight: 200;
-            color: #ffffff;
-            margin-bottom: 20px;
+        /* 主图容器 */
+        .main-image-container {
+            width: 90vw;
+            max-width: 1020px;
+            aspect-ratio: 1020 / 630;
+            margin-bottom: 4vw;
         }
 
-        .step-title {
-            font-size: 24px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 20px;
-            color: #ffffff;
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
         }
 
-        .step-description {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #ffffff;
-            max-width: 300px;
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* 小图网格 */
+        .grid-image-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2vw;
+            width: 90vw;
+            max-width: 1020px;
+        }
+
+        .grid-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 6px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+        }
+
+        /* 响应式：移动端一列显示 */
+        @media (max-width: 768px) {
+            .section-3 {
+                padding: 6vw 0;
+            }
+            
+            .main-image-container {
+                width: 95vw;
+                margin-bottom: 6vw;
+            }
+            
+            .grid-image-container {
+                grid-template-columns: 1fr;
+                gap: 4vw;
+                width: 95vw;
+            }
+            
+            .grid-image:hover {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* 超小屏幕优化 */
+        @media (max-width: 480px) {
+            .section-3 {
+                padding: 8vw 0;
+            }
+            
+            .grid-image-container {
+                gap: 5vw;
+            }
+        }
+
+        .mockup-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Contact Section */
-        .contact {
-            padding: 100px 40px;
-            text-align: center;
-            background-color: #f7f3e5;
-        }
-
-        .contact-container {
-            max-width: 800px;
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .contact-title {
-            font-size: 36px;
-            font-weight: 400;
-            margin-bottom: 40px;
-            color: #000000;
         }
 
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
+            gap: 80px;
+            align-items: center;
         }
 
-        .contact-link {
-            color: #000000;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 12px 24px;
-            border: 1px solid #000000;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-link:hover {
-            background-color: #000000;
-            color: #f7f3e5;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 响应式设计 */
-        
-        /* 平板端 (768px - 1024px) */
+        /* 平板端适配 (768px - 1024px) */
         @media (min-width: 768px) and (max-width: 1024px) {
             .navbar {
                 padding: 1.2vw 4vw;
@@ -336,12 +358,31 @@
                 gap: 1.5vw;
             }
             
-            main {
-                margin-top: calc(5vw + 2.4vw);
+            .mockup-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+                max-width: 800px;
+            }
+            
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+            
+            .contact-links {
+                gap: 50px;
+            }
+            
+            .product-image-container {
+                max-width: 350px;
+            }
+            
+            .small-product-container {
+                max-width: 200px;
             }
         }
 
-        /* 手机端 (小于768px) */
+        /* 手机端适配 (小于768px) */
         @media (max-width: 767px) {
             .navbar {
                 padding: 3vw 4vw;
@@ -371,60 +412,58 @@
                 font-size: clamp(11px, 3vw, 14px);
             }
             
-            main {
-                margin-top: 160px;
+            /* 网格布局调整 */
+            .mockup-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
             }
             
-            .slogan {
-                font-size: 32px;
-            }
-
-            .process-steps {
-                flex-direction: column;
+            .process-grid {
+                grid-template-columns: 1fr;
                 gap: 40px;
             }
-
-            .process-step {
-                flex: none;
-            }
-
+            
             .contact-links {
                 flex-direction: column;
-                align-items: center;
-                gap: 20px;
+                gap: 30px;
             }
             
-            .step-number {
-                font-size: 48px;
+            /* 图片容器调整 */
+            .product-image-container {
+                max-width: 300px;
             }
             
-            .step-title {
-                font-size: 20px;
+            /* 移除交错效果 - 已不再使用staggered grid */
+            
+            /* 文字大小调整 */
+            h1 {
+                font-size: 24px !important;
             }
             
-            .step-description {
-                font-size: 14px;
+            h2 {
+                font-size: 28px !important;
             }
             
-            .contact-title {
-                font-size: 28px;
+            /* 内容区域调整 */
+            #section2 {
+                padding: 120px 20px 60px !important;
+                margin-top: 160px !important;
             }
             
-            .process-title {
-                font-size: 32px;
-                margin-bottom: 60px;
+            #section4 {
+                padding: 60px 20px !important;
             }
             
-            .our-process {
-                padding: 80px 20px;
+            #section7 {
+                padding: 80px 20px !important;
             }
             
-            .contact {
-                padding: 80px 20px;
+            #section8 {
+                padding: 60px 20px !important;
             }
         }
 
-        /* 超小屏幕 (小于480px) */
+        /* 超小屏幕适配 (小于480px) */
         @media (max-width: 479px) {
             .navbar {
                 padding: 4vw 3vw;
@@ -443,6 +482,86 @@
             .nav-links a {
                 font-size: clamp(10px, 3.5vw, 12px);
             }
+            
+            .product-image-container {
+                max-width: 250px;
+            }
+        }
+
+        /* 新增：Our Process 和 Contact 的响应式样式 */
+        .process-steps {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        /* 移动端 Our Process 和 Contact 适配 */
+        @media (max-width: 767px) {
+            /* Our Process 移动端样式 */
+            .our-process {
+                padding: 80px 20px !important;
+            }
+            
+            .process-title {
+                font-size: 32px !important;
+                margin-bottom: 60px !important;
+            }
+            
+            .process-steps {
+                flex-direction: column !important;
+                gap: 40px !important;
+            }
+            
+            .process-step {
+                flex: none !important;
+            }
+            
+            .step-number {
+                font-size: 48px !important;
+            }
+            
+            .step-title {
+                font-size: 20px !important;
+            }
+            
+            .step-description {
+                font-size: 14px !important;
+            }
+            
+            /* Contact 移动端样式 */
+            .contact {
+                padding: 80px 20px !important;
+            }
+            
+            .contact-title {
+                font-size: 28px !important;
+            }
+            
+            .contact-links {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 20px !important;
+            }
         }
     </style>
 </head>
@@ -453,7 +572,9 @@
     <!-- 统一响应式导航栏 -->
     <header class="navbar">
         <div class="navbar-container">
-            <img src="assets/Between-logo-white.png" alt="Between Logo" class="logo" />
+            <a href="index.html" class="logo-link">
+                <img src="assets/Between-logo-white.png" alt="Between Logo" class="logo" />
+            </a>
             <nav class="nav-links">
                 <a href="works.html">WORKS</a>
                 <a href="#about">ABOUT</a>
@@ -462,166 +583,411 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1 class="slogan">Beyond Boundaries,<br>Within Balance</h1>
-            <a href="mailto:betweenlabo@gmail.com" class="cta-button">START A PROJECT</a>
-        </section>
-
-        <!-- Hero Slideshow -->
-        <section class="hero-slideshow">
-            <div class="slideshow-container">
-                <div class="slide slide1"></div>
-                <div class="slide slide2"></div>
-                <div class="slide slide3"></div>
-                <div class="slide slide4"></div>
-                <div class="slide slide5"></div>
-            </div>
-        </section>
-
-        <!-- Our Process Section -->
-        <section class="our-process">
-            <div class="process-container">
-                <h2 class="process-title">Our Process</h2>
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3 class="step-title">Brief</h3>
-                        <p class="step-description">
-                            First, let's connect and learn as much as possible about your brand and the story that makes it unique. Through research and insight, we'll bring to light the ways we can clarify and inspire your brand.
-                        </p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3 class="step-title">Co-create</h3>
-                        <p class="step-description">
-                            With your intuition and our expertise, we'll explore, experiment, uncover, and craft artful solutions that set your image apart from the rest. Your instinctual visual preferences and vision will guide the way.
-                        </p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3 class="step-title">Deliver</h3>
-                        <p class="step-description">
-                            We then refine and finalize your chosen designs. We help guide the production and application and make your project a reality. Show off your new brand with the world!
-                        </p>
+    <!-- Section 2: Client + Project Info -->
+    <section id="section2" style="
+        background-color: #000000;
+        padding: 120px 48px 80px;
+        text-align: center;
+        margin-top: 100px;
+    ">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <!-- CLIENT -->
+            <div style="margin-bottom: 40px;">
+                <p style="
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                    color: #ffffff;
+                    margin-bottom: 16px;
+                ">CLIENT:</p>
+                <!-- fal Logo with fallback -->
+                <div style="display: flex; justify-content: center;">
+                    <img src="assets/fal-logo-white.png" alt="fal Logo" style="width: 100px; height: auto;" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder logo-placeholder" style="display: none;">
+                        <span>fal</span>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Contact Section -->
-        <section class="contact">
-            <div class="contact-container">
-                <h2 class="contact-title">Let's Connect</h2>
-                <div class="contact-links">
-                    <a href="https://www.instagram.com/betweenlabo/" class="contact-link" target="_blank" rel="noopener noreferrer">Instagram</a>
-                    <a href="https://x.com/home?lang=en" class="contact-link" target="_blank" rel="noopener noreferrer">X</a>
-                    <a href="mailto:betweenlabo@gmail.com" class="contact-link">Email</a>
+            <!-- PROJECT -->
+            <div style="margin-bottom: 40px;">
+                <p style="
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                    color: #ffffff;
+                    margin-bottom: 16px;
+                ">PROJECT:</p>
+                <h1 style="
+                    font-family: 'Georgia', 'Times New Roman', serif;
+                    font-size: 28px;
+                    font-weight: 500;
+                    color: #ffffff;
+                    margin-bottom: 32px;
+                ">fal Uniformity</h1>
+            </div>
+
+            <!-- Vertical Divider -->
+            <div style="
+                width: 1px;
+                height: 40px;
+                background-color: #ffffff;
+                margin: 0 auto 32px;
+            "></div>
+
+            <!-- Description -->
+            <p style="
+                font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.6;
+                letter-spacing: 0.01em;
+                color: #ffffff;
+                max-width: 800px;
+            ">Human Form × Agent Function. Translate fal digital essence into wearable and tactile forms for the AI-native generation</p>
+        </div>
+    </section>
+
+    <!-- Section 3: Product Photos (Black Background) - 新设计 -->
+    <section class="section-3">
+        <!-- 主图 -->
+        <div class="main-image-container">
+            <img src="assets/images/sorona-tee-fal.png" alt="fal tee on rocks" class="main-image" 
+                 onerror="this.src='assets/fal-project/Sorona-tee-fal.png'" />
+        </div>
+        <!-- 小图网格 -->
+        <div class="grid-image-container">
+            <img src="assets/images/socks-fal.png" alt="fal socks" class="grid-image" 
+                 onerror="this.src='assets/fal-project/socks-fal.png'" />
+            <img src="assets/images/tee-socks-fal.png" alt="fal tee and socks on beach" class="grid-image" 
+                 onerror="this.src='assets/fal-project/tee-socks-fal.png'" />
+            <img src="assets/images/keyboard-fal.png" alt="fal keyboard key" class="grid-image" 
+                 onerror="this.src='assets/fal-project/keyboard-fal.png'" />
+            <img src="assets/images/pin-gold-fal.png" alt="fal gold pin" class="grid-image" 
+                 onerror="this.src='assets/fal-project/pin-gold-fal.png'" />
+        </div>
+    </section>
+
+    <!-- Section 4: Product Mockups (White Background) -->
+    <section id="section4" style="
+        background-color: #ffffff;
+        padding: 80px 100px;
+    ">
+        <div class="mockup-grid">
+            <!-- First Row -->
+            <div class="mockup-container">
+                <img src="assets/fal-project/leatherjacket-fal.jpg" alt="Leather Jacket" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none;">
+                    <span style="color: #666;">Leather Jacket</span>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="mockup-container">
+                <img src="assets/fal-project/cap-fal.jpg" alt="Cap" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none;">
+                    <span style="color: #666;">Cap</span>
+                </div>
+            </div>
+            <div class="mockup-container">
+                <img src="assets/fal-project/sorona-tee-studio-fal.jpg" alt="Sorona Tee Studio" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none;">
+                    <span style="color: #666;">Sorona Tee Studio</span>
+                </div>
+            </div>
+            
+            <!-- Second Row -->
+            <div class="mockup-container" style="margin-top: 60px;">
+                <img src="assets/fal-project/Magnet-cardholder-fal.png" alt="Magnet Card Holder" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none;">
+                    <span style="color: #666;">Magnet Card Holder</span>
+                </div>
+            </div>
+            <div class="mockup-container" style="margin-top: 60px;">
+                <img src="assets/fal-project/cardholder-grey-fal.png" alt="Grey Card Holder" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none;">
+                    <span style="color: #666;">Grey Card Holder</span>
+                </div>
+            </div>
+            <div class="mockup-container" style="margin-top: 60px;">
+                <img src="assets/fal-project/mug-purple-fal.png" alt="Purple Mug" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder mockup-placeholder" style="display: none;">
+                    <span style="color: #666;">Purple Mug</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Process Section - Cloned from index.html -->
+    <section class="our-process" style="
+        background-color: #f48d45;
+        padding: 100px 40px;
+        color: #000000;
+    ">
+        <div class="process-container" style="
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        ">
+            <h2 class="process-title" style="
+                font-size: 48px;
+                font-weight: 300;
+                margin-bottom: 80px;
+                color: #ffffff;
+            ">Our Process</h2>
+            
+            <div class="process-steps" style="
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: stretch;
+                gap: 40px;
+                margin-top: 60px;
+            ">
+                <div class="process-step" style="
+                    flex: 1;
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 20px;
+                ">
+                    <div class="step-number" style="
+                        font-size: 72px;
+                        font-weight: 200;
+                        color: #ffffff;
+                        margin-bottom: 20px;
+                    ">1</div>
+                    <h3 class="step-title" style="
+                        font-size: 24px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.1em;
+                        margin-bottom: 20px;
+                        color: #ffffff;
+                    ">Brief</h3>
+                    <p class="step-description" style="
+                        font-size: 16px;
+                        line-height: 1.6;
+                        color: #ffffff;
+                        max-width: 300px;
+                        margin: 0 auto;
+                    ">
+                        First, let's connect and learn as much as possible about your brand and the story that makes it unique. Through research and insight, we'll bring to light the ways we can clarify and inspire your brand.
+                    </p>
+                </div>
+                <div class="process-step" style="
+                    flex: 1;
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 20px;
+                ">
+                    <div class="step-number" style="
+                        font-size: 72px;
+                        font-weight: 200;
+                        color: #ffffff;
+                        margin-bottom: 20px;
+                    ">2</div>
+                    <h3 class="step-title" style="
+                        font-size: 24px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.1em;
+                        margin-bottom: 20px;
+                        color: #ffffff;
+                    ">Co-create</h3>
+                    <p class="step-description" style="
+                        font-size: 16px;
+                        line-height: 1.6;
+                        color: #ffffff;
+                        max-width: 300px;
+                        margin: 0 auto;
+                    ">
+                        With your intuition and our expertise, we'll explore, experiment, uncover, and craft artful solutions that set your image apart from the rest. Your instinctual visual preferences and vision will guide the way.
+                    </p>
+                </div>
+                <div class="process-step" style="
+                    flex: 1;
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 20px;
+                ">
+                    <div class="step-number" style="
+                        font-size: 72px;
+                        font-weight: 200;
+                        color: #ffffff;
+                        margin-bottom: 20px;
+                    ">3</div>
+                    <h3 class="step-title" style="
+                        font-size: 24px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.1em;
+                        margin-bottom: 20px;
+                        color: #ffffff;
+                    ">Deliver</h3>
+                    <p class="step-description" style="
+                        font-size: 16px;
+                        line-height: 1.6;
+                        color: #ffffff;
+                        max-width: 300px;
+                        margin: 0 auto;
+                    ">
+                        We then refine and finalize your chosen designs. We help guide the production and application and make your project a reality. Show off your new brand with the world!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section - Cloned from index.html -->
+    <section class="contact" style="
+        padding: 100px 40px;
+        text-align: center;
+        background-color: #f7f3e5;
+    ">
+        <div class="contact-container" style="
+            max-width: 800px;
+            margin: 0 auto;
+        ">
+            <h2 class="contact-title" style="
+                font-size: 36px;
+                font-weight: 400;
+                margin-bottom: 40px;
+                color: #000000;
+            ">Let's Connect</h2>
+            <div class="contact-links" style="
+                display: flex;
+                justify-content: center;
+                gap: 40px;
+                margin-top: 40px;
+            ">
+                <a href="https://www.instagram.com/betweenlabo/" class="contact-link" target="_blank" rel="noopener noreferrer" style="
+                    color: #000000;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    padding: 12px 24px;
+                    border: 1px solid #000000;
+                    border-radius: 50px;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.backgroundColor='#000000'; this.style.color='#f7f3e5';" 
+                   onmouseout="this.style.backgroundColor='transparent'; this.style.color='#000000';">Instagram</a>
+                <a href="https://x.com/home?lang=en" class="contact-link" target="_blank" rel="noopener noreferrer" style="
+                    color: #000000;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    padding: 12px 24px;
+                    border: 1px solid #000000;
+                    border-radius: 50px;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.backgroundColor='#000000'; this.style.color='#f7f3e5';" 
+                   onmouseout="this.style.backgroundColor='transparent'; this.style.color='#000000';">X</a>
+                <a href="mailto:betweenlabo@gmail.com" class="contact-link" style="
+                    color: #000000;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    padding: 12px 24px;
+                    border: 1px solid #000000;
+                    border-radius: 50px;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.backgroundColor='#000000'; this.style.color='#f7f3e5';" 
+                   onmouseout="this.style.backgroundColor='transparent'; this.style.color='#000000';">Email</a>
+            </div>
+        </div>
+    </section>
 
     <script>
-        // Custom cursor debug and initialization
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔧 Initializing custom cursor...');
+        // 自定义鼠标动画效果
+        (function() {
+            // 检查是否为桌面设备
+            const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
             
-            // Check if cursor element exists
-            const cursor = document.getElementById("custom-cursor");
-            if (!cursor) {
-                console.error('❌ Custom cursor element not found!');
-                return;
-            }
-            console.log('✅ Custom cursor element found');
-            
-            // Test image loading
-            const testImage = new Image();
-            testImage.onload = () => console.log('✅ Mouse brush image loaded successfully');
-            testImage.onerror = () => console.error('❌ Failed to load: assets/mouse/mouse-brush-white.png');
-            testImage.src = 'assets/mouse/mouse-brush-white.png';
-            
-            // Mouse tracking
-            document.addEventListener("mousemove", (e) => {
-                cursor.style.left = `${e.clientX}px`;
-                cursor.style.top = `${e.clientY}px`;
-                cursor.style.opacity = '1';
-                
-                // Background detection
-                const el = document.elementFromPoint(e.clientX, e.clientY);
-                if (el) {
-                    const bgColor = window.getComputedStyle(el).backgroundColor;
-                    const lightBackgrounds = ["rgb(255, 255, 255)", "rgb(247, 243, 229)", "rgb(244, 141, 69)"];
+            if (!isTouchDevice && window.innerWidth > 1024) {
+                // 创建自定义鼠标元素
+                const cursor = document.createElement("div");
+                cursor.classList.add("custom-cursor");
+                document.body.appendChild(cursor);
+
+                // 鼠标移动事件
+                document.addEventListener("mousemove", (e) => {
+                    cursor.style.left = `${e.clientX}px`;
+                    cursor.style.top = `${e.clientY}px`;
                     
-                    // Check if currently hovering nav links
-                    const isHoveringNav = el.closest("nav a") || el.closest(".logo-link");
+                    // 检测背景颜色并调整鼠标图案
+                    const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
+                    const bgColor = window.getComputedStyle(elementBelow).backgroundColor;
                     
-                    if (!isHoveringNav) {
-                        if (lightBackgrounds.some(color => bgColor.includes(color)) || 
-                            el.closest('.contact') || 
-                            el.closest('.our-process')) {
-                            cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-black.png')";
-                        } else {
-                            cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-white.png')";
-                        }
+                    // 如果是白色背景区域，切换到黑色图案
+                    if (bgColor === 'rgb(255, 255, 255)' || bgColor === 'rgba(255, 255, 255, 1)' || 
+                        elementBelow.closest('#section4') || elementBelow.closest('.contact')) {
+                        cursor.classList.add('white-bg');
+                    } else {
+                        cursor.classList.remove('white-bg');
                     }
-                }
-            });
-
-            // Navigation hover effects
-            const navLinks = document.querySelectorAll("nav a, .logo-link");
-            console.log(`📋 Found ${navLinks.length} navigation links`);
-            
-            navLinks.forEach(link => {
-                link.addEventListener("mouseenter", () => {
-                    console.log('🖱️ Nav hover: scaling cursor');
-                    cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-black.png')";
-                    cursor.style.transform = "translate(-50%, -50%) scale(2)";
                 });
-                link.addEventListener("mouseleave", () => {
-                    console.log('🖱️ Nav leave: resetting cursor');
-                    cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-white.png')";
-                    cursor.style.transform = "translate(-50%, -50%) scale(1)";
+
+                // 导航链接 hover 效果
+                const navLinks = document.querySelectorAll(".nav-links a, .logo-link");
+                
+                navLinks.forEach(link => {
+                    link.addEventListener("mouseenter", () => {
+                        cursor.classList.add("nav-hover");
+                    });
+                    
+                    link.addEventListener("mouseleave", () => {
+                        cursor.classList.remove("nav-hover");
+                    });
                 });
-            });
 
-            // Show cursor immediately
-            cursor.style.opacity = '1';
-            console.log('🎉 Custom cursor initialized successfully!');
-        });
+                // 鼠标进入和离开页面时的处理
+                document.addEventListener("mouseenter", () => {
+                    cursor.style.opacity = "1";
+                });
 
-        // Hero Slideshow
-        const slides = document.querySelectorAll('.slide');
-        let currentSlide = 0;
-        let isTransitioning = false;
+                document.addEventListener("mouseleave", () => {
+                    cursor.style.opacity = "0";
+                });
 
-        function nextSlide() {
-            if (isTransitioning) return;
-            
-            isTransitioning = true;
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            
-            setTimeout(() => {
-                slides[currentSlide].classList.add('active');
-                isTransitioning = false;
-            }, 300);
-        }
+                // 页面滚动时保持鼠标效果
+                window.addEventListener("scroll", () => {
+                    // 可以在这里添加滚动相关的鼠标效果逻辑
+                });
 
-        function startSlideshow() {
-            slides[currentSlide].classList.add('active');
-            setInterval(() => {
-                nextSlide();
-            }, 1100);
-        }
+                // 窗口大小改变时检查是否需要隐藏鼠标
+                window.addEventListener("resize", () => {
+                    if (window.innerWidth <= 1024) {
+                        cursor.style.display = "none";
+                        document.body.style.cursor = "auto";
+                    } else {
+                        cursor.style.display = "block";
+                        document.body.style.cursor = "none";
+                    }
+                });
+            }
+        })();
 
-        setTimeout(() => {
-            startSlideshow();
-        }, 1500);
-
-        // Header scroll effect
+        // 导航栏滚动效果
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
@@ -629,13 +995,18 @@
                 navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
             } else {
                 navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
-                navbar.style.boxShadow = 'none';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
             }
         });
 
-        // Debug: Console log for navigation testing
+        // Logo 点击调试
+        document.querySelector('.logo-link').addEventListener('click', function(e) {
+            console.log('Logo clicked! Navigating to:', this.href);
+        });
+
+        // 导航链接调试
         document.querySelector('a[href="works.html"]').addEventListener('click', function(e) {
-            console.log('WORKS link clicked! Navigating to:', this.href);
+            console.log('WORKS link clicked! Current page:', this.href);
         });
     </script>
 </body>
