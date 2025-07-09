@@ -32,6 +32,14 @@
             line-height: 1.5;
         }
 
+        /* Global Image Styles - Responsive for All Images */
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-width: 100%;
+        }
+
         /* Header - Smaller Logo to Match Reference */
         header {
             position: fixed;
@@ -45,6 +53,10 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
+        }
+
+        .logo {
+            max-width: 120px; /* Container max-width for logo */
         }
 
         .logo img {
@@ -106,10 +118,14 @@
             font-weight: 400;
         }
 
-        .client-logo {
-            width: 80px;
-            height: auto;
+        .client-logo-container {
+            max-width: 100px; /* Container max-width for client logo */
             margin: 0 auto;
+        }
+
+        .client-logo {
+            width: 100%;
+            height: auto;
         }
 
         .project-section {
@@ -152,7 +168,7 @@
             margin: 0 auto;
         }
 
-        /* Section 3: Main Image + 4 Small Images Grid - Matched Layout */
+        /* Section 3: Main Image + 4 Small Images Grid - Responsive Containers */
         .product-showcase {
             background-color: #000000;
             padding: 60px 32px 80px;
@@ -163,9 +179,14 @@
             margin-bottom: 60px;
         }
 
-        .main-product img {
+        .main-product-container {
+            max-width: 700px; /* Container max-width for main image */
             width: 60vw;
-            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .main-product img {
+            width: 100%;
             height: auto;
             border-radius: 8px;
         }
@@ -174,13 +195,15 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
-            max-width: 600px;
+            max-width: 600px; /* Container max-width for grid */
             margin: 0 auto;
             align-items: start;
         }
 
         .product-item {
+            max-width: 280px; /* Container max-width for each grid item */
             width: 100%;
+            margin: 0 auto;
         }
 
         .product-item img {
@@ -297,21 +320,30 @@
             color: #f7f3e5;
         }
 
-        /* Responsive Design */
+        /* Responsive Design - Updated with Container Max-widths */
         @media (max-width: 1024px) {
-            .main-product img {
+            .main-product-container {
                 width: 70vw;
+                max-width: 600px;
             }
             
             .product-grid {
                 max-width: 500px;
                 gap: 20px;
             }
+
+            .product-item {
+                max-width: 240px;
+            }
         }
 
         @media (max-width: 768px) {
             header {
                 padding: 16px 20px;
+            }
+
+            .logo {
+                max-width: 100px;
             }
 
             nav {
@@ -326,6 +358,10 @@
                 padding: 80px 20px 60px;
             }
 
+            .client-logo-container {
+                max-width: 80px;
+            }
+
             .project-title {
                 font-size: 28px;
             }
@@ -338,13 +374,18 @@
                 padding: 40px 20px 60px;
             }
 
-            .main-product img {
-                width: 90vw;
+            .main-product-container {
+                width: 85vw;
+                max-width: 500px;
             }
 
             .product-grid {
                 max-width: 400px;
                 gap: 16px;
+            }
+
+            .product-item {
+                max-width: 190px;
             }
 
             .process-steps {
@@ -372,21 +413,35 @@
         }
 
         @media (max-width: 480px) {
+            .logo {
+                max-width: 80px;
+            }
+
             .logo img {
                 height: 28px;
+            }
+
+            .client-logo-container {
+                max-width: 70px;
             }
 
             .project-title {
                 font-size: 24px;
             }
 
-            .main-product img {
+            .main-product-container {
                 width: 95vw;
+                max-width: 400px;
             }
 
             .product-grid {
                 grid-template-columns: 1fr;
                 max-width: 300px;
+                gap: 20px;
+            }
+
+            .product-item {
+                max-width: 280px;
             }
         }
     </style>
