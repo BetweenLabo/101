@@ -527,12 +527,15 @@
     <script>
         // 自定义鼠标交互逻辑
         const cursor = document.getElementById("custom-cursor");
-        const navLinks = document.querySelectorAll(".nav-links a");
+        const navLinks = document.querySelectorAll(".nav-links a, .logo-link");
 
         // 鼠标跟随移动
         document.addEventListener("mousemove", (e) => {
             cursor.style.left = `${e.clientX}px`;
             cursor.style.top = `${e.clientY}px`;
+            
+            // 实时检测背景颜色并切换鼠标图案
+            updateCursorBasedOnBackground(e.clientX, e.clientY);
         });
 
         // 导航链接 hover 效果
@@ -546,32 +549,55 @@
             });
         });
 
-        // 背景颜色检测和鼠标图案切换
-        const observer = new MutationObserver(updateCursorStyle);
-        observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+        // 根据背景颜色更新鼠标图案
+        function updateCursorBasedOnBackground(x, y) {
+            // 如果正在 hover 导航，不改变图案
+            if (document.body.classList.contains("nav-hover")) {
+                return;
+            }
 
-        function updateCursorStyle() {
-            const bgColor = getComputedStyle(document.body).backgroundColor;
-            const isLight = isLightColor(bgColor);
+            const elementBelow = document.elementFromPoint(x, y);
+            if (!elementBelow) return;
+
+            const computedStyle = getComputedStyle(elementBelow);
+            const bgColor = computedStyle.backgroundColor;
             
-            if (!document.body.classList.contains("nav-hover")) {
-                cursor.style.backgroundImage = isLight ? 
-                    "url('assets/mouse/mouse-brush-black.png')" : 
-                    "url('assets/mouse/mouse-brush-white.png')";
+            // 检查是否在白色/浅色背景区域
+            const isInWhiteSection = elementBelow.closest('.contact') || 
+                                   elementBelow.closest('.our-process') ||
+                                   elementBelow.closest('[style*="background-color: #f7f3e5"]') ||
+                                   elementBelow.closest('[style*="background-color: #ffffff"]') ||
+                                   elementBelow.closest('[style*="background-color: white"]');
+            
+            const isLightBackground = isLightColor(bgColor) || isInWhiteSection;
+            
+            // 切换鼠标图案
+            if (isLightBackground) {
+                cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-black.png')";
+            } else {
+                cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-white.png')";
             }
         }
 
+        // 判断颜色是否为浅色
         function isLightColor(rgb) {
+            if (!rgb || rgb === 'rgba(0, 0, 0, 0)' || rgb === 'transparent') {
+                return false;
+            }
+            
             const match = rgb.match(/\d+/g);
-            if (!match) return false;
+            if (!match || match.length < 3) return false;
             
             const [r, g, b] = match.map(Number);
             const brightness = (r * 299 + g * 587 + b * 114) / 1000;
             return brightness > 200;
         }
 
-        // 初始化鼠标样式
-        window.addEventListener('load', updateCursorStyle);
+        // 页面加载时初始化鼠标样式
+        window.addEventListener('load', () => {
+            updateCursorBasedOnBackground(window.innerWidth / 2, window.innerHeight / 2);
+            console.log('✅ Custom cursor initialized');
+        });
 
         // Hero Slideshow
         const slides = document.querySelectorAll('.slide');

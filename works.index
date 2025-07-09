@@ -222,7 +222,7 @@
             transition: all 0.3s ease;
             padding: 4px 8px;
             position: relative;
-            z-index: 2;
+            z-index: 10000;
         }
 
         .nav-links a:hover {
