@@ -525,9 +525,9 @@
     </main>
 
     <script>
-        // Custom cursor debug and initialization
+        // Custom cursor debug and initialization - 完全克隆自 works.html
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔧 Initializing custom cursor...');
+            console.log('🔧 Initializing custom cursor for index.html...');
             
             // Check if cursor element exists
             const cursor = document.getElementById("custom-cursor");
@@ -589,8 +589,25 @@
 
             // Show cursor immediately
             cursor.style.opacity = '1';
-            console.log('🎉 Custom cursor initialized successfully!');
+            console.log('🎉 Custom cursor initialized successfully for index.html!');
         });
+
+        // 检查自定义鼠标图片是否能正确加载 - 克隆自 works.html
+        function checkMouseImages() {
+            const testWhite = new Image();
+            const testBlack = new Image();
+            
+            testWhite.onload = () => console.log('✅ White mouse cursor loaded successfully');
+            testWhite.onerror = () => console.warn('❌ White mouse cursor failed to load: assets/mouse/mouse-brush-white.png');
+            testWhite.src = 'assets/mouse/mouse-brush-white.png';
+            
+            testBlack.onload = () => console.log('✅ Black mouse cursor loaded successfully');
+            testBlack.onerror = () => console.warn('❌ Black mouse cursor failed to load: assets/mouse/mouse-brush-black.png');
+            testBlack.src = 'assets/mouse/mouse-brush-black.png';
+        }
+        
+        // 页面加载完成后检查图片
+        window.addEventListener('load', checkMouseImages);
 
         // Hero Slideshow
         const slides = document.querySelectorAll('.slide');
