@@ -447,7 +447,7 @@
     </style>
 </head>
 <body>
-    <!-- 自定义鼠标元素 -->
+    <!-- 自定义鼠标元素 - 必须在页面最开始 -->
     <div id="custom-cursor"></div>
 
     <!-- 统一响应式导航栏 -->
@@ -525,44 +525,71 @@
     </main>
 
     <script>
-        // Custom cursor logic
-        const cursor = document.getElementById("custom-cursor");
-        
-        // Mouse tracking
-        document.addEventListener("mousemove", (e) => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
+        // Custom cursor debug and initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 Initializing custom cursor...');
             
-            // Background detection
-            const el = document.elementFromPoint(e.clientX, e.clientY);
-            if (el) {
-                const bgColor = window.getComputedStyle(el).backgroundColor;
-                const lightBackgrounds = ["#fff", "rgb(255, 255, 255)", "#f7f3e5", "rgb(247, 243, 229)", "rgb(244, 141, 69)"];
+            // Check if cursor element exists
+            const cursor = document.getElementById("custom-cursor");
+            if (!cursor) {
+                console.error('❌ Custom cursor element not found!');
+                return;
+            }
+            console.log('✅ Custom cursor element found');
+            
+            // Test image loading
+            const testImage = new Image();
+            testImage.onload = () => console.log('✅ Mouse brush image loaded successfully');
+            testImage.onerror = () => console.error('❌ Failed to load: assets/mouse/mouse-brush-white.png');
+            testImage.src = 'assets/mouse/mouse-brush-white.png';
+            
+            // Mouse tracking
+            document.addEventListener("mousemove", (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+                cursor.style.opacity = '1';
                 
-                // Check if currently hovering nav links
-                const isHoveringNav = el.closest("nav a") || el.closest(".logo-link");
-                
-                if (!isHoveringNav) {
-                    if (lightBackgrounds.includes(bgColor) || el.closest('.contact') || el.closest('.our-process')) {
-                        cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-black.png')";
-                    } else {
-                        cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-white.png')";
+                // Background detection
+                const el = document.elementFromPoint(e.clientX, e.clientY);
+                if (el) {
+                    const bgColor = window.getComputedStyle(el).backgroundColor;
+                    const lightBackgrounds = ["rgb(255, 255, 255)", "rgb(247, 243, 229)", "rgb(244, 141, 69)"];
+                    
+                    // Check if currently hovering nav links
+                    const isHoveringNav = el.closest("nav a") || el.closest(".logo-link");
+                    
+                    if (!isHoveringNav) {
+                        if (lightBackgrounds.some(color => bgColor.includes(color)) || 
+                            el.closest('.contact') || 
+                            el.closest('.our-process')) {
+                            cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-black.png')";
+                        } else {
+                            cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-white.png')";
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        // Navigation hover effects
-        const navLinks = document.querySelectorAll("nav a, .logo-link");
-        navLinks.forEach(link => {
-            link.addEventListener("mouseenter", () => {
-                cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-black.png')";
-                cursor.style.transform = "translate(-50%, -50%) scale(2)";
+            // Navigation hover effects
+            const navLinks = document.querySelectorAll("nav a, .logo-link");
+            console.log(`📋 Found ${navLinks.length} navigation links`);
+            
+            navLinks.forEach(link => {
+                link.addEventListener("mouseenter", () => {
+                    console.log('🖱️ Nav hover: scaling cursor');
+                    cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-black.png')";
+                    cursor.style.transform = "translate(-50%, -50%) scale(2)";
+                });
+                link.addEventListener("mouseleave", () => {
+                    console.log('🖱️ Nav leave: resetting cursor');
+                    cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-white.png')";
+                    cursor.style.transform = "translate(-50%, -50%) scale(1)";
+                });
             });
-            link.addEventListener("mouseleave", () => {
-                cursor.style.backgroundImage = "url('assets/mouse/mouse-brush-white.png')";
-                cursor.style.transform = "translate(-50%, -50%) scale(1)";
-            });
+
+            // Show cursor immediately
+            cursor.style.opacity = '1';
+            console.log('🎉 Custom cursor initialized successfully!');
         });
 
         // Hero Slideshow
