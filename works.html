@@ -169,14 +169,88 @@
             color: #000000;
         }
 
-        /* 网格布局响应式 */
-        .staggered-grid {
+        /* Section 3 新样式 */
+        .section-3 {
+            background-color: black;
+            padding: 4vw 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 主图容器 */
+        .main-image-container {
+            width: 90vw;
+            max-width: 1020px;
+            aspect-ratio: 1020 / 630;
+            margin-bottom: 4vw;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* 小图网格 */
+        .grid-image-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px 32px;
-            max-width: 800px;
-            margin: 0 auto;
-            align-items: start;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2vw;
+            width: 90vw;
+            max-width: 1020px;
+        }
+
+        .grid-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 6px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+        }
+
+        /* 响应式：移动端一列显示 */
+        @media (max-width: 768px) {
+            .section-3 {
+                padding: 6vw 0;
+            }
+            
+            .main-image-container {
+                width: 95vw;
+                margin-bottom: 6vw;
+            }
+            
+            .grid-image-container {
+                grid-template-columns: 1fr;
+                gap: 4vw;
+                width: 95vw;
+            }
+            
+            .grid-image:hover {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* 超小屏幕优化 */
+        @media (max-width: 480px) {
+            .section-3 {
+                padding: 8vw 0;
+            }
+            
+            .grid-image-container {
+                gap: 5vw;
+            }
         }
 
         .mockup-grid {
@@ -267,12 +341,6 @@
             }
             
             /* 网格布局调整 */
-            .staggered-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-                text-align: center;
-            }
-            
             .mockup-grid {
                 grid-template-columns: 1fr;
                 gap: 24px;
@@ -293,21 +361,7 @@
                 max-width: 300px;
             }
             
-            .small-product-container {
-                max-width: 200px;
-                margin: 0 auto;
-            }
-            
-            .mini-product-container {
-                max-width: 120px;
-                margin: 0 auto;
-            }
-            
-            /* 移除交错效果 */
-            .staggered-grid > div {
-                margin-top: 0 !important;
-                justify-self: center !important;
-            }
+            /* 移除交错效果 - 已不再使用staggered grid */
             
             /* 文字大小调整 */
             h1 {
@@ -322,10 +376,6 @@
             #section2 {
                 padding: 120px 20px 60px !important;
                 margin-top: 160px !important;
-            }
-            
-            #section3 {
-                padding: 60px 20px !important;
             }
             
             #section4 {
@@ -363,14 +413,6 @@
             
             .product-image-container {
                 max-width: 250px;
-            }
-            
-            .small-product-container {
-                max-width: 160px;
-            }
-            
-            .mini-product-container {
-                max-width: 100px;
             }
         }
 
@@ -530,61 +572,23 @@
         </div>
     </section>
 
-    <!-- Section 3: Product Photos (Black Background) -->
-    <section id="section3" style="
-        background-color: #000000;
-        padding: 80px 48px;
-        text-align: center;
-    ">
-        <!-- Main Image -->
-        <div style="margin-bottom: 64px;">
-            <div class="product-image-container">
-                <img src="assets/fal-project/Sorona-tee-fal.png" alt="Sorona Tee" 
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="image-placeholder product-placeholder" style="display: none;">
-                    <span>Sorona Tee Product Image</span>
-                </div>
-            </div>
+    <!-- Section 3: Product Photos (Black Background) - 新设计 -->
+    <section class="section-3">
+        <!-- 主图 -->
+        <div class="main-image-container">
+            <img src="assets/images/sorona-tee-fal.png" alt="fal tee on rocks" class="main-image" 
+                 onerror="this.src='assets/fal-project/Sorona-tee-fal.png'" />
         </div>
-
-        <!-- 2x2 Grid (Staggered) -->
-        <div class="staggered-grid">
-            <div style="justify-self: end;">
-                <div class="small-product-container">
-                    <img src="assets/fal-project/socks-fal.png" alt="fal Socks" 
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display: none; height: 200px;">
-                        <span>fal Socks</span>
-                    </div>
-                </div>
-            </div>
-            <div style="justify-self: start; margin-top: 20px;">
-                <div class="small-product-container">
-                    <img src="assets/fal-project/tee-socks-fal.png" alt="Tee and Socks" 
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display: none; height: 200px;">
-                        <span>Tee and Socks</span>
-                    </div>
-                </div>
-            </div>
-            <div style="justify-self: end; margin-top: 48px;">
-                <div class="small-product-container">
-                    <img src="assets/fal-project/keyboard-fal.png" alt="fal Keyboard" 
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display: none; height: 200px;">
-                        <span>fal Keyboard</span>
-                    </div>
-                </div>
-            </div>
-            <div style="justify-self: start; margin-top: 68px;">
-                <div class="mini-product-container">
-                    <img src="assets/fal-project/pin-gold-fal.png" alt="Gold Pin" 
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display: none; height: 150px;">
-                        <span>Gold Pin</span>
-                    </div>
-                </div>
-            </div>
+        <!-- 小图网格 -->
+        <div class="grid-image-container">
+            <img src="assets/images/socks-fal.png" alt="fal socks" class="grid-image" 
+                 onerror="this.src='assets/fal-project/socks-fal.png'" />
+            <img src="assets/images/tee-socks-fal.png" alt="fal tee and socks on beach" class="grid-image" 
+                 onerror="this.src='assets/fal-project/tee-socks-fal.png'" />
+            <img src="assets/images/keyboard-fal.png" alt="fal keyboard key" class="grid-image" 
+                 onerror="this.src='assets/fal-project/keyboard-fal.png'" />
+            <img src="assets/images/pin-gold-fal.png" alt="fal gold pin" class="grid-image" 
+                 onerror="this.src='assets/fal-project/pin-gold-fal.png'" />
         </div>
     </section>
 
