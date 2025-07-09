@@ -29,6 +29,73 @@
             background-color: var(--black);
             color: var(--white);
             overflow-x: hidden;
+            cursor: none; /* 隐藏默认鼠标指针 */
+        }
+
+        /* 自定义鼠标动画 */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: url('assets/images/mouse-brush-white.png') no-repeat center center;
+            background-size: contain;
+            z-index: 10000;
+            mix-blend-mode: screen;
+            transition: transform 0.08s ease, opacity 0.3s ease;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+        /* 回退图片路径 */
+        .custom-cursor {
+            background-image: url('assets/images/mouse-brush-white.png'), url('assets/mouse-animation.jpg');
+        }
+
+        /* Hover 导航栏时的黑色图案 */
+        .custom-cursor.nav-hover {
+            background-image: url('assets/images/mouse-brush-black.png'), url('assets/mouse-animation-black.jpg');
+            mix-blend-mode: normal;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* 在白色背景区域使用黑色图案 */
+        .white-bg .custom-cursor {
+            background-image: url('assets/images/mouse-brush-black.png');
+            mix-blend-mode: multiply;
+        }
+
+        /* 移动设备隐藏自定义鼠标 */
+        @media (hover: none) and (pointer: coarse) {
+            body {
+                cursor: auto;
+            }
+            
+            .custom-cursor {
+                display: none;
+            }
+        }
+
+        /* 针对触摸设备的额外检查 */
+        @media (max-width: 1024px) {
+            .custom-cursor {
+                display: none;
+            }
+            
+            body {
+                cursor: auto;
+            }
+        }
+
+        /* Logo 链接样式 */
+        .logo-link {
+            display: block;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-link:hover .logo {
+            transform: scale(1.05);
         }
 
         /* 响应式图片统一样式 */
@@ -154,6 +221,35 @@
             text-decoration: none;
             transition: all 0.3s ease;
             padding: 4px 8px;
+        }
+
+        /* 导航链接悬停效果 */
+        .nav-links a:hover {
+            /* 悬停时使用黑色鼠标图案 */
+            cursor: url('assets/mouse/mouse-black.png') 16 16, auto;
+            transform: scale(1.05);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
+        /* 高分辨率屏幕支持 */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            body {
+                cursor: url('assets/mouse/mouse-white@2x.png') 32 32, url('assets/mouse/mouse-white.png') 16 16, auto;
+            }
+            
+            .nav-links a:hover,
+            .logo-link:hover {
+                cursor: url('assets/mouse/mouse-black@2x.png') 32 32, url('assets/mouse/mouse-black.png') 16 16, auto;
+            }
+        }
+
+        /* 移动设备回退到默认鼠标 */
+        @media (hover: none) and (pointer: coarse) {
+            body,
+            .nav-links a:hover,
+            .logo-link:hover {
+                cursor: auto;
+            }
         }
 
         .start-project-btn {
@@ -497,7 +593,9 @@
     <!-- 统一响应式导航栏 -->
     <header class="navbar">
         <div class="navbar-container">
-            <img src="assets/Between-logo-white.png" alt="Between Logo" class="logo" />
+            <a href="index.html" class="logo-link">
+                <img src="assets/Between-logo-white.png" alt="Between Logo" class="logo" />
+            </a>
             <nav class="nav-links">
                 <a href="works.html">WORKS</a>
                 <a href="#about">ABOUT</a>
@@ -839,5 +937,98 @@
             </div>
         </div>
     </section>
+
+    <script>
+        // 自定义鼠标动画效果
+        (function() {
+            // 检查是否为桌面设备
+            const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+            
+            if (!isTouchDevice && window.innerWidth > 1024) {
+                // 创建自定义鼠标元素
+                const cursor = document.createElement("div");
+                cursor.classList.add("custom-cursor");
+                document.body.appendChild(cursor);
+
+                // 鼠标移动事件
+                document.addEventListener("mousemove", (e) => {
+                    cursor.style.left = `${e.clientX}px`;
+                    cursor.style.top = `${e.clientY}px`;
+                    
+                    // 检测背景颜色并调整鼠标图案
+                    const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
+                    const bgColor = window.getComputedStyle(elementBelow).backgroundColor;
+                    
+                    // 如果是白色背景区域，切换到黑色图案
+                    if (bgColor === 'rgb(255, 255, 255)' || bgColor === 'rgba(255, 255, 255, 1)' || 
+                        elementBelow.closest('#section4') || elementBelow.closest('.contact')) {
+                        cursor.classList.add('white-bg');
+                    } else {
+                        cursor.classList.remove('white-bg');
+                    }
+                });
+
+                // 导航链接 hover 效果
+                const navLinks = document.querySelectorAll(".nav-links a, .logo-link");
+                
+                navLinks.forEach(link => {
+                    link.addEventListener("mouseenter", () => {
+                        cursor.classList.add("nav-hover");
+                    });
+                    
+                    link.addEventListener("mouseleave", () => {
+                        cursor.classList.remove("nav-hover");
+                    });
+                });
+
+                // 鼠标进入和离开页面时的处理
+                document.addEventListener("mouseenter", () => {
+                    cursor.style.opacity = "1";
+                });
+
+                document.addEventListener("mouseleave", () => {
+                    cursor.style.opacity = "0";
+                });
+
+                // 页面滚动时保持鼠标效果
+                window.addEventListener("scroll", () => {
+                    // 可以在这里添加滚动相关的鼠标效果逻辑
+                });
+
+                // 窗口大小改变时检查是否需要隐藏鼠标
+                window.addEventListener("resize", () => {
+                    if (window.innerWidth <= 1024) {
+                        cursor.style.display = "none";
+                        document.body.style.cursor = "auto";
+                    } else {
+                        cursor.style.display = "block";
+                        document.body.style.cursor = "none";
+                    }
+                });
+            }
+        })();
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+            }
+        });
+
+        // Logo 点击调试
+        document.querySelector('.logo-link').addEventListener('click', function(e) {
+            console.log('Logo clicked! Navigating to:', this.href);
+        });
+
+        // 导航链接调试
+        document.querySelector('a[href="works.html"]').addEventListener('click', function(e) {
+            console.log('WORKS link clicked! Current page:', this.href);
+        });
+    </script>
 </body>
 </html>
