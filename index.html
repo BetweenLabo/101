@@ -526,6 +526,39 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🎨 CREATING ENHANCED BRUSH CURSOR (160px default)...');
             
+            // Debug: Check if paper texture is loading
+            const testImage = new Image();
+            testImage.onload = () => {
+                console.log('✅ Paper texture loaded successfully');
+                document.body.style.background = `url("assets/paper-texture.png") repeat fixed`;
+            };
+            testImage.onerror = () => {
+                console.warn('❌ Paper texture failed to load, trying alternative paths...');
+                // Try different paths
+                const altPaths = [
+                    './assets/paper-texture.png',
+                    '/assets/paper-texture.png',
+                    'paper-texture.png'
+                ];
+                
+                altPaths.forEach((path, index) => {
+                    const altTest = new Image();
+                    altTest.onload = () => {
+                        console.log(`✅ Paper texture loaded from: ${path}`);
+                        document.body.style.background = `url("${path}") repeat fixed`;
+                        document.body.style.backgroundColor = '#f5f1e8'; // Fallback similar to texture
+                    };
+                    altTest.onerror = () => {
+                        if (index === altPaths.length - 1) {
+                            console.warn('❌ All paper texture paths failed, using fallback color');
+                            document.body.style.backgroundColor = '#f5f1e8';
+                        }
+                    };
+                    altTest.src = path;
+                });
+            };
+            testImage.src = 'assets/paper-texture.png';
+            
             // Remove any existing cursor
             const existingCursor = document.getElementById("custom-cursor");
             if (existingCursor) {
