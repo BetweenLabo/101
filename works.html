@@ -380,6 +380,27 @@
             .small-product-container {
                 max-width: 200px;
             }
+            
+            /* Section 2 平板适配 */
+            #section2 {
+                padding: 120px 40px 90px !important;
+            }
+            
+            /* CLIENT/PROJECT 标签 */
+            #section2 p[style*="font-size: 18px"] {
+                font-size: 16px !important;
+            }
+            
+            /* fal Uniformity 标题 */
+            #section2 h1 {
+                font-size: 36px !important;
+            }
+            
+            /* 描述文字 */
+            #section2 div[style*="max-width: 700px"] p {
+                font-size: 20px !important;
+                max-width: 600px !important;
+            }
         }
 
         /* 手机端适配 (小于768px) */
@@ -433,23 +454,43 @@
                 max-width: 300px;
             }
             
-            /* 移除交错效果 - 已不再使用staggered grid */
-            
-            /* 文字大小调整 */
-            h1 {
-                font-size: 24px !important;
+            /* Section 2 响应式调整 */
+            #section2 {
+                padding: 100px 20px 80px !important;
+                margin-top: 140px !important;
             }
             
-            h2 {
+            #section2 .container {
+                max-width: 95% !important;
+            }
+            
+            /* CLIENT/PROJECT 标签 */
+            #section2 p[style*="font-size: 18px"] {
+                font-size: 14px !important;
+                letter-spacing: 0.15em !important;
+                margin-bottom: 16px !important;
+            }
+            
+            /* fal Uniformity 标题 */
+            #section2 h1 {
                 font-size: 28px !important;
+                line-height: 1.1 !important;
+            }
+            
+            /* 垂直分隔线 */
+            #section2 div[style*="height: 60px"] {
+                height: 40px !important;
+                margin: 60px auto !important;
+            }
+            
+            /* 描述文字 */
+            #section2 div[style*="max-width: 700px"] p {
+                font-size: 18px !important;
+                line-height: 1.4 !important;
+                max-width: 100% !important;
             }
             
             /* 内容区域调整 */
-            #section2 {
-                padding: 120px 20px 60px !important;
-                margin-top: 160px !important;
-            }
-            
             #section4 {
                 padding: 60px 20px !important;
             }
@@ -583,69 +624,77 @@
         </div>
     </header>
 
-    <!-- Section 2: Client + Project Info -->
+    <!-- Section 2: Client + Project Info - Refined Typography -->
     <section id="section2" style="
         background-color: #000000;
-        padding: 120px 48px 80px;
+        padding: 140px 48px 100px;
         text-align: center;
         margin-top: 100px;
     ">
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div style="max-width: 900px; margin: 0 auto;">
             <!-- CLIENT -->
-            <div style="margin-bottom: 40px;">
+            <div style="margin-bottom: 60px;">
                 <p style="
-                    font-size: 12px;
+                    font-size: 18px;
                     text-transform: uppercase;
-                    letter-spacing: 0.15em;
+                    letter-spacing: 0.2em;
                     color: #ffffff;
-                    margin-bottom: 16px;
+                    margin-bottom: 24px;
+                    font-weight: 500;
+                    font-family: var(--body-font);
                 ">CLIENT:</p>
                 <!-- fal Logo with fallback -->
                 <div style="display: flex; justify-content: center;">
-                    <img src="assets/fal-logo-white.png" alt="fal Logo" style="width: 100px; height: auto;" 
+                    <img src="assets/fal-logo-white.png" alt="fal Logo" style="width: 120px; height: auto;" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="image-placeholder logo-placeholder" style="display: none;">
-                        <span>fal</span>
+                        <span style="color: #ffffff; font-size: 24px; font-weight: 600;">fal</span>
                     </div>
                 </div>
             </div>
 
             <!-- PROJECT -->
-            <div style="margin-bottom: 40px;">
+            <div style="margin-bottom: 60px;">
                 <p style="
-                    font-size: 12px;
+                    font-size: 18px;
                     text-transform: uppercase;
-                    letter-spacing: 0.15em;
-                    color: #ffffff;
-                    margin-bottom: 16px;
-                ">PROJECT:</p>
-                <h1 style="
-                    font-family: 'Georgia', 'Times New Roman', serif;
-                    font-size: 28px;
-                    font-weight: 500;
+                    letter-spacing: 0.2em;
                     color: #ffffff;
                     margin-bottom: 32px;
+                    font-weight: 500;
+                    font-family: var(--body-font);
+                ">PROJECT:</p>
+                <h1 style="
+                    font-family: var(--heading-font);
+                    font-size: 42px;
+                    font-weight: 400;
+                    color: #ffffff;
+                    line-height: 1.2;
+                    letter-spacing: -0.01em;
                 ">fal Uniformity</h1>
             </div>
 
             <!-- Vertical Divider -->
             <div style="
                 width: 1px;
-                height: 40px;
+                height: 60px;
                 background-color: #ffffff;
-                margin: 0 auto 32px;
+                margin: 80px auto;
+                opacity: 0.6;
             "></div>
 
             <!-- Description -->
-            <p style="
-                font-family: 'Helvetica Neue', 'Inter', 'Satoshi', sans-serif;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 1.6;
-                letter-spacing: 0.01em;
-                color: #ffffff;
-                max-width: 800px;
-            ">Human Form × Agent Function. Translate fal digital essence into wearable and tactile forms for the AI-native generation</p>
+            <div style="max-width: 700px; margin: 0 auto;">
+                <p style="
+                    font-family: var(--heading-font);
+                    font-size: 22px;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    letter-spacing: 0.005em;
+                    color: #ffffff;
+                    margin: 0;
+                ">Human Form × Agent Function. Translate fal digital essence into wearable and tactile forms for the AI-native generation</p>
+            </div>
         </div>
     </section>
 
