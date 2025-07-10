@@ -522,9 +522,9 @@
     </main>
 
     <script>
-        // FINAL SOLUTION: Pure CSS brush effect (no images needed)
+        // Enhanced brush cursor system - 160px default, 2.5x nav scaling
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎨 CREATING PURE CSS BRUSH CURSOR...');
+            console.log('🎨 CREATING ENHANCED BRUSH CURSOR (160px default)...');
             
             // Remove any existing cursor
             const existingCursor = document.getElementById("custom-cursor");
@@ -532,73 +532,91 @@
                 existingCursor.remove();
             }
             
-            // Create cursor with CSS brush effect
+            // Create enhanced cursor element
             const cursor = document.createElement('div');
             cursor.id = 'custom-cursor';
             cursor.style.cssText = `
                 position: fixed !important;
                 top: 0 !important;
                 left: 0 !important;
-                width: 80px !important;
-                height: 80px !important;
-                z-index: 9999999 !important;
+                width: 160px !important;
+                height: 160px !important;
+                z-index: 9999 !important;
                 pointer-events: none !important;
                 opacity: 1 !important;
                 display: block !important;
                 visibility: visible !important;
                 transform: translate(-50%, -50%) !important;
-                transition: transform 0.25s ease !important;
+                transition: transform 0.3s ease !important;
             `;
             
-            // Create beautiful CSS brush pattern
-            function createBrushPattern(isBlack = false) {
+            // Enhanced brush pattern function (more realistic)
+            function createEnhancedBrushPattern(isBlack = false) {
                 const color = isBlack ? '0, 0, 0' : '255, 255, 255';
-                const shadowColor = isBlack ? '255, 255, 255' : '0, 0, 0';
+                const opacity = isBlack ? '0.9' : '0.95';
                 
                 return `
-                    radial-gradient(ellipse 35px 15px at 25% 30%, rgba(${color}, 0.9) 0%, rgba(${color}, 0.7) 30%, transparent 70%),
-                    radial-gradient(ellipse 25px 35px at 70% 20%, rgba(${color}, 0.8) 0%, rgba(${color}, 0.5) 40%, transparent 80%),
-                    radial-gradient(ellipse 20px 20px at 60% 70%, rgba(${color}, 0.9) 0%, rgba(${color}, 0.6) 50%, transparent 100%),
-                    radial-gradient(ellipse 30px 10px at 20% 80%, rgba(${color}, 0.7) 0%, rgba(${color}, 0.4) 60%, transparent 100%),
-                    radial-gradient(ellipse 40px 25px at 80% 60%, rgba(${color}, 0.8) 0%, rgba(${color}, 0.3) 70%, transparent 100%),
-                    radial-gradient(ellipse 15px 30px at 40% 40%, rgba(${color}, 0.9) 0%, rgba(${color}, 0.5) 50%, transparent 100%)
+                    radial-gradient(ellipse 70px 30px at 25% 30%, rgba(${color}, ${opacity}) 0%, rgba(${color}, 0.7) 30%, transparent 70%),
+                    radial-gradient(ellipse 50px 70px at 70% 20%, rgba(${color}, 0.8) 0%, rgba(${color}, 0.5) 40%, transparent 80%),
+                    radial-gradient(ellipse 40px 40px at 60% 70%, rgba(${color}, ${opacity}) 0%, rgba(${color}, 0.6) 50%, transparent 100%),
+                    radial-gradient(ellipse 60px 25px at 20% 80%, rgba(${color}, 0.7) 0%, rgba(${color}, 0.4) 60%, transparent 100%),
+                    radial-gradient(ellipse 80px 50px at 80% 60%, rgba(${color}, 0.8) 0%, rgba(${color}, 0.3) 70%, transparent 100%),
+                    radial-gradient(ellipse 35px 60px at 40% 40%, rgba(${color}, ${opacity}) 0%, rgba(${color}, 0.5) 50%, transparent 100%),
+                    radial-gradient(ellipse 55px 35px at 60% 10%, rgba(${color}, 0.6) 0%, rgba(${color}, 0.3) 80%, transparent 100%),
+                    radial-gradient(ellipse 30px 55px at 10% 60%, rgba(${color}, 0.8) 0%, rgba(${color}, 0.4) 70%, transparent 100%),
+                    radial-gradient(ellipse 45px 45px at 50% 50%, rgba(${color}, 0.5) 0%, rgba(${color}, 0.2) 60%, transparent 100%)
                 `;
             }
             
-            // Apply white brush pattern initially
-            cursor.style.background = createBrushPattern(false);
-            cursor.style.borderRadius = '40px';
-            cursor.style.filter = 'blur(0.5px)';
-            cursor.style.boxShadow = `0 0 10px rgba(255, 255, 255, 0.3)`;
+            // Apply white brush pattern initially (160px)
+            cursor.style.background = createEnhancedBrushPattern(false);
+            cursor.style.borderRadius = '80px';
+            cursor.style.filter = 'blur(0.8px)';
+            cursor.style.boxShadow = `0 0 20px rgba(255, 255, 255, 0.4)`;
             
             document.body.appendChild(cursor);
-            console.log('✅ CSS BRUSH CURSOR CREATED!');
+            console.log('✅ ENHANCED BRUSH CURSOR CREATED! (160px default)');
             
-            // Mouse tracking
+            // Mouse tracking with enhanced background detection
             document.addEventListener("mousemove", (e) => {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
                 
-                // Background detection for auto color switching
+                // Enhanced background detection
                 const el = document.elementFromPoint(e.clientX, e.clientY);
                 if (el) {
                     const bgColor = window.getComputedStyle(el).backgroundColor;
-                    const lightBackgrounds = ["rgb(255, 255, 255)", "rgb(247, 243, 229)", "rgb(244, 141, 69)"];
+                    const lightBackgrounds = [
+                        "rgb(255, 255, 255)", 
+                        "rgb(247, 243, 229)", 
+                        "rgb(244, 141, 69)",
+                        "rgba(255, 255, 255",
+                        "rgba(247, 243, 229",
+                        "rgba(244, 141, 69"
+                    ];
                     
                     // Check if currently hovering nav links
                     const isHoveringNav = el.closest("nav a") || el.closest(".logo-link");
                     
                     if (!isHoveringNav) {
-                        if (lightBackgrounds.some(color => bgColor.includes(color)) || 
+                        // Check for light backgrounds or specific sections
+                        const isLightBackground = lightBackgrounds.some(color => bgColor.includes(color)) || 
                             el.closest('.contact') || 
-                            el.closest('.our-process')) {
-                            // Use black brush on light backgrounds
-                            cursor.style.background = createBrushPattern(true);
-                            cursor.style.boxShadow = `0 0 10px rgba(0, 0, 0, 0.3)`;
+                            el.closest('.our-process') ||
+                            el.closest('[style*="background-color: #ffffff"]') ||
+                            el.closest('[style*="background-color: #f7f3e5"]') ||
+                            el.closest('[style*="background-color: #f48d45"]');
+                        
+                        if (isLightBackground) {
+                            // Light background: use black brush
+                            cursor.style.background = createEnhancedBrushPattern(true);
+                            cursor.style.boxShadow = `0 0 20px rgba(0, 0, 0, 0.4)`;
+                            cursor.style.transform = "translate(-50%, -50%) scale(1)";
                         } else {
-                            // Use white brush on dark backgrounds
-                            cursor.style.background = createBrushPattern(false);
-                            cursor.style.boxShadow = `0 0 10px rgba(255, 255, 255, 0.3)`;
+                            // Dark background: use white brush
+                            cursor.style.background = createEnhancedBrushPattern(false);
+                            cursor.style.boxShadow = `0 0 20px rgba(255, 255, 255, 0.4)`;
+                            cursor.style.transform = "translate(-50%, -50%) scale(1)";
                         }
                     }
                 }
@@ -610,26 +628,30 @@
             cursor.style.left = centerX + 'px';
             cursor.style.top = centerY + 'px';
 
-            // Navigation hover effects
+            // Enhanced navigation hover effects - scale to 2.5x (160px → 400px)
             const navLinks = document.querySelectorAll("nav a, .logo-link");
             console.log(`📋 Found ${navLinks.length} navigation links`);
             
             navLinks.forEach(link => {
                 link.addEventListener("mouseenter", () => {
-                    console.log('🖱️ Nav hover: BLACK brush + scale 2x');
-                    cursor.style.background = createBrushPattern(true);
-                    cursor.style.boxShadow = `0 0 15px rgba(0, 0, 0, 0.5)`;
-                    cursor.style.transform = "translate(-50%, -50%) scale(2)";
+                    console.log('🖱️ Nav hover: BLACK brush + 2.5x scale (400px)');
+                    cursor.style.background = createEnhancedBrushPattern(true);
+                    cursor.style.boxShadow = `0 0 40px rgba(0, 0, 0, 0.6)`;
+                    cursor.style.filter = 'blur(1px)';
+                    // Scale to 2.5x (160px × 2.5 = 400px)
+                    cursor.style.transform = "translate(-50%, -50%) scale(2.5)";
                 });
                 link.addEventListener("mouseleave", () => {
-                    console.log('🖱️ Nav leave: WHITE brush + normal size');
-                    cursor.style.background = createBrushPattern(false);
-                    cursor.style.boxShadow = `0 0 10px rgba(255, 255, 255, 0.3)`;
+                    console.log('🖱️ Nav leave: WHITE brush + normal size (160px)');
+                    cursor.style.background = createEnhancedBrushPattern(false);
+                    cursor.style.boxShadow = `0 0 20px rgba(255, 255, 255, 0.4)`;
+                    cursor.style.filter = 'blur(0.8px)';
                     cursor.style.transform = "translate(-50%, -50%) scale(1)";
                 });
             });
 
-            console.log('🎉 PURE CSS BRUSH CURSOR READY! NO IMAGES NEEDED!');
+            console.log('🎉 ENHANCED BRUSH CURSOR READY!');
+            console.log('📏 Default: 160px, Nav hover: 400px (2.5x scale)');
         });
 
         // Hero Slideshow
