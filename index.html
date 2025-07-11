@@ -526,6 +526,24 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🎨 CREATING INK BRUSH CURSOR WITH PATH DETECTION...');
             
+            // Force navigation text to be black
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.style.color = '#000000';
+                link.style.setProperty('color', '#000000', 'important');
+            });
+            console.log('🖤 Navigation text forced to black');
+            
+            // Test logo path and add fallback
+            const logo = document.querySelector('.logo');
+            if (logo) {
+                logo.onerror = function() {
+                    console.warn('❌ between-logo-transparent.png failed, using fallback');
+                    this.src = 'assets/Between-logo-white.png';
+                };
+                console.log('🖼️ Logo path set with fallback');
+            }
+            
             // Test multiple paths for paper texture
             const paperTexturePaths = [
                 'assets/paper-texture.png',
@@ -541,6 +559,12 @@
                     console.warn('❌ All paper texture paths failed, using CSS fallback background');
                     document.body.style.background = 'linear-gradient(45deg, #f5f1e8 0%, #f0ebe0 25%, #f5f1e8 50%, #f0ebe0 75%, #f5f1e8 100%)';
                     document.body.style.backgroundSize = '40px 40px';
+                    // Also apply to contact section
+                    const contactSection = document.querySelector('.contact');
+                    if (contactSection) {
+                        contactSection.style.background = 'linear-gradient(45deg, #f5f1e8 0%, #f0ebe0 25%, #f5f1e8 50%, #f0ebe0 75%, #f5f1e8 100%)';
+                        contactSection.style.backgroundSize = '40px 40px';
+                    }
                     return;
                 }
                 
@@ -552,6 +576,12 @@
                     console.log(`✅ Paper texture loaded successfully from: ${path}`);
                     document.body.style.background = `url("${path}") repeat fixed`;
                     document.body.style.backgroundSize = 'auto';
+                    // Also apply to contact section
+                    const contactSection = document.querySelector('.contact');
+                    if (contactSection) {
+                        contactSection.style.background = `url("${path}") repeat fixed`;
+                        contactSection.style.backgroundSize = 'auto';
+                    }
                 };
                 testPaper.onerror = () => {
                     console.warn(`❌ Failed to load paper texture from: ${path}`);
@@ -733,10 +763,10 @@
             cursor.style.top = centerY + 'px';
 
             // Enhanced navigation hover effects - scale to 200px with black brush
-            const navLinks = document.querySelectorAll("nav a, .logo-link");
-            console.log(`📋 Found ${navLinks.length} navigation links`);
+            const allNavLinks = document.querySelectorAll("nav a, .logo-link");
+            console.log(`📋 Found ${allNavLinks.length} navigation links`);
             
-            navLinks.forEach(link => {
+            allNavLinks.forEach(link => {
                 link.addEventListener("mouseenter", () => {
                     console.log('🖱️ Nav hover: BLACK ink brush + 200px');
                     
