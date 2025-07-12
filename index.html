@@ -108,7 +108,7 @@
             transform: translate(-50%, -50%) scale(4);
         }
 
-        /* 响应式导航栏样式 */
+        /* Between Navigation Bar Styles */
         .navbar {
             position: fixed;
             top: 0;
@@ -119,8 +119,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
+            background-color: transparent;
             z-index: 1000;
             transition: all 0.3s ease;
             opacity: 0;
@@ -135,13 +134,25 @@
             align-items: center;
         }
 
-        .logo {
+        .navbar .logo {
             height: 6vw;
             max-height: 70px;
             min-height: 30px;
             width: auto;
             object-fit: contain;
             transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Logo shake animation */
+        .navbar .logo:hover {
+            animation: logoShake 0.5s ease-in-out;
+        }
+
+        @keyframes logoShake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+            20%, 40%, 60%, 80% { transform: translateX(2px); }
         }
 
         .nav-links {
@@ -155,23 +166,54 @@
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: white;
+            color: #000000;
             text-decoration: none;
             transition: all 0.3s ease;
             padding: 4px 8px;
+            position: relative;
+        }
+
+        /* Underline animation for navigation links */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: #000000;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .start-project-btn {
-            border: 1px solid #ffffff;
-            border-radius: 9999px;
+            background-color: #732c26 !important;
+            border: 1px solid #000000 !important;
+            border-radius: 9999px !important;
             padding: 12px 20px !important;
-            font-weight: 500;
+            font-weight: 500 !important;
+            color: white !important;
             transition: all 0.3s ease;
         }
 
         .start-project-btn:hover {
-            background-color: #ffffff;
-            color: #000000;
+            background-color: #5a1f1a;
+            transform: translateY(-1px);
+        }
+
+        .start-project-btn::after {
+            display: none; /* Remove underline for button */
+        }
+
+        /* Scroll effect for navbar */
+        .navbar.scrolled {
+            background-color: rgba(247, 243, 229, 0.85) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* Main Content */
@@ -340,48 +382,239 @@
             margin: 0 auto;
         }
 
-        /* Contact Section */
-        .contact {
-            padding: 100px 40px;
-            text-align: center;
-            background-color: #f7f3e5;
-        }
-
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-title {
-            font-size: 36px;
-            font-weight: 400;
-            margin-bottom: 40px;
-            color: #000000;
-        }
-
-        .contact-links {
+        /* Between Footer Styles */
+        .footer {
+            background-color: #000000;
+            color: #eae6df;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
+            flex-direction: column;
+            position: relative;
+            padding: 80px 40px 0;
+            overflow: hidden;
         }
 
-        .contact-link {
-            color: #000000;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 400;
+        .footer-content {
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 60px;
+            padding-top: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            font-family: "Times New Roman", serif;
+            font-size: 24px;
+            font-weight: normal;
+            margin-bottom: 25px;
+            color: #eae6df;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .newsletter-section h3 {
+            text-align: left;
+            align-self: flex-start;
+        }
+
+        .newsletter-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 280px;
+            text-align: left;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .email-input {
+            width: 100%;
+            max-width: 260px;
+            padding: 10px 18px;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .email-input::placeholder {
+            color: #999;
+        }
+
+        .subscribe-btn {
+            padding: 8px 25px;
+            background-color: transparent;
+            border: 1px solid #eae6df;
+            border-radius: 20px;
+            color: #eae6df;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            padding: 12px 24px;
-            border: 1px solid #000000;
-            border-radius: 50px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .contact-link:hover {
-            background-color: #000000;
-            color: #f7f3e5;
+        .subscribe-btn:hover {
+            background-color: #eae6df;
+            color: #000000;
+        }
+
+        /* Connect Section */
+        .connect-section {
+            align-items: center;
+        }
+
+        .connect-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .connect-links a {
+            color: #eae6df;
+            text-decoration: none;
+            font-size: 14px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .connect-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background-color: #eae6df;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .connect-links a:hover::after {
+            width: 100%;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 0;
+        }
+
+        .footer-cta-btn {
+            background-color: #732c26 !important;
+            border: 1px solid #000000 !important;
+            border-radius: 9999px !important;
+            padding: 12px 20px !important;
+            font-weight: 500 !important;
+            color: white !important;
+            font-size: clamp(10px, 0.85vw, 14px);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-cta-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background-color: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .footer-cta-btn:hover::after {
+            width: 100%;
+        }
+
+        .footer-cta-btn:hover {
+            background-color: #5a1f1a;
+            transform: translateY(-1px);
+        }
+
+        /* Bottom Logo Background - Full Width */
+        .footer-logo-background {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background-image: url('assets/between-logo-white-transparent.png');
+            background-size: contain;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            z-index: 1;
+            pointer-events: none;
+            filter: brightness(0.8);
+        }
+
+        /* Alternative: Handwritten logo from attachment */
+        .footer-logo-fullwidth {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 250px;
+            background-image: url('assets/between-handwritten-logo.png');
+            background-size: contain;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            z-index: 1;
+            pointer-events: none;
+            display: none; /* Hidden by default, will be shown if primary logo fails */
+        }
+
+        /* Fallback: CSS-based Between text */
+        .footer-logo-text {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: "Brush Script MT", "Lucida Handwriting", cursive;
+            font-size: clamp(60px, 8vw, 120px);
+            color: #333333;
+            font-weight: normal;
+            opacity: 0.3;
+            z-index: 1;
+            pointer-events: none;
+            display: none;
         }
 
         /* Animations */
@@ -390,9 +623,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 响应式设计 */
+        /* Responsive Design */
         
-        /* 平板端 (768px - 1024px) */
+        /* Navbar Responsive */
         @media (min-width: 768px) and (max-width: 1024px) {
             .navbar {
                 padding: 1.2vw 4vw;
@@ -407,7 +640,6 @@
             }
         }
 
-        /* 手机端 (小于768px) */
         @media (max-width: 767px) {
             .navbar {
                 padding: 3vw 4vw;
@@ -421,7 +653,7 @@
                 width: 100%;
             }
             
-            .logo {
+            .navbar .logo {
                 height: 8vw;
                 max-height: 50px;
                 min-height: 25px;
@@ -453,12 +685,6 @@
             .process-step {
                 flex: none;
             }
-
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
             
             .step-number {
                 font-size: 48px;
@@ -472,10 +698,6 @@
                 font-size: 14px;
             }
             
-            .contact-title {
-                font-size: 28px;
-            }
-            
             .process-title {
                 font-size: 32px;
                 margin-bottom: 60px;
@@ -484,23 +706,18 @@
             .our-process {
                 padding: 80px 20px;
             }
-            
-            .contact {
-                padding: 80px 20px;
-            }
 
             .opening-logo {
                 max-width: 250px;
             }
         }
 
-        /* 超小屏幕 (小于480px) */
         @media (max-width: 479px) {
             .navbar {
                 padding: 4vw 3vw;
             }
             
-            .logo {
+            .navbar .logo {
                 height: 10vw;
                 max-height: 45px;
                 min-height: 22px;
@@ -516,6 +733,117 @@
 
             .opening-logo {
                 max-width: 200px;
+            }
+        }
+
+        /* Footer Responsive */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+                align-items: center;
+            }
+
+            .footer-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .newsletter-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .newsletter-section h3 {
+                text-align: center;
+                align-self: center;
+            }
+
+            .newsletter-section p {
+                text-align: center;
+            }
+
+            .email-form {
+                align-items: center;
+            }
+
+            .footer-logo-background {
+                height: 200px;
+            }
+
+            .footer-logo-fullwidth {
+                height: 200px;
+            }
+
+            .footer-logo-text {
+                font-size: clamp(50px, 6vw, 80px);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .footer {
+                padding: 40px 20px 0;
+                min-height: 80vh;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+                align-items: center;
+                padding-top: 40px;
+            }
+
+            .footer-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .newsletter-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .newsletter-section h3 {
+                text-align: center;
+                align-self: center;
+            }
+
+            .newsletter-section p {
+                text-align: center;
+                max-width: 280px;
+            }
+
+            .email-form {
+                align-items: center;
+            }
+
+            .footer-logo-background {
+                height: 150px;
+            }
+
+            .footer-logo-fullwidth {
+                height: 150px;
+            }
+
+            .footer-logo-text {
+                font-size: clamp(40px, 10vw, 60px);
+                bottom: 10px;
+            }
+        }
+
+        @media (max-width: 479px) {
+            .footer-logo-background {
+                height: 120px;
+            }
+
+            .footer-logo-fullwidth {
+                height: 120px;
+            }
+
+            .footer-logo-text {
+                font-size: clamp(30px, 12vw, 50px);
             }
         }
     </style>
@@ -535,14 +863,14 @@
 
     <!-- Main Website Content -->
     <div class="main-website" id="mainWebsite">
-        <!-- 统一响应式导航栏 -->
-        <header class="navbar">
+        <!-- Reusable Navigation Bar -->
+        <header class="navbar" id="navbar">
             <div class="navbar-container">
-                <img src="assets/between-logo-transparent.png" alt="Between Logo" class="logo" />
+                <img src="assets/between-logo-transparent.png" alt="Between Logo" class="logo" onclick="window.location.href='index.html'" />
                 <nav class="nav-links">
                     <a href="works.html">WORKS</a>
-                    <a href="#about">ABOUT</a>
-                    <a href="mailto:betweenlabo@gmail.com" class="start-project-btn">START A PROJECT</a>
+                    <a href="about.html">ABOUT</a>
+                    <a href="start-a-project.html" class="start-project-btn">START A PROJECT</a>
                 </nav>
             </div>
         </header>
@@ -595,19 +923,47 @@
                     </div>
                 </div>
             </section>
+        </main>
 
-            <!-- Contact Section -->
-            <section class="contact">
-                <div class="contact-container">
-                    <h2 class="contact-title">Let's Connect</h2>
-                    <div class="contact-links">
-                        <a href="https://www.instagram.com/betweenlabo/" class="contact-link" target="_blank" rel="noopener noreferrer">Instagram</a>
-                        <a href="https://x.com/home?lang=en" class="contact-link" target="_blank" rel="noopener noreferrer">X</a>
-                        <a href="mailto:betweenlabo@gmail.com" class="contact-link">Email</a>
+        <!-- Reusable Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <!-- Newsletter Section -->
+                <div class="footer-section newsletter-section">
+                    <h3>Newsletter</h3>
+                    <p>Join our newsletter to stay informed about new projects, products, previews, and more.</p>
+                    <form class="email-form" onsubmit="handleNewsletterSubmit(event)">
+                        <input type="email" class="email-input" placeholder="E-Mail" required>
+                        <button type="submit" class="subscribe-btn">Subscribe</button>
+                    </form>
+                </div>
+
+                <!-- Connect Section -->
+                <div class="footer-section connect-section">
+                    <h3>Connect</h3>
+                    <div class="connect-links">
+                        <a href="https://www.instagram.com/betweenlabo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        <a href="https://x.com/BetweenLabo" target="_blank" rel="noopener noreferrer">X</a>
+                        <a href="mailto:betweenlabo@gmail.com">Email</a>
                     </div>
                 </div>
-            </section>
-        </main>
+
+                <!-- CTA Section -->
+                <div class="footer-section cta-section">
+                    <a href="start-a-project.html" class="footer-cta-btn">START A PROJECT</a>
+                </div>
+            </div>
+
+            <!-- Full Width Bottom Logo Background -->
+            <!-- Primary: White transparent logo -->
+            <div class="footer-logo-background"></div>
+            
+            <!-- Fallback 1: Handwritten logo from attachment -->
+            <div class="footer-logo-fullwidth"></div>
+            
+            <!-- Fallback 2: CSS text (will show if both images fail to load) -->
+            <div class="footer-logo-text">Between</div>
+        </footer>
     </div>
 
     <script>
@@ -686,12 +1042,6 @@
                     console.warn('❌ All paper texture paths failed, using CSS fallback background');
                     document.body.style.background = 'linear-gradient(45deg, #f5f1e8 0%, #f0ebe0 25%, #f5f1e8 50%, #f0ebe0 75%, #f5f1e8 100%)';
                     document.body.style.backgroundSize = '40px 40px';
-                    // Also apply to contact section
-                    const contactSection = document.querySelector('.contact');
-                    if (contactSection) {
-                        contactSection.style.background = 'linear-gradient(45deg, #f5f1e8 0%, #f0ebe0 25%, #f5f1e8 50%, #f0ebe0 75%, #f5f1e8 100%)';
-                        contactSection.style.backgroundSize = '40px 40px';
-                    }
                     return;
                 }
                 
@@ -703,12 +1053,6 @@
                     console.log(`✅ Paper texture loaded successfully from: ${path}`);
                     document.body.style.background = `url("${path}") repeat fixed`;
                     document.body.style.backgroundSize = 'auto';
-                    // Also apply to contact section
-                    const contactSection = document.querySelector('.contact');
-                    if (contactSection) {
-                        contactSection.style.background = `url("${path}") repeat fixed`;
-                        contactSection.style.backgroundSize = 'auto';
-                    }
                 };
                 testPaper.onerror = () => {
                     console.warn(`❌ Failed to load paper texture from: ${path}`);
@@ -843,12 +1187,11 @@
                     ];
                     
                     // Check if currently hovering nav links
-                    const isHoveringNav = el.closest("nav a") || el.closest(".logo-link");
+                    const isHoveringNav = el.closest("nav a") || el.closest(".logo");
                     
                     if (!isHoveringNav) {
                         // Check for light backgrounds or specific sections
                         const isLightBackground = lightBackgrounds.some(color => bgColor.includes(color)) || 
-                            el.closest('.contact') || 
                             el.closest('.our-process') ||
                             el.closest('[style*="background-color: #ffffff"]') ||
                             el.closest('[style*="background-color: #f7f3e5"]') ||
@@ -883,7 +1226,7 @@
             });
             
             // Enhanced navigation hover effects - scale to 200px with black brush
-            const allNavLinks = document.querySelectorAll("nav a, .logo-link");
+            const allNavLinks = document.querySelectorAll("nav a, .logo");
             console.log(`📋 Found ${allNavLinks.length} navigation links`);
             
             allNavLinks.forEach(link => {
@@ -960,25 +1303,121 @@
                 startSlideshow();
             }, 1500);
 
-            // Enhanced header scroll effect (transparent nav)
-            window.addEventListener('scroll', () => {
-                const navbar = document.querySelector('.navbar');
-                if (window.scrollY > 50) {
-                    navbar.style.backgroundColor = 'rgba(245, 241, 232, 0.85)';
-                    navbar.style.backdropFilter = 'blur(10px)';
-                    navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-                } else {
-                    navbar.style.backgroundColor = 'transparent';
-                    navbar.style.backdropFilter = 'none';
-                    navbar.style.boxShadow = 'none';
-                }
-            });
-
             // Debug: Console log for navigation testing
-            document.querySelector('a[href="works.html"]').addEventListener('click', function(e) {
-                console.log('WORKS link clicked! Navigating to:', this.href);
-            });
+            const worksLink = document.querySelector('a[href="works.html"]');
+            if (worksLink) {
+                worksLink.addEventListener('click', function(e) {
+                    console.log('WORKS link clicked! Navigating to:', this.href);
+                });
+            }
         }
+
+        // Between Navigation Bar Script
+        (function() {
+            // Enhanced header scroll effect
+            function handleScroll() {
+                const navbar = document.getElementById('navbar');
+                if (navbar) {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }
+            }
+
+            // Initialize navbar functionality
+            function initNavbar() {
+                window.addEventListener('scroll', handleScroll);
+                
+                // Logo error handling
+                const logo = document.querySelector('.navbar .logo');
+                if (logo) {
+                    logo.onerror = function() {
+                        console.warn('Logo image failed to load:', this.src);
+                    };
+                }
+                
+                console.log('✅ Between Navigation Bar initialized');
+            }
+
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initNavbar);
+            } else {
+                initNavbar();
+            }
+        })();
+
+        // Between Footer Script
+        (function() {
+            // Newsletter form submission
+            window.handleNewsletterSubmit = function(event) {
+                event.preventDefault();
+                const email = event.target.querySelector('.email-input').value;
+                
+                // Create mailto link with the email
+                const subject = encodeURIComponent('Newsletter Subscription');
+                const body = encodeURIComponent(`Please add this email to the newsletter: ${email}`);
+                const mailtoLink = `mailto:betweenlabo@gmail.com?subject=${subject}&body=${body}`;
+                
+                // Open email client
+                window.location.href = mailtoLink;
+                
+                // Reset form
+                event.target.reset();
+                
+                // Optional: Show confirmation message
+                alert('Thank you! Your email client should now open to send the subscription request.');
+            };
+
+            // Initialize footer functionality
+            function initFooter() {
+                // Logo image loading with fallback chain
+                const logoBackground = document.querySelector('.footer-logo-background');
+                const logoHandwritten = document.querySelector('.footer-logo-fullwidth');
+                const logoText = document.querySelector('.footer-logo-text');
+                
+                if (logoBackground && logoHandwritten && logoText) {
+                    // Test primary logo (white transparent)
+                    const testPrimaryImg = new Image();
+                    testPrimaryImg.onload = function() {
+                        console.log('✅ Primary footer logo (white transparent) loaded successfully');
+                        logoBackground.style.display = 'block';
+                        logoHandwritten.style.display = 'none';
+                        logoText.style.display = 'none';
+                    };
+                    testPrimaryImg.onerror = function() {
+                        console.warn('❌ Primary footer logo failed, trying handwritten logo...');
+                        logoBackground.style.display = 'none';
+                        
+                        // Test secondary logo (handwritten)
+                        const testHandwrittenImg = new Image();
+                        testHandwrittenImg.onload = function() {
+                            console.log('✅ Handwritten footer logo loaded successfully');
+                            logoHandwritten.style.display = 'block';
+                            logoText.style.display = 'none';
+                        };
+                        testHandwrittenImg.onerror = function() {
+                            console.warn('❌ Handwritten footer logo failed, showing text fallback');
+                            logoHandwritten.style.display = 'none';
+                            logoText.style.display = 'block';
+                        };
+                        testHandwrittenImg.src = 'assets/between-handwritten-logo.png';
+                    };
+                    testPrimaryImg.src = 'assets/between-logo-white-transparent.png';
+                }
+                
+                console.log('✅ Between Footer initialized');
+            }
+
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initFooter);
+            } else {
+                initFooter();
+            }
+        })();
     </script>
 </body>
 </html>
