@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Between</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #000000;
+            background-color: #ffffff;
+            padding-top: 100px; /* Space for fixed navbar */
+        }
+
+        /* Between Navigation Bar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 1.5vw 5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-container {
+            width: 100%;
+            max-width: 1440px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            height: 6vw;
+            max-height: 70px;
+            min-height: 30px;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .navbar .logo:hover {
+            animation: logoShake 0.5s ease-in-out;
+        }
+
+        @keyframes logoShake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+            20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2vw;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: clamp(12px, 0.95vw, 16px);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #000000;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 4px 8px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: #000000;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .start-project-btn {
+            background-color: #732c26 !important;
+            border: 1px solid #000000 !important;
+            border-radius: 9999px !important;
+            padding: 12px 20px !important;
+            font-weight: 500 !important;
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+
+        .start-project-btn:hover {
+            background-color: #5a1f1a;
+            transform: translateY(-1px);
+        }
+
+        .start-project-btn::after {
+            display: none;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(247, 243, 229, 0.85) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Animation Styles */
+        .hero-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.6s ease;
+            background-color: #000;
+            margin-top: -100px; /* Compensate for body padding-top */
+        }
+
+        .text-container {
+            text-align: center;
+            max-width: 90vw;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .hero-text {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            color: white;
+            font-size: 10vw;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+            margin-right: 0.3em;
+        }
+
+        .word:last-child {
+            margin-right: 0;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .phrase-enter {
+            opacity: 1;
+        }
+
+        .phrase-exit {
+            opacity: 0;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            background-color: #ffffff;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Section 2 - Service Section */
+        .section-2 {
+            background-color: #ffffff;
+            padding: 100px 10vw;
+            text-align: center;
+            font-family: 'Inter', 'Helvetica Neue', sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-header {
+            flex-shrink: 0;
+            text-align: left;
+        }
+
+        .service-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #111111;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 0;
+            writing-mode: horizontal-tb;
+        }
+
+        .service-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .intro-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111111;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .intro-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .statement-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #111111;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease 0.2s;
+        }
+
+        .statement-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease 0.4s;
+        }
+
+        .service-list.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-list li {
+            font-size: 26px;
+            font-weight: 700;
+            color: #000000;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        /* Responsive Design for Section 2 */
+        @media (max-width: 768px) {
+            .section-2 {
+                padding: 80px 5vw;
+            }
+
+            .service-container {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .service-header {
+                text-align: center;
+            }
+
+            .service-content {
+                text-align: center;
+            }
+
+            .intro-text {
+                font-size: 18px;
+            }
+
+            .statement-text {
+                font-size: 20px;
+            }
+
+            .service-list li {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .intro-text {
+                font-size: 16px;
+            }
+
+            .statement-text {
+                font-size: 18px;
+            }
+
+            .service-list li {
+                font-size: 20px;
+            }
+        }
+
+        /* Image Block Section */
+        .image-section {
+            padding: 120px 10vw;
+            text-align: center;
+        }
+
+        .about-diagram {
+            max-width: 80vw;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .about-diagram.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Between Footer Styles */
+        .footer {
+            background-color: #000000;
+            color: #eae6df;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 80px 40px 0;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 60px;
+            padding-top: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            font-family: "Times New Roman", serif;
+            font-size: 24px;
+            font-weight: normal;
+            margin-bottom: 25px;
+            color: #eae6df;
+        }
+
+        .newsletter-section {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .newsletter-section h3 {
+            text-align: left;
+            align-self: flex-start;
+        }
+
+        .newsletter-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 280px;
+            text-align: left;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .email-input {
+            width: 100%;
+            max-width: 260px;
+            padding: 10px 18px;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .email-input::placeholder {
+            color: #999;
+        }
+
+        .subscribe-btn {
+            padding: 8px 25px;
+            background-color: transparent;
+            border: 1px solid #eae6df;
+            border-radius: 20px;
+            color: #eae6df;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .subscribe-btn:hover {
+            background-color: #eae6df;
+            color: #000000;
+        }
+
+        .connect-section {
+            align-items: center;
+        }
+
+        .connect-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .connect-links a {
+            color: #eae6df;
+            text-decoration: none;
+            font-size: 14px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .connect-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background-color: #eae6df;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .connect-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 0;
+        }
+
+        .footer-cta-btn {
+            background-color: #732c26 !important;
+            border: 1px solid #000000 !important;
+            border-radius: 9999px !important;
+            padding: 12px 20px !important;
+            font-weight: 500 !important;
+            color: white !important;
+            font-size: clamp(10px, 0.85vw, 14px);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-cta-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background-color: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .footer-cta-btn:hover::after {
+            width: 100%;
+        }
+
+        .footer-cta-btn:hover {
+            background-color: #5a1f1a;
+            transform: translateY(-1px);
+        }
+
+        .footer-logo-background {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background-image: url('assets/between-logo-white-transparent.png');
+            background-size: contain;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            z-index: 1;
+            pointer-events: none;
+            filter: brightness(0.8);
+        }
+
+        .footer-logo-fullwidth {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 250px;
+            background-image: url('assets/between-handwritten-logo.png');
+            background-size: contain;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            z-index: 1;
+            pointer-events: none;
+            display: none;
+        }
+
+        .footer-logo-text {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: "Brush Script MT", "Lucida Handwriting", cursive;
+            font-size: clamp(60px, 8vw, 120px);
+            color: #333333;
+            font-weight: normal;
+            opacity: 0.3;
+            z-index: 1;
+            pointer-events: none;
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .navbar {
+                padding: 1.2vw 4vw;
+            }
+            
+            .nav-links {
+                gap: 1.5vw;
+            }
+
+            .hero-text {
+                font-size: 6vw;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+                align-items: center;
+            }
+
+            .footer-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .newsletter-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .newsletter-section h3 {
+                text-align: center;
+                align-self: center;
+            }
+
+            .newsletter-section p {
+                text-align: center;
+            }
+
+            .email-form {
+                align-items: center;
+            }
+
+            .footer-logo-background {
+                height: 200px;
+            }
+
+            .footer-logo-fullwidth {
+                height: 200px;
+            }
+
+            .footer-logo-text {
+                font-size: clamp(50px, 6vw, 80px);
+            }
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding-top: 80px;
+            }
+
+            .hero-container {
+                margin-top: -80px;
+            }
+
+            .navbar {
+                padding: 3vw 4vw;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .navbar-container {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+            }
+            
+            .navbar .logo {
+                height: 8vw;
+                max-height: 50px;
+                min-height: 25px;
+            }
+            
+            .nav-links {
+                gap: 6vw;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links a {
+                font-size: clamp(11px, 3vw, 14px);
+            }
+
+            .hero-text {
+                font-size: 4.5vw;
+                line-height: 1.2;
+            }
+
+            .section-2 {
+                padding: 80px 5vw;
+            }
+
+            .text-module {
+                margin-bottom: 60px;
+            }
+
+            .image-section {
+                padding: 80px 5vw;
+            }
+
+            .footer {
+                padding: 40px 20px 0;
+                min-height: 80vh;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+                align-items: center;
+                padding-top: 40px;
+            }
+
+            .footer-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .newsletter-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .newsletter-section h3 {
+                text-align: center;
+                align-self: center;
+            }
+
+            .newsletter-section p {
+                text-align: center;
+                max-width: 280px;
+            }
+
+            .email-form {
+                align-items: center;
+            }
+
+            .footer-logo-background {
+                height: 150px;
+            }
+
+            .footer-logo-fullwidth {
+                height: 150px;
+            }
+
+            .footer-logo-text {
+                font-size: clamp(40px, 10vw, 60px);
+                bottom: 10px;
+            }
+        }
+
+        @media (max-width: 479px) {
+            .navbar {
+                padding: 4vw 3vw;
+            }
+            
+            .navbar .logo {
+                height: 10vw;
+                max-height: 45px;
+                min-height: 22px;
+            }
+            
+            .nav-links {
+                gap: 8vw;
+            }
+            
+            .nav-links a {
+                font-size: clamp(10px, 3.5vw, 12px);
+            }
+
+            .hero-text {
+                font-size: 5vw;
+                line-height: 1.15;
+            }
+            
+            .text-container {
+                max-width: 95vw;
+            }
+
+            .footer-logo-background {
+                height: 120px;
+            }
+
+            .footer-logo-fullwidth {
+                height: 120px;
+            }
+
+            .footer-logo-text {
+                font-size: clamp(30px, 12vw, 50px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar" id="navbar">
+        <div class="navbar-container">
+            <img src="assets/between-logo-transparent.png" alt="Between Logo" class="logo" onclick="window.location.href='index.html'" />
+            <nav class="nav-links">
+                <a href="works.html">WORKS</a>
+                <a href="about.html">ABOUT</a>
+                <a href="start-a-project.html" class="start-project-btn">START A PROJECT</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Animation Section -->
+    <div class="hero-container" id="heroContainer">
+        <div class="text-container" id="textContainer">
+            <div class="hero-text" id="heroText"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Section 2 - Service Section -->
+        <section class="section-2">
+            <div class="service-container">
+                <div class="service-header">
+                    <h2>SERVICE</h2>
+                </div>
+                <div class="service-content">
+                    <!-- Module 1: Intro Text -->
+                    <div class="intro-text" data-animate>
+                        Between is an independent design studio with a balance spirit. Concentrating on brand identities, packaging, and illustration.
+                    </div>
+                    
+                    <!-- Module 2: Statement -->
+                    <div class="statement-text" data-animate>
+                        We partner with businesses of any size or sector: from first round of funding to every subsequent stage of growth. Beauty becomes Purpose, and function becomes Promise.
+                    </div>
+                    
+                    <!-- Module 3: Service List -->
+                    <ul class="service-list" data-animate>
+                        <li>Brand Identity</li>
+                        <li>Product design</li>
+                        <li>Illustration</li>
+                        <li>Packaging Design</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Section -->
+        <section class="image-section">
+            <img src="assets/about-3ring.png" alt="Between Design Philosophy Diagram" class="about-diagram" data-animate />
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Newsletter Section -->
+            <div class="footer-section newsletter-section">
+                <h3>Newsletter</h3>
+                <p>Join our newsletter to stay informed about new projects, products, previews, and more.</p>
+                <form class="email-form" onsubmit="handleNewsletterSubmit(event)">
+                    <input type="email" class="email-input" placeholder="E-Mail" required>
+                    <button type="submit" class="subscribe-btn">Subscribe</button>
+                </form>
+            </div>
+
+            <!-- Connect Section -->
+            <div class="footer-section connect-section">
+                <h3>Connect</h3>
+                <div class="connect-links">
+                    <a href="https://www.instagram.com/betweenlabo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a href="https://x.com/BetweenLabo" target="_blank" rel="noopener noreferrer">X</a>
+                    <a href="mailto:betweenlabo@gmail.com">Email</a>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="footer-section cta-section">
+                <a href="start-a-project.html" class="footer-cta-btn">START A PROJECT</a>
+            </div>
+        </div>
+
+        <!-- Full Width Bottom Logo Background -->
+        <div class="footer-logo-background"></div>
+        <div class="footer-logo-fullwidth"></div>
+        <div class="footer-logo-text">Between</div>
+    </footer>
+
+    <script>
+        // Hero Animation Class
+        class HeroAnimation {
+            constructor() {
+                this.phrases = [
+                    {
+                        text: "Between is a space where creativity flourishes",
+                        backgroundColor: "#a2251c"
+                    },
+                    {
+                        text: "Art changes everything",
+                        backgroundColor: "#77775d"
+                    },
+                    {
+                        text: "We design in the balance",
+                        backgroundColor: "#d2a17c"
+                    },
+                    {
+                        text: "We craft brand identities, packaging, and illustration",
+                        backgroundColor: "#deb6a5"
+                    },
+                    {
+                        text: "for founders shaping tomorrow.",
+                        backgroundColor: "#dcc7a8"
+                    },
+                    {
+                        text: "Design without our planet in mind is to create problems, not solutions",
+                        backgroundColor: "#cbb9a5"
+                    }
+                ];
+
+                this.currentPhraseIndex = 0;
+                this.heroContainer = document.getElementById('heroContainer');
+                this.textContainer = document.getElementById('textContainer');
+                this.heroText = document.getElementById('heroText');
+                
+                this.isAnimating = false;
+                this.wordAnimationDelay = 150;
+                this.phraseDisplayTime = 3000;
+                this.fadeTransitionTime = 600;
+
+                this.init();
+            }
+
+            init() {
+                this.showPhrase(0);
+            }
+
+            createWordElements(text) {
+                const words = text.split(' ');
+                return words.map(word => `<span class="word">${word}</span>`).join(' ');
+            }
+
+            async showPhrase(index) {
+                if (this.isAnimating) return;
+                this.isAnimating = true;
+
+                const currentPhrase = this.phrases[index];
+                
+                this.heroContainer.style.backgroundColor = currentPhrase.backgroundColor;
+                this.heroText.innerHTML = this.createWordElements(currentPhrase.text);
+                
+                this.textContainer.classList.add('phrase-enter');
+                this.textContainer.style.opacity = '1';
+
+                const words = this.heroText.querySelectorAll('.word');
+                
+                for (let i = 0; i < words.length; i++) {
+                    setTimeout(() => {
+                        words[i].style.animationDelay = '0s';
+                        words[i].style.opacity = '1';
+                        words[i].style.transform = 'translateY(0)';
+                    }, i * this.wordAnimationDelay);
+                }
+
+                const totalWordAnimationTime = words.length * this.wordAnimationDelay + 500;
+                
+                setTimeout(() => {
+                    setTimeout(() => {
+                        this.hidePhrase().then(() => {
+                            this.currentPhraseIndex = (this.currentPhraseIndex + 1) % this.phrases.length;
+                            this.isAnimating = false;
+                            
+                            setTimeout(() => {
+                                this.showPhrase(this.currentPhraseIndex);
+                            }, 300);
+                        });
+                    }, this.phraseDisplayTime);
+                }, totalWordAnimationTime);
+            }
+
+            async hidePhrase() {
+                return new Promise((resolve) => {
+                    this.textContainer.style.opacity = '0';
+                    setTimeout(resolve, this.fadeTransitionTime);
+                });
+            }
+
+            nextPhrase() {
+                if (!this.isAnimating) {
+                    this.currentPhraseIndex = (this.currentPhraseIndex + 1) % this.phrases.length;
+                    this.showPhrase(this.currentPhraseIndex);
+                }
+            }
+        }
+
+        // Navigation Bar Script
+        function handleScroll() {
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+        }
+
+        // Newsletter form submission
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.email-input').value;
+            
+            const subject = encodeURIComponent('Newsletter Subscription');
+            const body = encodeURIComponent(`Please add this email to the newsletter: ${email}`);
+            const mailtoLink = `mailto:betweenlabo@gmail.com?subject=${subject}&body=${body}`;
+            
+            window.location.href = mailtoLink;
+            event.target.reset();
+            alert('Thank you! Your email client should now open to send the subscription request.');
+        }
+
+        // Scroll animations for content
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('[data-animate]').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Footer initialization
+        function initFooter() {
+            const logoBackground = document.querySelector('.footer-logo-background');
+            const logoHandwritten = document.querySelector('.footer-logo-fullwidth');
+            const logoText = document.querySelector('.footer-logo-text');
+            
+            if (logoBackground && logoHandwritten && logoText) {
+                const testPrimaryImg = new Image();
+                testPrimaryImg.onload = function() {
+                    console.log('✅ Primary footer logo (white transparent) loaded successfully');
+                    logoBackground.style.display = 'block';
+                    logoHandwritten.style.display = 'none';
+                    logoText.style.display = 'none';
+                };
+                testPrimaryImg.onerror = function() {
+                    console.warn('❌ Primary footer logo failed, trying handwritten logo...');
+                    logoBackground.style.display = 'none';
+                    
+                    const testHandwrittenImg = new Image();
+                    testHandwrittenImg.onload = function() {
+                        console.log('✅ Handwritten footer logo loaded successfully');
+                        logoHandwritten.style.display = 'block';
+                        logoText.style.display = 'none';
+                    };
+                    testHandwrittenImg.onerror = function() {
+                        console.warn('❌ Handwritten footer logo failed, showing text fallback');
+                        logoHandwritten.style.display = 'none';
+                        logoText.style.display = 'block';
+                    };
+                    testHandwrittenImg.src = 'assets/between-handwritten-logo.png';
+                };
+                testPrimaryImg.src = 'assets/between-logo-white-transparent.png';
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            new HeroAnimation();
+            window.addEventListener('scroll', handleScroll);
+            initScrollAnimations();
+            initFooter();
+            
+            // Logo error handling
+            const logo = document.querySelector('.navbar .logo');
+            if (logo) {
+                logo.onerror = function() {
+                    console.warn('Logo image failed to load:', this.src);
+                };
+            }
+            
+            console.log('✅ About page initialized');
+        });
+    </script>
+</body>
+</html>
