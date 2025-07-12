@@ -9,7 +9,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none !important;
         }
 
         /* Opening Animation Styles */
@@ -81,7 +80,6 @@
             font-family: "Helvetica Neue", "Inter", "Satoshi", sans-serif;
             background-color: #000000;
             color: #000000;
-            cursor: none !important;
             overflow-x: hidden;
             animation: bodyFadeIn 0.5s ease-in forwards;
         }
@@ -89,23 +87,6 @@
         @keyframes bodyFadeIn {
             from { background-color: #000000; }
             to { background-color: #f7f3e5; }
-        }
-
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 12px;
-            height: 12px;
-            background-color: #8985cf;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.3s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .cursor.expand {
-            transform: translate(-50%, -50%) scale(4);
         }
 
         /* Between Navigation Bar Styles */
@@ -1006,9 +987,6 @@
         function initializeMainWebsite() {
             console.log('🚀 Initializing main website...');
             
-            // Enhanced ink brush cursor system with comprehensive path testing
-            console.log('🎨 CREATING INK BRUSH CURSOR WITH PATH DETECTION...');
-            
             // Force navigation text to be black
             const navLinks = document.querySelectorAll('.nav-links a');
             navLinks.forEach(link => {
@@ -1026,253 +1004,6 @@
                 };
                 console.log('🖼️ Logo path set with fallback');
             }
-            
-            // Test multiple paths for paper texture
-            const paperTexturePaths = [
-                'assets/paper-texture.png',
-                './assets/paper-texture.png', 
-                '/assets/paper-texture.png',
-                'paper-texture.png',
-                './paper-texture.png',
-                '/paper-texture.png'
-            ];
-            
-            function tryPaperTexture(index = 0) {
-                if (index >= paperTexturePaths.length) {
-                    console.warn('❌ All paper texture paths failed, using CSS fallback background');
-                    document.body.style.background = 'linear-gradient(45deg, #f5f1e8 0%, #f0ebe0 25%, #f5f1e8 50%, #f0ebe0 75%, #f5f1e8 100%)';
-                    document.body.style.backgroundSize = '40px 40px';
-                    return;
-                }
-                
-                const path = paperTexturePaths[index];
-                console.log(`🔍 Testing paper texture path ${index + 1}/${paperTexturePaths.length}: ${path}`);
-                
-                const testPaper = new Image();
-                testPaper.onload = () => {
-                    console.log(`✅ Paper texture loaded successfully from: ${path}`);
-                    document.body.style.background = `url("${path}") repeat fixed`;
-                    document.body.style.backgroundSize = 'auto';
-                };
-                testPaper.onerror = () => {
-                    console.warn(`❌ Failed to load paper texture from: ${path}`);
-                    tryPaperTexture(index + 1);
-                };
-                testPaper.src = path;
-            }
-            
-            // Test multiple paths for ink mouse
-            const inkMousePaths = [
-                'assets/ink-mouse.png',
-                './assets/ink-mouse.png',
-                '/assets/ink-mouse.png', 
-                'ink-mouse.png',
-                './ink-mouse.png',
-                '/ink-mouse.png',
-                'assets/mouse/mouse-brush-white.png',
-                './assets/mouse/mouse-brush-white.png'
-            ];
-            
-            let inkMouseLoaded = false;
-            let successfulInkPath = '';
-            
-            function tryInkMouse(index = 0) {
-                if (index >= inkMousePaths.length) {
-                    console.warn('❌ All ink mouse paths failed, using enhanced CSS patterns');
-                    inkMouseLoaded = false;
-                    return;
-                }
-                
-                const path = inkMousePaths[index];
-                console.log(`🔍 Testing ink mouse path ${index + 1}/${inkMousePaths.length}: ${path}`);
-                
-                const testInk = new Image();
-                testInk.onload = () => {
-                    console.log(`✅ Ink mouse loaded successfully from: ${path}`);
-                    inkMouseLoaded = true;
-                    successfulInkPath = path;
-                    updateCursorImage();
-                };
-                testInk.onerror = () => {
-                    console.warn(`❌ Failed to load ink mouse from: ${path}`);
-                    tryInkMouse(index + 1);
-                };
-                testInk.src = path;
-            }
-            
-            // Start path testing
-            tryPaperTexture();
-            tryInkMouse();
-            
-            // Remove any existing cursor
-            const existingCursor = document.getElementById("custom-cursor");
-            if (existingCursor) {
-                existingCursor.remove();
-            }
-            
-            // Create enhanced ink cursor element
-            const cursor = document.createElement('div');
-            cursor.id = 'custom-cursor';
-            cursor.style.cssText = `
-                position: fixed !important;
-                top: 50% !important;
-                left: 50% !important;
-                width: 80px !important;
-                height: 80px !important;
-                z-index: 10002 !important;
-                pointer-events: none !important;
-                opacity: 1 !important;
-                display: block !important;
-                visibility: visible !important;
-                transform: translate(-50%, -50%) !important;
-                transition: all 0.3s ease !important;
-                border-radius: 40px !important;
-                filter: blur(0.5px) !important;
-            `;
-            
-            // Enhanced CSS brush patterns (more realistic ink effect)
-            function createRealisticInkBrush(isBlack = false) {
-                const color = isBlack ? '0, 0, 0' : '255, 255, 255';
-                const opacity = isBlack ? '0.95' : '0.9';
-                
-                return `
-                    radial-gradient(ellipse 45px 18px at 32% 28%, rgba(${color}, ${opacity}) 0%, rgba(${color}, 0.8) 20%, rgba(${color}, 0.5) 55%, transparent 100%),
-                    radial-gradient(ellipse 35px 48px at 68% 18%, rgba(${color}, 0.9) 0%, rgba(${color}, 0.65) 30%, rgba(${color}, 0.3) 70%, transparent 100%),
-                    radial-gradient(ellipse 28px 28px at 58% 72%, rgba(${color}, ${opacity}) 0%, rgba(${color}, 0.7) 35%, rgba(${color}, 0.25) 80%, transparent 100%),
-                    radial-gradient(ellipse 42px 16px at 18% 78%, rgba(${color}, 0.85) 0%, rgba(${color}, 0.55) 45%, rgba(${color}, 0.15) 85%, transparent 100%),
-                    radial-gradient(ellipse 52px 32px at 82% 58%, rgba(${color}, 0.88) 0%, rgba(${color}, 0.45) 50%, rgba(${color}, 0.1) 90%, transparent 100%),
-                    radial-gradient(ellipse 24px 42px at 38% 38%, rgba(${color}, ${opacity}) 0%, rgba(${color}, 0.6) 40%, rgba(${color}, 0.2) 85%, transparent 100%),
-                    radial-gradient(ellipse 38px 22px at 62% 8%, rgba(${color}, 0.75) 0%, rgba(${color}, 0.35) 65%, transparent 100%),
-                    radial-gradient(ellipse 20px 38px at 12% 48%, rgba(${color}, 0.9) 0%, rgba(${color}, 0.5) 55%, rgba(${color}, 0.1) 95%, transparent 100%),
-                    radial-gradient(ellipse 33px 33px at 50% 50%, rgba(${color}, 0.65) 0%, rgba(${color}, 0.25) 65%, transparent 100%)
-                `;
-            }
-            
-            function updateCursorImage() {
-                if (inkMouseLoaded && successfulInkPath) {
-                    cursor.style.backgroundImage = `url('${successfulInkPath}')`;
-                    cursor.style.backgroundSize = 'contain';
-                    cursor.style.backgroundRepeat = 'no-repeat';
-                    cursor.style.backgroundPosition = 'center';
-                    cursor.style.background = 'none';
-                } else {
-                    cursor.style.background = createRealisticInkBrush(false);
-                    cursor.style.backgroundImage = 'none';
-                    cursor.style.borderRadius = '40px';
-                    cursor.style.filter = 'blur(0.5px)';
-                }
-            }
-            
-            // Initialize with CSS pattern first and add to document
-            cursor.style.background = createRealisticInkBrush(false);
-            document.body.appendChild(cursor);
-            console.log('✅ INK BRUSH CURSOR CREATED AND ADDED TO DOM! (80px default)');
-            
-            // Mouse tracking with smart background detection
-            document.addEventListener("mousemove", (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                
-                // Smart background detection for automatic color switching
-                const el = document.elementFromPoint(e.clientX, e.clientY);
-                if (el) {
-                    const bgColor = window.getComputedStyle(el).backgroundColor;
-                    const lightBackgrounds = [
-                        "rgb(255, 255, 255)", 
-                        "rgb(247, 243, 229)", 
-                        "rgb(244, 141, 69)",
-                        "rgba(255, 255, 255",
-                        "rgba(247, 243, 229",
-                        "rgba(244, 141, 69"
-                    ];
-                    
-                    // Check if currently hovering nav links
-                    const isHoveringNav = el.closest("nav a") || el.closest(".logo");
-                    
-                    if (!isHoveringNav) {
-                        // Check for light backgrounds or specific sections
-                        const isLightBackground = lightBackgrounds.some(color => bgColor.includes(color)) || 
-                            el.closest('.our-process') ||
-                            el.closest('[style*="background-color: #ffffff"]') ||
-                            el.closest('[style*="background-color: #f7f3e5"]') ||
-                            el.closest('[style*="background-color: #f48d45"]');
-                        
-                        if (isLightBackground) {
-                            // Light background: use black ink brush
-                            if (inkMouseLoaded) {
-                                cursor.style.backgroundImage = `url('${successfulInkPath.replace('.png', '-black.png')}')`;
-                                cursor.style.background = 'none';
-                            } else {
-                                cursor.style.background = createRealisticInkBrush(true);
-                                cursor.style.backgroundImage = 'none';
-                            }
-                            cursor.style.filter = 'none';
-                        } else {
-                            // Dark background: use white ink brush
-                            if (inkMouseLoaded) {
-                                cursor.style.backgroundImage = `url('${successfulInkPath}')`;
-                                cursor.style.background = 'none';
-                            } else {
-                                cursor.style.background = createRealisticInkBrush(false);
-                                cursor.style.backgroundImage = 'none';
-                            }
-                            cursor.style.filter = 'blur(0.5px)';
-                        }
-                        cursor.style.width = '80px';
-                        cursor.style.height = '80px';
-                        cursor.style.transform = "translate(-50%, -50%) scale(1)";
-                    }
-                }
-            });
-            
-            // Enhanced navigation hover effects - scale to 200px with black brush
-            const allNavLinks = document.querySelectorAll("nav a, .logo");
-            console.log(`📋 Found ${allNavLinks.length} navigation links`);
-            
-            allNavLinks.forEach(link => {
-                link.addEventListener("mouseenter", () => {
-                    console.log('🖱️ Nav hover: BLACK ink brush + 200px');
-                    
-                    // Switch to black brush pattern or image
-                    if (inkMouseLoaded) {
-                        cursor.style.backgroundImage = `url('${successfulInkPath.replace('.png', '-black.png')}')`;
-                        cursor.style.background = 'none';
-                    } else {
-                        cursor.style.background = createRealisticInkBrush(true);
-                        cursor.style.backgroundImage = 'none';
-                    }
-                    
-                    // Scale to 200px (from 80px = 2.5x scale)
-                    cursor.style.width = '80px';
-                    cursor.style.height = '80px';
-                    cursor.style.transform = "translate(-50%, -50%) scale(2.5)";
-                    cursor.style.filter = 'blur(0.3px)';
-                    cursor.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.3)';
-                });
-                
-                link.addEventListener("mouseleave", () => {
-                    console.log('🖱️ Nav leave: WHITE ink brush + 80px');
-                    
-                    // Switch back to white brush
-                    if (inkMouseLoaded) {
-                        cursor.style.backgroundImage = `url('${successfulInkPath}')`;
-                        cursor.style.background = 'none';
-                    } else {
-                        cursor.style.background = createRealisticInkBrush(false);
-                        cursor.style.backgroundImage = 'none';
-                    }
-                    
-                    cursor.style.width = '80px';
-                    cursor.style.height = '80px';
-                    cursor.style.transform = "translate(-50%, -50%) scale(1)";
-                    cursor.style.filter = 'blur(0.5px)';
-                    cursor.style.boxShadow = 'none';
-                });
-            });
-
-            console.log('🎉 INK BRUSH CURSOR READY!');
-            console.log('📏 Default: 80px, Nav hover: 200px (2.5x scale)');
-            console.log('🎨 Using:', inkMouseLoaded ? 'Image files' : 'CSS patterns');
 
             // Hero Slideshow
             const slides = document.querySelectorAll('.slide');
