@@ -550,6 +550,7 @@
             height: 100%;
             padding: 0;
             margin: 0;
+            position: relative;
         }
 
         .logo-image {
@@ -1057,15 +1058,26 @@
         // Footer logo loading animation
         document.addEventListener('DOMContentLoaded', function() {
             const logoImage = document.querySelector('#betweenLogo');
+            
             if (logoImage) {
-                logoImage.style.opacity = '0';
-                logoImage.style.transform = 'scale(0.8)';
+                // Handle successful image load
+                logoImage.onload = function() {
+                    console.log(`Logo loaded successfully: ${this.src}`);
+                    
+                    // Animate the logo
+                    logoImage.style.opacity = '0';
+                    logoImage.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        logoImage.style.transition = 'all 1s ease';
+                        logoImage.style.opacity = '1';
+                        logoImage.style.transform = 'scale(1)';
+                    }, 200);
+                };
                 
-                setTimeout(() => {
-                    logoImage.style.transition = 'all 1s ease';
-                    logoImage.style.opacity = '1';
-                    logoImage.style.transform = 'scale(1)';
-                }, 800);
+                // Handle image load error (just log, no fallback)
+                logoImage.onerror = function() {
+                    console.log(`Logo failed to load: ${this.src}`);
+                };
             }
         });
     </script>
