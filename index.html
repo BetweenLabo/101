@@ -908,18 +908,40 @@
             const email = document.getElementById('emailInput').value;
             
             if (email) {
-                // Create mailto link for newsletter subscription
-                const subject = encodeURIComponent('Newsletter Subscription');
-                const body = encodeURIComponent(`Please add ${email} to the newsletter subscription list.`);
-                const mailtoLink = `mailto:betweenlabo@gmail.com?subject=${subject}&body=${body}`;
-                
-                window.location.href = mailtoLink;
-                
-                // Show success message
-                alert('Thank you for subscribing! Your email client should open to send the subscription request.');
-                
-                // Clear the input
-                document.getElementById('emailInput').value = '';
+                // Send POST request to Formspree
+                fetch('https://formspree.io/f/mgvzwvnz', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        _subject: 'Newsletter Subscription',
+                        message: `Newsletter subscription request from: ${email}`
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Newsletter subscription sent successfully');
+                        // Refresh page after short delay
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 800);
+                    } else {
+                        console.error('Failed to send newsletter subscription');
+                        // Still refresh page even if there's an error
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 800);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending newsletter subscription:', error);
+                    // Refresh page even if there's an error
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 800);
+                });
             }
         }
 
