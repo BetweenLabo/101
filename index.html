@@ -182,12 +182,35 @@
 
         .start-project-btn {
             background-color: #732c26 !important;
-            border: 1px solid #000000 !important;
+            border: none !important;
             border-radius: 9999px !important;
             padding: 12px 20px !important;
             font-weight: 500 !important;
+            font-size: clamp(12px, 0.95vw, 16px) !important;
+            font-family: "Helvetica Neue", "Inter", "Satoshi", sans-serif !important;
             color: white !important;
-            transition: all 0.3s ease;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-decoration: none !important;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease !important;
+        }
+
+        .start-project-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease, transform 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .start-project-btn:hover::after {
+            width: 100%;
         }
 
         .start-project-btn:hover {
@@ -195,9 +218,7 @@
             transform: translateY(-1px);
         }
 
-        .start-project-btn::after {
-            display: none; /* Remove underline for button */
-        }
+
 
         /* Scroll effect for navbar */
         .navbar.scrolled {
@@ -233,24 +254,41 @@
         }
 
         .cta-button {
-            background-color: #f48d45;
-            color: #000000;
-            padding: 16px 32px;
-            border: none;
-            border-radius: 50px;
+            background-color: #732c26 !important;       /* 背景颜色保持不变 */
+            border: none !important;                    /* 移除黑色边框 */
+            border-radius: 9999px !important;           /* 保持椭圆形 */
+            padding: 16px 32px !important;              /* 内边距 */
+            font-weight: 500 !important;                /* 字重 */
+            color: white !important;                    /* 白色字体 */
+            transition: all 0.3s ease;                  /* 动效 */
             font-size: 14px;
-            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
             opacity: 0;
             animation: fadeIn 1s ease-in 1s forwards;
+            position: relative;
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease, transform 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .cta-button:hover::after {
+            width: 100%;
         }
 
         .cta-button:hover {
-            background-color: #e67c2f;
+            background-color: #5a1f1a;
             transform: translateY(-2px);
         }
 
@@ -504,16 +542,16 @@
         }
 
         .footer-cta-button {
-            background-color: #732c26;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 16px 32px;
+            background-color: #732c26 !important;       /* 背景颜色保持不变 */
+            border: none !important;                    /* 移除黑色边框 */
+            border-radius: 9999px !important;           /* 保持椭圆形 */
+            padding: 16px 32px !important;              /* 内边距 */
+            font-weight: 500 !important;                /* 字重 */
+            color: white !important;                    /* 白色字体 */
+            transition: all 0.3s ease;                  /* 动效 */
             font-size: 0.9rem;
-            font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: all 0.3s ease;
             position: relative;
             text-decoration: none;
             display: inline-block;
@@ -537,6 +575,7 @@
         }
 
         .footer-cta-button:hover {
+            background-color: #5a1f1a;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(115, 44, 38, 0.4);
         }
@@ -718,7 +757,12 @@
             }
 
             .footer-cta-button {
-                padding: 14px 28px;
+                background-color: #732c26 !important;
+                border: none !important;
+                border-radius: 9999px !important;
+                padding: 14px 28px !important;
+                font-weight: 500 !important;
+                color: white !important;
                 font-size: 0.85rem;
             }
 
@@ -763,7 +807,12 @@
             }
 
             .footer-cta-button {
-                padding: 12px 24px;
+                background-color: #732c26 !important;
+                border: none !important;
+                border-radius: 9999px !important;
+                padding: 12px 24px !important;
+                font-weight: 500 !important;
+                color: white !important;
                 font-size: 0.8rem;
             }
 
@@ -984,13 +1033,13 @@
         function initializeMainWebsite() {
             console.log('🚀 Initializing main website...');
             
-            // Force navigation text to be black
-            const navLinks = document.querySelectorAll('.nav-links a');
+            // Force navigation text to be black (except start project button)
+            const navLinks = document.querySelectorAll('.nav-links a:not(.start-project-btn)');
             navLinks.forEach(link => {
                 link.style.color = '#000000';
                 link.style.setProperty('color', '#000000', 'important');
             });
-            console.log('🖤 Navigation text forced to black');
+            console.log('🖤 Navigation text forced to black (excluding start project button)');
             
             // Test logo path and add fallback
             const logo = document.querySelector('.logo');
