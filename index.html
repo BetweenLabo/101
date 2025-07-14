@@ -180,7 +180,10 @@
             width: 100%;
         }
 
-        .start-project-btn {
+        /* Standardized START A PROJECT Button Styles */
+        .start-project-btn,
+        .cta-button,
+        .footer-cta-button {
             background-color: #732c26 !important;
             border: none !important;
             border-radius: 9999px !important;
@@ -197,7 +200,9 @@
             transition: all 0.3s ease !important;
         }
 
-        .start-project-btn::after {
+        .start-project-btn::after,
+        .cta-button::after,
+        .footer-cta-button::after {
             content: '';
             position: absolute;
             bottom: -4px;
@@ -209,16 +214,33 @@
             transform: translateX(-50%);
         }
 
-        .start-project-btn:hover::after {
+        .start-project-btn:hover::after,
+        .cta-button:hover::after,
+        .footer-cta-button:hover::after {
             width: 100%;
         }
 
-        .start-project-btn:hover {
+        .start-project-btn:hover,
+        .cta-button:hover,
+        .footer-cta-button:hover {
             background-color: #5a1f1a;
             transform: translateY(-1px);
         }
 
+        /* Additional styling for hero CTA button */
+        .cta-button {
+            opacity: 0;
+            animation: fadeIn 1s ease-in 1s forwards;
+        }
 
+        /* Additional styling for footer CTA button */
+        .footer-cta-button {
+            box-shadow: none;
+        }
+
+        .footer-cta-button:hover {
+            box-shadow: 0 4px 12px rgba(115, 44, 38, 0.4);
+        }
 
         /* Scroll effect for navbar */
         .navbar.scrolled {
@@ -251,45 +273,6 @@
             margin-bottom: 40px;
             opacity: 0;
             animation: fadeIn 1s ease-in 0.5s forwards;
-        }
-
-        .cta-button {
-            background-color: #732c26 !important;       /* 背景颜色保持不变 */
-            border: none !important;                    /* 移除黑色边框 */
-            border-radius: 9999px !important;           /* 保持椭圆形 */
-            padding: 16px 32px !important;              /* 内边距 */
-            font-weight: 500 !important;                /* 字重 */
-            color: white !important;                    /* 白色字体 */
-            transition: all 0.3s ease;                  /* 动效 */
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-decoration: none;
-            display: inline-block;
-            opacity: 0;
-            animation: fadeIn 1s ease-in 1s forwards;
-            position: relative;
-        }
-
-        .cta-button::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: white;
-            transition: width 0.3s ease, transform 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .cta-button:hover::after {
-            width: 100%;
-        }
-
-        .cta-button:hover {
-            background-color: #5a1f1a;
-            transform: translateY(-2px);
         }
 
         /* Hero Slideshow */
@@ -541,45 +524,6 @@
             align-items: flex-start;
         }
 
-        .footer-cta-button {
-            background-color: #732c26 !important;       /* 背景颜色保持不变 */
-            border: none !important;                    /* 移除黑色边框 */
-            border-radius: 9999px !important;           /* 保持椭圆形 */
-            padding: 16px 32px !important;              /* 内边距 */
-            font-weight: 500 !important;                /* 字重 */
-            color: white !important;                    /* 白色字体 */
-            transition: all 0.3s ease;                  /* 动效 */
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            text-decoration: none;
-            display: inline-block;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        .footer-cta-button::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 1px;
-            background-color: white;
-            transition: width 0.3s ease;
-        }
-
-        .footer-cta-button:hover::after {
-            width: 80%;
-        }
-
-        .footer-cta-button:hover {
-            background-color: #5a1f1a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(115, 44, 38, 0.4);
-        }
-
         .logo-section {
             flex: 1;
             display: flex;
@@ -756,16 +700,6 @@
                 font-size: 1rem;
             }
 
-            .footer-cta-button {
-                background-color: #732c26 !important;
-                border: none !important;
-                border-radius: 9999px !important;
-                padding: 14px 28px !important;
-                font-weight: 500 !important;
-                color: white !important;
-                font-size: 0.85rem;
-            }
-
             .logo-section {
                 align-items: end;
                 justify-content: center;
@@ -804,16 +738,6 @@
             .subscribe-btn {
                 padding: 10px 20px;
                 font-size: 0.95rem;
-            }
-
-            .footer-cta-button {
-                background-color: #732c26 !important;
-                border: none !important;
-                border-radius: 9999px !important;
-                padding: 12px 24px !important;
-                font-weight: 500 !important;
-                color: white !important;
-                font-size: 0.8rem;
             }
 
             .logo-section {
