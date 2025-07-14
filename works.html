@@ -42,7 +42,7 @@
             cursor: none; /* Hide default cursor for custom cursor */
         }
 
-        /* Header Styles (from header_qub.html) */
+        /* Header Styles from header_qub.html */
         .navbar {
             position: fixed;
             top: 0;
@@ -53,11 +53,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
+            background-color: transparent;
             z-index: 1000;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .navbar-container {
@@ -99,7 +97,7 @@
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: white;
+            color: #000000;
             text-decoration: none;
             transition: all 0.3s ease;
             padding: 4px 8px;
@@ -114,18 +112,13 @@
             left: 50%;
             width: 0;
             height: 2px;
-            background-color: white;
+            background-color: #000000;
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
 
         .nav-links a:hover::after {
             width: 100%;
-        }
-
-        .nav-links a:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
         }
 
         /* START A PROJECT Button Styles */
@@ -165,6 +158,13 @@
         .start-project-btn:hover {
             background-color: #5a1f1a;
             transform: translateY(-1px);
+        }
+
+        /* Scroll effect for navbar */
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.98) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
         }
 
         /* Custom cursor styles */
@@ -922,12 +922,10 @@
     <!-- Custom cursor element - large version (300px) -->
     <div id="custom-cursor"></div>
 
-    <!-- Header (from header_qub.html) -->
-    <header class="navbar">
+    <!-- Header from header_qub.html -->
+    <header class="navbar" id="navbar">
         <div class="navbar-container">
-            <a href="index.html" class="logo-link">
-                <img src="assets/between-logo-transparent.png" alt="Between Logo" class="navbar .logo" onclick="window.location.href='index.html'" />
-            </a>
+            <img src="assets/between-logo-transparent.png" alt="Between Logo" class="logo" onclick="window.location.href='index.html'" />
             <nav class="nav-links">
                 <a href="works.html">WORKS</a>
                 <a href="about.html">ABOUT</a>
@@ -1287,7 +1285,7 @@
                 });
 
                 // Navigation link hover effect
-                const navLinks = document.querySelectorAll(".nav-links a, .logo-link");
+                const navLinks = document.querySelectorAll(".nav-links a, .logo");
                 
                 navLinks.forEach(link => {
                     link.addEventListener("mouseenter", () => {
@@ -1308,11 +1306,6 @@
                     cursor.style.opacity = "0";
                 });
 
-                // Keep cursor effect on page scroll
-                window.addEventListener("scroll", () => {
-                    // Can add scroll-related cursor effect logic here
-                });
-
                 // Check if cursor should be hidden on window resize
                 window.addEventListener("resize", () => {
                     if (window.innerWidth <= 1024) {
@@ -1326,26 +1319,21 @@
             }
         })();
 
-        // Navigation bar scroll effect (from header_qub.html)
+        // Enhanced header scroll effect from header_qub.html
         function handleScroll() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
-            } else {
-                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
-                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
             }
         }
 
         // Logo click debug
-        document.querySelector('.logo-link').addEventListener('click', function(e) {
-            console.log('Logo clicked! Navigating to:', this.href);
-        });
-
-        // Navigation link debug
-        document.querySelector('a[href="works.html"]').addEventListener('click', function(e) {
-            console.log('WORKS link clicked! Current page:', this.href);
+        document.querySelector('.logo').addEventListener('click', function(e) {
+            console.log('Logo clicked! Navigating to index.html');
         });
 
         // Newsletter form submission (from footer.html)
@@ -1419,7 +1407,7 @@
 
         // Initialize everything
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize header functionality
+            // Initialize header functionality from header_qub.html
             window.addEventListener('scroll', handleScroll);
             
             // Logo error handling
@@ -1434,7 +1422,7 @@
             // Initialize footer
             initFooter();
             
-            console.log('✅ Works page initialized with embedded components');
+            console.log('✅ Works page initialized with header_qub.html header');
         });
     </script>
 </body>
