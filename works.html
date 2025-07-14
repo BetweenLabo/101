@@ -22,17 +22,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: auto; /* System preferred cursor */
         }
 
-        body {
-            font-family: var(--body-font);
-            background-color: var(--black);
-            color: var(--white);
-            overflow-x: hidden;
-            cursor: none; /* 隐藏默认鼠标指针 */
-        }
-
-        /* System preferred interactive cursors for footer */
+        /* System preferred interactive cursors */
         button, a, input[type="submit"], input[type="button"], .clickable {
             cursor: pointer;
         }
@@ -41,7 +34,140 @@
             cursor: text;
         }
 
-        /* 自定义鼠标动画 */
+        body {
+            font-family: var(--body-font);
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor for custom cursor */
+        }
+
+        /* Header Styles (from header_qub.html) */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 1.5vw 5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .navbar-container {
+            width: 100%;
+            max-width: 1440px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            height: 6vw;
+            max-height: 70px;
+            min-height: 30px;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        /* Logo shake animation */
+        .navbar .logo:hover {
+            animation: logoShake 0.5s ease-in-out;
+        }
+
+        @keyframes logoShake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+            20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2vw;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: clamp(12px, 0.95vw, 16px);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 4px 8px;
+            position: relative;
+        }
+
+        /* Underline animation for navigation links */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
+        /* START A PROJECT Button Styles */
+        .start-project-btn {
+            background-color: #732c26 !important;
+            border: none !important;
+            border-radius: 9999px !important;
+            padding: 12px 20px !important;
+            font-weight: 500 !important;
+            font-size: clamp(12px, 0.95vw, 16px) !important;
+            font-family: "Helvetica Neue", "Inter", "Satoshi", sans-serif !important;
+            color: white !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-decoration: none !important;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease !important;
+        }
+
+        .start-project-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease, transform 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .start-project-btn:hover::after {
+            width: 100%;
+        }
+
+        .start-project-btn:hover {
+            background-color: #5a1f1a;
+            transform: translateY(-1px);
+        }
+
+        /* Custom cursor styles */
         .custom-cursor {
             pointer-events: none;
             position: fixed;
@@ -56,25 +182,25 @@
             opacity: 1;
         }
 
-        /* 回退图片路径 */
+        /* Fallback image paths */
         .custom-cursor {
             background-image: url('assets/images/mouse-brush-white.png'), url('assets/mouse-animation.jpg');
         }
 
-        /* Hover 导航栏时的黑色图案 */
+        /* Hover navigation with black pattern */
         .custom-cursor.nav-hover {
             background-image: url('assets/images/mouse-brush-black.png'), url('assets/mouse-animation-black.jpg');
             mix-blend-mode: normal;
             transform: translate(-50%, -50%) scale(1.1);
         }
 
-        /* 在白色背景区域使用黑色图案 */
+        /* Use black pattern on white background areas */
         .white-bg .custom-cursor {
             background-image: url('assets/images/mouse-brush-black.png');
             mix-blend-mode: multiply;
         }
 
-        /* 移动设备隐藏自定义鼠标 */
+        /* Hide custom cursor on mobile devices */
         @media (hover: none) and (pointer: coarse) {
             body {
                 cursor: auto;
@@ -85,7 +211,7 @@
             }
         }
 
-        /* 针对触摸设备的额外检查 */
+        /* Additional check for touch devices */
         @media (max-width: 1024px) {
             .custom-cursor {
                 display: none;
@@ -96,7 +222,7 @@
             }
         }
 
-        /* Logo 链接样式 */
+        /* Logo link styles */
         .logo-link {
             display: block;
             text-decoration: none;
@@ -107,7 +233,7 @@
             transform: scale(1.05);
         }
 
-        /* 响应式图片统一样式 */
+        /* Unified responsive image styles */
         img {
             width: 100%;
             height: auto;
@@ -116,7 +242,7 @@
             transition: transform 0.3s ease;
         }
 
-        /* 图片容器样式 */
+        /* Image container styles */
         .image-container {
             width: 100%;
             max-width: 100%;
@@ -124,25 +250,25 @@
             position: relative;
         }
 
-        /* 产品图片容器 */
+        /* Product image container */
         .product-image-container {
             max-width: 400px;
             margin: 0 auto;
         }
 
-        /* 小产品图片容器 */
+        /* Small product container */
         .small-product-container {
             max-width: 250px;
             width: 100%;
         }
 
-        /* 迷你产品图片容器 */
+        /* Mini product container */
         .mini-product-container {
             max-width: 150px;
             width: 100%;
         }
 
-        /* Mockup 图片容器 */
+        /* Mockup image container */
         .mockup-container {
             width: 100%;
             max-width: 100%;
@@ -180,77 +306,7 @@
             display: none;
         }
 
-        /* 统一响应式导航栏样式 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            padding: 1.5vw 5vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .navbar-container {
-            width: 100%;
-            max-width: 1440px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            height: 6vw;
-            max-height: 70px;
-            min-height: 30px;
-            width: auto;
-            object-fit: contain;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2vw;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-size: clamp(12px, 0.95vw, 16px);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 4px 8px;
-        }
-
-        .nav-links a:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-        }
-
-        .start-project-btn {
-            border: 1px solid #ffffff;
-            border-radius: 9999px;
-            padding: 12px 20px !important;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .start-project-btn:hover {
-            background-color: #ffffff;
-            color: #000000;
-        }
-
-        /* Section 3 新样式 */
+        /* Section 3 new styles */
         .section-3 {
             background-color: black;
             padding: 4vw 0;
@@ -259,7 +315,7 @@
             align-items: center;
         }
 
-        /* 主图容器 */
+        /* Main image container */
         .main-image-container {
             width: 90vw;
             max-width: 1020px;
@@ -279,7 +335,7 @@
             transform: scale(1.02);
         }
 
-        /* 小图网格 */
+        /* Small image grid */
         .grid-image-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -299,39 +355,6 @@
         .grid-image:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
-        }
-
-        /* 响应式：移动端一列显示 */
-        @media (max-width: 768px) {
-            .section-3 {
-                padding: 6vw 0;
-            }
-            
-            .main-image-container {
-                width: 95vw;
-                margin-bottom: 6vw;
-            }
-            
-            .grid-image-container {
-                grid-template-columns: 1fr;
-                gap: 4vw;
-                width: 95vw;
-            }
-            
-            .grid-image:hover {
-                transform: translateY(-3px);
-            }
-        }
-
-        /* 超小屏幕优化 */
-        @media (max-width: 480px) {
-            .section-3 {
-                padding: 8vw 0;
-            }
-            
-            .grid-image-container {
-                gap: 5vw;
-            }
         }
 
         .mockup-grid {
@@ -357,249 +380,7 @@
             align-items: center;
         }
 
-        /* 平板端适配 (768px - 1024px) */
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .navbar {
-                padding: 1.2vw 4vw;
-            }
-            
-            .nav-links {
-                gap: 1.5vw;
-            }
-            
-            .mockup-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
-                max-width: 800px;
-            }
-            
-            .process-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 40px;
-            }
-            
-            .contact-links {
-                gap: 50px;
-            }
-            
-            .product-image-container {
-                max-width: 350px;
-            }
-            
-            .small-product-container {
-                max-width: 200px;
-            }
-            
-            /* Section 2 平板适配 */
-            #section2 {
-                padding: 120px 40px 90px !important;
-            }
-            
-            /* CLIENT/PROJECT 标签 */
-            #section2 p[style*="font-size: 18px"] {
-                font-size: 16px !important;
-            }
-            
-            /* fal Uniformity 标题 */
-            #section2 h1 {
-                font-size: 36px !important;
-            }
-            
-            /* 描述文字 */
-            #section2 div[style*="max-width: 700px"] p {
-                font-size: 20px !important;
-                max-width: 600px !important;
-            }
-        }
-
-        /* 手机端适配 (小于768px) */
-        @media (max-width: 767px) {
-            .navbar {
-                padding: 3vw 4vw;
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .navbar-container {
-                flex-direction: column;
-                gap: 20px;
-                width: 100%;
-            }
-            
-            .logo {
-                height: 8vw;
-                max-height: 50px;
-                min-height: 25px;
-            }
-            
-            .nav-links {
-                gap: 6vw;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-links a {
-                font-size: clamp(11px, 3vw, 14px);
-            }
-            
-            /* 网格布局调整 */
-            .mockup-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            
-            .process-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .contact-links {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            /* 图片容器调整 */
-            .product-image-container {
-                max-width: 300px;
-            }
-            
-            /* Section 2 响应式调整 */
-            #section2 {
-                padding: 100px 20px 80px !important;
-                margin-top: 140px !important;
-            }
-            
-            #section2 .container {
-                max-width: 95% !important;
-            }
-            
-            /* CLIENT/PROJECT 标签 */
-            #section2 p[style*="font-size: 18px"] {
-                font-size: 14px !important;
-                letter-spacing: 0.15em !important;
-                margin-bottom: 16px !important;
-            }
-            
-            /* fal Uniformity 标题 */
-            #section2 h1 {
-                font-size: 28px !important;
-                line-height: 1.1 !important;
-            }
-            
-            /* 垂直分隔线 */
-            #section2 div[style*="height: 60px"] {
-                height: 40px !important;
-                margin: 60px auto !important;
-            }
-            
-            /* 描述文字 */
-            #section2 div[style*="max-width: 700px"] p {
-                font-size: 18px !important;
-                line-height: 1.4 !important;
-                max-width: 100% !important;
-            }
-            
-            /* 内容区域调整 */
-            #section4 {
-                padding: 60px 20px !important;
-            }
-            
-            #section7 {
-                padding: 80px 20px !important;
-            }
-            
-            #section8 {
-                padding: 60px 20px !important;
-            }
-        }
-
-        /* 超小屏幕适配 (小于480px) */
-        @media (max-width: 479px) {
-            .navbar {
-                padding: 4vw 3vw;
-            }
-            
-            .logo {
-                height: 10vw;
-                max-height: 45px;
-                min-height: 22px;
-            }
-            
-            .nav-links {
-                gap: 8vw;
-            }
-            
-            .nav-links a {
-                font-size: clamp(10px, 3.5vw, 12px);
-            }
-            
-            .product-image-container {
-                max-width: 250px;
-            }
-        }
-
-        /* 新增：Our Process 和 Contact 的响应式样式 */
-        .process-steps {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: stretch;
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .process-step {
-            flex: 1;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        /* 移动端 Our Process 和 Contact 适配 */
-        @media (max-width: 767px) {
-            /* Our Process 移动端样式 */
-            .our-process {
-                padding: 80px 20px !important;
-            }
-            
-            .process-title {
-                font-size: 32px !important;
-                margin-bottom: 60px !important;
-            }
-            
-            .process-steps {
-                flex-direction: column !important;
-                gap: 40px !important;
-            }
-            
-            .process-step {
-                flex: none !important;
-            }
-            
-            .step-number {
-                font-size: 48px !important;
-            }
-            
-            .step-title {
-                font-size: 20px !important;
-            }
-            
-            .step-description {
-                font-size: 14px !important;
-            }
-        }
-
-        /* Between Footer Styles */
+        /* Footer Styles (from footer.html) */
         .between-footer {
             background-color: #000000;
             color: white;
@@ -732,40 +513,41 @@
         }
 
         .footer-cta-button {
-            background-color: #732c26;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 16px 32px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            position: relative;
-            text-decoration: none;
+            background-color: #732c26 !important;
+            border: none !important;
+            border-radius: 9999px !important;
+            padding: 12px 20px !important;
+            font-weight: 500 !important;
+            font-size: clamp(12px, 0.95vw, 16px) !important;
+            font-family: "Helvetica Neue", "Inter", "Satoshi", sans-serif !important;
+            color: white !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-decoration: none !important;
             display: inline-block;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            position: relative;
+            transition: all 0.3s ease !important;
         }
 
         .footer-cta-button::after {
             content: '';
             position: absolute;
-            bottom: -6px;
+            bottom: -4px;
             left: 50%;
-            transform: translateX(-50%);
             width: 0;
-            height: 1px;
+            height: 2px;
             background-color: white;
-            transition: width 0.3s ease;
+            transition: width 0.3s ease, transform 0.3s ease;
+            transform: translateX(-50%);
         }
 
         .footer-cta-button:hover::after {
-            width: 80%;
+            width: 100%;
         }
 
         .footer-cta-button:hover {
-            transform: translateY(-2px);
+            background-color: #5a1f1a;
+            transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(115, 44, 38, 0.4);
         }
 
@@ -790,8 +572,233 @@
             padding: 0;
         }
 
-        /* Footer Responsive */
-        @media (max-width: 768px) {
+        /* Our Process styles */
+        .process-steps {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Tablet adaptation (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .navbar {
+                padding: 1.2vw 4vw;
+            }
+            
+            .nav-links {
+                gap: 1.5vw;
+            }
+            
+            .mockup-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+                max-width: 800px;
+            }
+            
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+            
+            .contact-links {
+                gap: 50px;
+            }
+            
+            .product-image-container {
+                max-width: 350px;
+            }
+            
+            .small-product-container {
+                max-width: 200px;
+            }
+            
+            /* Section 2 tablet adaptation */
+            #section2 {
+                padding: 120px 40px 90px !important;
+            }
+            
+            /* CLIENT/PROJECT labels */
+            #section2 p[style*="font-size: 18px"] {
+                font-size: 16px !important;
+            }
+            
+            /* fal Uniformity title */
+            #section2 h1 {
+                font-size: 36px !important;
+            }
+            
+            /* Description text */
+            #section2 div[style*="max-width: 700px"] p {
+                font-size: 20px !important;
+                max-width: 600px !important;
+            }
+        }
+
+        /* Mobile adaptation (under 768px) */
+        @media (max-width: 767px) {
+            .navbar {
+                padding: 3vw 4vw;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .navbar-container {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+            }
+            
+            .navbar .logo {
+                height: 8vw;
+                max-height: 50px;
+                min-height: 25px;
+            }
+            
+            .nav-links {
+                gap: 6vw;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links a {
+                font-size: clamp(11px, 3vw, 14px);
+            }
+            
+            /* Responsive grid layouts mobile */
+            .section-3 {
+                padding: 6vw 0;
+            }
+            
+            .main-image-container {
+                width: 95vw;
+                margin-bottom: 6vw;
+            }
+            
+            .grid-image-container {
+                grid-template-columns: 1fr;
+                gap: 4vw;
+                width: 95vw;
+            }
+            
+            .grid-image:hover {
+                transform: translateY(-3px);
+            }
+            
+            /* Grid layout adjustments */
+            .mockup-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            /* Image container adjustments */
+            .product-image-container {
+                max-width: 300px;
+            }
+            
+            /* Section 2 responsive adjustments */
+            #section2 {
+                padding: 100px 20px 80px !important;
+                margin-top: 140px !important;
+            }
+            
+            #section2 .container {
+                max-width: 95% !important;
+            }
+            
+            /* CLIENT/PROJECT labels */
+            #section2 p[style*="font-size: 18px"] {
+                font-size: 14px !important;
+                letter-spacing: 0.15em !important;
+                margin-bottom: 16px !important;
+            }
+            
+            /* fal Uniformity title */
+            #section2 h1 {
+                font-size: 28px !important;
+                line-height: 1.1 !important;
+            }
+            
+            /* Vertical divider */
+            #section2 div[style*="height: 60px"] {
+                height: 40px !important;
+                margin: 60px auto !important;
+            }
+            
+            /* Description text */
+            #section2 div[style*="max-width: 700px"] p {
+                font-size: 18px !important;
+                line-height: 1.4 !important;
+                max-width: 100% !important;
+            }
+            
+            /* Content area adjustments */
+            #section4 {
+                padding: 60px 20px !important;
+            }
+            
+            #section7 {
+                padding: 80px 20px !important;
+            }
+            
+            #section8 {
+                padding: 60px 20px !important;
+            }
+
+            /* Our Process mobile adaptation */
+            .our-process {
+                padding: 80px 20px !important;
+            }
+            
+            .process-title {
+                font-size: 32px !important;
+                margin-bottom: 60px !important;
+            }
+            
+            .process-steps {
+                flex-direction: column !important;
+                gap: 40px !important;
+            }
+            
+            .process-step {
+                flex: none !important;
+            }
+            
+            .step-number {
+                font-size: 48px !important;
+            }
+            
+            .step-title {
+                font-size: 20px !important;
+            }
+            
+            .step-description {
+                font-size: 14px !important;
+            }
+
+            /* Footer Responsive */
             .between-footer {
                 min-height: 100vh;
             }
@@ -826,11 +833,6 @@
                 font-size: 1rem;
             }
 
-            .footer-cta-button {
-                padding: 14px 28px;
-                font-size: 0.85rem;
-            }
-
             .logo-section {
                 align-items: end;
                 justify-content: center;
@@ -843,7 +845,39 @@
             }
         }
 
-        @media (max-width: 480px) {
+        /* Extra small screen adaptation (under 480px) */
+        @media (max-width: 479px) {
+            .navbar {
+                padding: 4vw 3vw;
+            }
+            
+            .navbar .logo {
+                height: 10vw;
+                max-height: 45px;
+                min-height: 22px;
+            }
+            
+            .nav-links {
+                gap: 8vw;
+            }
+            
+            .nav-links a {
+                font-size: clamp(10px, 3.5vw, 12px);
+            }
+            
+            .product-image-container {
+                max-width: 250px;
+            }
+
+            /* Extra small screen optimizations */
+            .section-3 {
+                padding: 8vw 0;
+            }
+            
+            .grid-image-container {
+                gap: 5vw;
+            }
+
             .between-footer {
                 min-height: 100vh;
             }
@@ -871,11 +905,6 @@
                 font-size: 0.95rem;
             }
 
-            .footer-cta-button {
-                padding: 12px 24px;
-                font-size: 0.8rem;
-            }
-
             .logo-section {
                 align-items: end;
                 justify-content: center;
@@ -890,19 +919,19 @@
     </style>
 </head>
 <body>
-    <!-- 自定义鼠标元素 - 大尺寸版本 (300px) -->
+    <!-- Custom cursor element - large version (300px) -->
     <div id="custom-cursor"></div>
 
-    <!-- 统一响应式导航栏 -->
+    <!-- Header (from header_qub.html) -->
     <header class="navbar">
         <div class="navbar-container">
             <a href="index.html" class="logo-link">
-                <img src="assets/Between-logo-white.png" alt="Between Logo" class="logo" />
+                <img src="assets/between-logo-transparent.png" alt="Between Logo" class="navbar .logo" onclick="window.location.href='index.html'" />
             </a>
             <nav class="nav-links">
                 <a href="works.html">WORKS</a>
-                <a href="#about">ABOUT</a>
-                <a href="mailto:betweenlabo@gmail.com" class="start-project-btn">START A PROJECT</a>
+                <a href="about.html">ABOUT</a>
+                <a href="start-a-project.html" class="start-project-btn">START A PROJECT</a>
             </nav>
         </div>
     </header>
@@ -981,14 +1010,14 @@
         </div>
     </section>
 
-    <!-- Section 3: Product Photos (Black Background) - 新设计 -->
+    <!-- Section 3: Product Photos (Black Background) - New design -->
     <section class="section-3">
-        <!-- 主图 -->
+        <!-- Main image -->
         <div class="main-image-container">
             <img src="assets/images/sorona-tee-fal.png" alt="fal tee on rocks" class="main-image" 
                  onerror="this.src='assets/fal-project/Sorona-tee-fal.png'" />
         </div>
-        <!-- 小图网格 -->
+        <!-- Small image grid -->
         <div class="grid-image-container">
             <img src="assets/images/socks-fal.png" alt="fal socks" class="grid-image" 
                  onerror="this.src='assets/fal-project/socks-fal.png'" />
@@ -1055,7 +1084,7 @@
         </div>
     </section>
 
-    <!-- Our Process Section - Cloned from index.html -->
+    <!-- Our Process Section -->
     <section class="our-process" style="
         background-color: #f48d45;
         padding: 100px 40px;
@@ -1184,7 +1213,7 @@
         </div>
     </section>
 
-    <!-- Between Footer Module -->
+    <!-- Footer (from footer.html) -->
     <footer class="between-footer">
         <div class="footer-content">
             <!-- Newsletter Section -->
@@ -1193,17 +1222,14 @@
                 <p class="newsletter-description">
                     Join our newsletter to stay informed about new projects, products, previews, and more.
                 </p>
-                <form class="newsletter-form" action="https://formspree.io/f/mgvzwvnz" method="POST" onsubmit="handleNewsletterSubmit(event)">
+                <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
                     <input 
                         type="email" 
                         class="email-input" 
                         placeholder="E-Mail" 
                         required
                         id="emailInput"
-                        name="email"
                     >
-                    <input type="hidden" name="_subject" value="New Subscriber">
-                    <input type="hidden" name="_next" value="">
                     <button type="submit" class="subscribe-btn">Subscribe</button>
                 </form>
             </div>
@@ -1230,37 +1256,28 @@
         </div>
     </footer>
 
-    <!-- 
-    EMAIL INTEGRATION - READY TO USE:
-    Newsletter form sends directly to Formspree endpoint: https://formspree.io/f/mgvzwvnz
-    - Sends POST request with user's email
-    - Subject: "New Subscriber" 
-    - No popups or email client opening
-    - Auto refreshes page after 800ms
-    -->
-
     <script>
-        // 自定义鼠标动画效果
+        // Custom cursor animation effects
         (function() {
-            // 检查是否为桌面设备
+            // Check if desktop device
             const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
             
             if (!isTouchDevice && window.innerWidth > 1024) {
-                // 创建自定义鼠标元素
+                // Create custom cursor element
                 const cursor = document.createElement("div");
                 cursor.classList.add("custom-cursor");
                 document.body.appendChild(cursor);
 
-                // 鼠标移动事件
+                // Mouse move event
                 document.addEventListener("mousemove", (e) => {
                     cursor.style.left = `${e.clientX}px`;
                     cursor.style.top = `${e.clientY}px`;
                     
-                    // 检测背景颜色并调整鼠标图案
+                    // Detect background color and adjust cursor pattern
                     const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
                     const bgColor = window.getComputedStyle(elementBelow).backgroundColor;
                     
-                    // 如果是白色背景区域，切换到黑色图案
+                    // If white background area, switch to black pattern
                     if (bgColor === 'rgb(255, 255, 255)' || bgColor === 'rgba(255, 255, 255, 1)' || 
                         elementBelow.closest('#section4') || elementBelow.closest('.contact')) {
                         cursor.classList.add('white-bg');
@@ -1269,7 +1286,7 @@
                     }
                 });
 
-                // 导航链接 hover 效果
+                // Navigation link hover effect
                 const navLinks = document.querySelectorAll(".nav-links a, .logo-link");
                 
                 navLinks.forEach(link => {
@@ -1282,7 +1299,7 @@
                     });
                 });
 
-                // 鼠标进入和离开页面时的处理
+                // Mouse enter and leave page handling
                 document.addEventListener("mouseenter", () => {
                     cursor.style.opacity = "1";
                 });
@@ -1291,12 +1308,12 @@
                     cursor.style.opacity = "0";
                 });
 
-                // 页面滚动时保持鼠标效果
+                // Keep cursor effect on page scroll
                 window.addEventListener("scroll", () => {
-                    // 可以在这里添加滚动相关的鼠标效果逻辑
+                    // Can add scroll-related cursor effect logic here
                 });
 
-                // 窗口大小改变时检查是否需要隐藏鼠标
+                // Check if cursor should be hidden on window resize
                 window.addEventListener("resize", () => {
                     if (window.innerWidth <= 1024) {
                         cursor.style.display = "none";
@@ -1309,8 +1326,8 @@
             }
         })();
 
-        // 导航栏滚动效果
-        window.addEventListener('scroll', () => {
+        // Navigation bar scroll effect (from header_qub.html)
+        function handleScroll() {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
                 navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
@@ -1319,65 +1336,63 @@
                 navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
                 navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
             }
-        });
+        }
 
-        // Logo 点击调试
+        // Logo click debug
         document.querySelector('.logo-link').addEventListener('click', function(e) {
             console.log('Logo clicked! Navigating to:', this.href);
         });
 
-        // 导航链接调试
+        // Navigation link debug
         document.querySelector('a[href="works.html"]').addEventListener('click', function(e) {
             console.log('WORKS link clicked! Current page:', this.href);
         });
 
-        // Newsletter form submission - Direct Formspree integration
+        // Newsletter form submission (from footer.html)
         function handleNewsletterSubmit(event) {
             event.preventDefault();
             const email = document.getElementById('emailInput').value;
-            const subscribeBtn = document.querySelector('.subscribe-btn');
             
             if (email) {
-                // Show loading state
-                subscribeBtn.disabled = true;
-                subscribeBtn.textContent = 'Sending...';
-                
-                // Prepare form data for Formspree
-                const formData = new FormData();
-                formData.append('email', email);
-                formData.append('_subject', 'New Subscriber');
-                
                 // Send POST request to Formspree
                 fetch('https://formspree.io/f/mgvzwvnz', {
                     method: 'POST',
-                    body: formData,
                     headers: {
-                        'Accept': 'application/json'
-                    }
-                }).then(response => {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        _subject: 'Newsletter Subscription',
+                        message: `Newsletter subscription request from: ${email}`
+                    })
+                })
+                .then(response => {
                     if (response.ok) {
-                        // Success - clear form and refresh after 800ms
-                        document.getElementById('emailInput').value = '';
+                        console.log('Newsletter subscription sent successfully');
+                        // Refresh page after short delay
                         setTimeout(() => {
                             window.location.reload();
                         }, 800);
                     } else {
-                        // Handle error - reset button state
-                        subscribeBtn.disabled = false;
-                        subscribeBtn.textContent = 'Subscribe';
-                        console.error('Form submission failed');
+                        console.error('Failed to send newsletter subscription');
+                        // Still refresh page even if there's an error
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 800);
                     }
-                }).catch(error => {
-                    // Handle network error - reset button state
-                    subscribeBtn.disabled = false;
-                    subscribeBtn.textContent = 'Subscribe';
-                    console.error('Network error:', error);
+                })
+                .catch(error => {
+                    console.error('Error sending newsletter subscription:', error);
+                    // Refresh page even if there's an error
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 800);
                 });
             }
         }
 
-        // Footer logo loading animation
-        document.addEventListener('DOMContentLoaded', function() {
+        // Footer logo loading animation (from footer.html)
+        function initFooter() {
             const logoImage = document.querySelector('#betweenLogo');
             
             if (logoImage) {
@@ -1400,6 +1415,26 @@
                     console.log(`Logo failed to load: ${this.src}`);
                 };
             }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize header functionality
+            window.addEventListener('scroll', handleScroll);
+            
+            // Logo error handling
+            const logo = document.querySelector('.navbar .logo');
+            if (logo) {
+                logo.onerror = function() {
+                    console.warn('Logo image failed to load:', this.src);
+                    this.src = 'assets/Between-logo-white.png'; // Fallback
+                };
+            }
+
+            // Initialize footer
+            initFooter();
+            
+            console.log('✅ Works page initialized with embedded components');
         });
     </script>
 </body>
