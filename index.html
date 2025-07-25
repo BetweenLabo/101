@@ -901,13 +901,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🎬 Starting opening animation...');
             
-            // Show opening logo after 500ms
+            // Show opening logo after 400ms
             setTimeout(function() {
                 document.getElementById('openingLogo').classList.add('fade-in');
                 console.log('✨ Logo faded in');
-            }, 500);
+            }, 400);
 
-            // Start transition to main website after 4 seconds
+            // Start transition to main website after 3.2 seconds
             setTimeout(function() {
                 console.log('🔄 Starting transition to main website...');
                 
@@ -920,16 +920,16 @@
                     document.getElementById('mainWebsite').classList.add('show');
                     console.log('🌟 Main website revealed!');
                     
-                    // Remove opening animation from DOM to free memory
-                    setTimeout(function() {
-                        openingAnimation.remove();
-                        console.log('🧹 Opening animation removed from DOM');
-                    }, 1000);
-                    
                     // Initialize main website features
                     initializeMainWebsite();
-                }, 500);
-            }, 4000); // Total opening animation duration: 4 seconds
+                }, 400);
+                
+                // Remove opening animation from DOM after transition completes
+                setTimeout(function() {
+                    openingAnimation.remove();
+                    console.log('🧹 Opening animation removed from DOM - Total duration: 4 seconds');
+                }, 800);
+            }, 3200); // Start transition at 3.2 seconds for total 4-second duration
         });
 
         // Initialize main website functionality
