@@ -286,9 +286,11 @@
             margin: 80px 0 0 0;
             padding: 0;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: videoFadeIn 1.5s ease-out 1.5s forwards;
+            background-color: #f0f0f0;
+            border: 2px solid #ccc;
+            opacity: 1;
+            transform: translateY(0);
+            animation: videoFadeIn 1.5s ease-out 0.5s forwards;
         }
 
         .video-section video {
@@ -296,6 +298,21 @@
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        /* Fallback content for when video doesn't load */
+        .video-section::before {
+            content: 'Video Loading... (fal_movie.mp4)';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            z-index: 1;
         }
 
         @keyframes videoFadeIn {
