@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Between - fal Uniformity Collection</title>
+    <title>Between - fal Uniformity</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,13 +11,9 @@
         :root {
             --heading-font: 'Playfair Display', serif;
             --body-font: 'Inter', sans-serif;
-            --primary-font: "Helvetica Neue", "Inter", "Satoshi", sans-serif;
             --white: #ffffff;
             --black: #000000;
             --gray: #666666;
-            --cream: #f7f3e5;
-            --brand-red: #732c26;
-            --brand-red-dark: #5a1f1a;
         }
 
         * {
@@ -27,6 +23,7 @@
             cursor: auto;
         }
 
+        /* System preferred interactive cursors */
         button, a, input[type="submit"], input[type="button"], .clickable {
             cursor: pointer;
         }
@@ -35,14 +32,10 @@
             cursor: text;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: var(--primary-font);
-            background-color: var(--white);
-            color: var(--black);
+            font-family: "Helvetica Neue", "Inter", "Satoshi", sans-serif;
+            background-color: #f7f3e5;
+            color: #000000;
             line-height: 1.6;
         }
 
@@ -100,7 +93,7 @@
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--black);
+            color: #000000;
             text-decoration: none;
             transition: all 0.3s ease;
             padding: 4px 8px;
@@ -114,7 +107,7 @@
             left: 50%;
             width: 0;
             height: 2px;
-            background-color: var(--black);
+            background-color: #000000;
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
@@ -124,13 +117,13 @@
         }
 
         .start-project-btn {
-            background-color: var(--brand-red) !important;
+            background-color: #732c26 !important;
             border: none !important;
             border-radius: 9999px !important;
             padding: 12px 20px !important;
             font-weight: 500 !important;
             font-size: clamp(12px, 0.95vw, 16px) !important;
-            font-family: var(--primary-font) !important;
+            font-family: "Helvetica Neue", "Inter", "Satoshi", sans-serif !important;
             color: white !important;
             letter-spacing: 0.1em !important;
             text-transform: uppercase !important;
@@ -157,7 +150,7 @@
         }
 
         .start-project-btn:hover {
-            background-color: var(--brand-red-dark);
+            background-color: #5a1f1a;
             transform: translateY(-1px);
         }
 
@@ -167,54 +160,13 @@
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar.scrolled .nav-links a {
-            color: var(--black);
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-animation {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            object-fit: cover;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero h1 {
-            font-family: var(--heading-font);
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        /* ===== CLIENT SECTION ===== */
+        /* ===== CLIENT SECTION STYLES ===== */
         .client-section {
             background-color: var(--white);
-            padding: 160px 48px 60px;
+            padding: 140px 48px 100px;
             text-align: center;
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin: 0;
         }
 
         .content-container {
@@ -293,19 +245,38 @@
             margin: 0;
         }
 
-        /* ===== MAIN CONTENT ===== */
+        /* ===== FASHION LAYOUT STYLES ===== */
+        .hero {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-animation {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+        }
+
         .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
+            width: 100%;
+            margin: 0;
             padding: 30px 20px;
-            background-color: var(--white);
+            background-color: #ffffff;
         }
 
         .product-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
         .product-item {
@@ -324,14 +295,12 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            background-color: #f5f5f5;
-            transition: opacity 0.3s ease;
         }
 
         .lifestyle-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 30px;
         }
 
         .lifestyle-item {
@@ -350,20 +319,57 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            background-color: #f5f5f5;
-            transition: opacity 0.3s ease;
         }
 
         /* ===== FOOTER STYLES ===== */
+        .footer-cta-button {
+            background-color: #732c26 !important;
+            border: none !important;
+            border-radius: 9999px !important;
+            padding: 12px 20px !important;
+            font-weight: 500 !important;
+            font-size: clamp(12px, 0.95vw, 16px) !important;
+            font-family: "Helvetica Neue", "Inter", "Satoshi", sans-serif !important;
+            color: white !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-decoration: none !important;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease !important;
+        }
+
+        .footer-cta-button::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease, transform 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .footer-cta-button:hover::after {
+            width: 100%;
+        }
+
+        .footer-cta-button:hover {
+            background-color: #5a1f1a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(115, 44, 38, 0.4);
+        }
+
         .between-footer {
-            background-color: var(--black);
+            background-color: #000000;
             color: white;
             width: 100%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             position: relative;
-            font-family: var(--primary-font);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         .footer-content {
@@ -383,7 +389,7 @@
         }
 
         .footer-section h3 {
-            font-family: var(--heading-font);
+            font-family: Georgia, 'Times New Roman', Times, serif;
             font-size: 1.8rem;
             font-weight: normal;
             margin-bottom: 1.5rem;
@@ -419,11 +425,11 @@
         }
 
         .email-input:focus {
-            background-color: var(--white);
+            background-color: #fff;
         }
 
         .email-input::placeholder {
-            color: var(--gray);
+            color: #666;
         }
 
         .subscribe-btn {
@@ -439,7 +445,7 @@
 
         .subscribe-btn:hover {
             background-color: white;
-            color: var(--black);
+            color: black;
         }
 
         .connect-section {
@@ -486,45 +492,6 @@
             align-items: flex-start;
         }
 
-        .footer-cta-button {
-            background-color: var(--brand-red) !important;
-            border: none !important;
-            border-radius: 9999px !important;
-            padding: 12px 20px !important;
-            font-weight: 500 !important;
-            font-size: clamp(12px, 0.95vw, 16px) !important;
-            font-family: var(--primary-font) !important;
-            color: white !important;
-            letter-spacing: 0.1em !important;
-            text-transform: uppercase !important;
-            text-decoration: none !important;
-            display: inline-block;
-            position: relative;
-            transition: all 0.3s ease !important;
-        }
-
-        .footer-cta-button::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: white;
-            transition: width 0.3s ease, transform 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .footer-cta-button:hover::after {
-            width: 100%;
-        }
-
-        .footer-cta-button:hover {
-            background-color: var(--brand-red-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(115, 44, 38, 0.4);
-        }
-
         .logo-section {
             flex: 1;
             display: flex;
@@ -546,7 +513,25 @@
             padding: 0;
         }
 
+        /* Image loading placeholder */
+        .product-item img,
+        .lifestyle-item img {
+            background-color: #f5f5f5;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-item img:not([src]),
+        .lifestyle-item img:not([src]) {
+            opacity: 0.3;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* ===== RESPONSIVE DESIGN ===== */
+        /* Navbar Responsive */
         @media (min-width: 768px) and (max-width: 1024px) {
             .navbar {
                 padding: 1.2vw 4vw;
@@ -554,23 +539,6 @@
             
             .nav-links {
                 gap: 1.5vw;
-            }
-
-            .client-section {
-                padding: 120px 40px 90px;
-            }
-            
-            .client-label, .project-label {
-                font-size: 16px;
-            }
-            
-            .project-title {
-                font-size: 36px;
-            }
-            
-            .description-text {
-                font-size: 20px;
-                max-width: 600px;
             }
         }
 
@@ -602,37 +570,56 @@
             .nav-links a {
                 font-size: clamp(11px, 3vw, 14px);
             }
+        }
 
-            .hero h1 {
-                font-size: 2rem;
+        @media (max-width: 479px) {
+            .navbar {
+                padding: 4vw 3vw;
             }
             
-            .main-content {
-                padding: 20px 15px;
+            .navbar .logo {
+                height: 10vw;
+                max-height: 45px;
+                min-height: 22px;
             }
             
-            .product-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                margin-bottom: 25px;
+            .nav-links {
+                gap: 8vw;
             }
             
-            .lifestyle-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
+            .nav-links a {
+                font-size: clamp(10px, 3.5vw, 12px);
             }
-            
-            .product-item,
-            .lifestyle-item {
-                aspect-ratio: 4/5;
-            }
+        }
 
+        /* Client Section Responsive */
+        @media (min-width: 768px) and (max-width: 1024px) {
             .client-section {
-                padding: 140px 20px 40px;
+                padding: 120px 40px 90px;
+            }
+            
+            .client-label, .project-label {
+                font-size: 16px;
+            }
+            
+            .project-title {
+                font-size: 36px;
+            }
+            
+            .description-text {
+                font-size: 20px;
+                max-width: 600px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .client-section {
+                padding: 100px 20px 80px;
             }
             
             .content-container {
-                max-width: 95%;
+                max-width: 100%;
+                padding: 0 10px;
             }
             
             .client-label, .project-label {
@@ -660,7 +647,69 @@
             .client-logo {
                 width: 100px;
             }
+        }
 
+        @media (max-width: 479px) {
+            .client-section {
+                padding: 80px 15px 60px;
+            }
+            
+            .client-label, .project-label {
+                font-size: 12px;
+            }
+            
+            .project-title {
+                font-size: 24px;
+            }
+            
+            .description-text {
+                font-size: 16px;
+            }
+
+            .client-logo {
+                width: 80px;
+            }
+        }
+
+        /* Fashion Layout Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px 15px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-bottom: 25px;
+                padding: 0 10px;
+            }
+            
+            .lifestyle-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 0 10px;
+            }
+            
+            .product-item,
+            .lifestyle-item {
+                aspect-ratio: 4/5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px 10px;
+            }
+            
+            .product-grid,
+            .lifestyle-grid {
+                gap: 12px;
+                padding: 0 5px;
+            }
+        }
+
+        /* Footer Responsive */
+        @media (max-width: 768px) {
             .between-footer {
                 min-height: 100vh;
             }
@@ -694,58 +743,22 @@
             .connect-link {
                 font-size: 1rem;
             }
+
+            .logo-section {
+                align-items: end;
+                justify-content: center;
+            }
+
+            .logo-image {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
         }
 
-        @media (max-width: 479px) {
-            .navbar {
-                padding: 4vw 3vw;
-            }
-            
-            .navbar .logo {
-                height: 10vw;
-                max-height: 45px;
-                min-height: 22px;
-            }
-            
-            .nav-links {
-                gap: 8vw;
-            }
-            
-            .nav-links a {
-                font-size: clamp(10px, 3.5vw, 12px);
-            }
-
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-            
-            .main-content {
-                padding: 15px 10px;
-            }
-            
-            .product-grid,
-            .lifestyle-grid {
-                gap: 12px;
-            }
-
-            .client-section {
-                padding: 120px 15px 30px;
-            }
-            
-            .client-label, .project-label {
-                font-size: 12px;
-            }
-            
-            .project-title {
-                font-size: 24px;
-            }
-            
-            .description-text {
-                font-size: 16px;
-            }
-
-            .client-logo {
-                width: 80px;
+        @media (max-width: 480px) {
+            .between-footer {
+                min-height: 100vh;
             }
 
             .footer-content {
@@ -770,11 +783,22 @@
                 padding: 10px 20px;
                 font-size: 0.95rem;
             }
+
+            .logo-section {
+                align-items: end;
+                justify-content: center;
+            }
+
+            .logo-image {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Between Navigation Header -->
+    <!-- Header Component -->
     <header class="navbar" id="navbar">
         <div class="navbar-container">
             <img src="assets/between-logo-transparent.png" alt="Between Logo" class="logo" onclick="window.location.href='index.html'" />
@@ -786,14 +810,14 @@
         </div>
     </header>
 
-    <!-- Client Information Section -->
+    <!-- Client Section Component -->
     <div class="client-section">
         <div class="content-container">
             <!-- CLIENT -->
             <div class="client-block">
                 <p class="client-label">CLIENT:</p>
                 <div class="logo-container">
-                    <img src="https://via.placeholder.com/120x60/000000/FFFFFF?text=fal" alt="Client Logo" class="client-logo">
+                    <img src="assets/work-fal/fal-logo.png" alt="Client Logo" class="client-logo">
                 </div>
             </div>
 
@@ -813,15 +837,12 @@
         </div>
     </div>
 
+    <!-- Fashion Layout Component -->
     <!-- Hero Section -->
     <section class="hero">
         <video class="hero-animation" autoplay muted loop playsinline>
-            <source src="github/101/assets/work-fal/hero-animation.mp4" type="video/mp4">
+            <source src="assets/work-fal/hero-animation.mp4" type="video/mp4">
         </video>
-        <div class="hero-content">
-            <h1>fal Uniformity</h1>
-            <p style="font-size: 14px; opacity: 0.8; margin-top: 10px;">[Hero video will display when hosted with proper file paths]</p>
-        </div>
     </section>
 
     <!-- Main Content -->
@@ -829,31 +850,31 @@
         <!-- Product Grid - 4 items -->
         <section class="product-grid">
             <div class="product-item">
-                <img src="https://via.placeholder.com/300x400/f5f5f5/666666?text=Product+1" alt="Person in black dress with green bag" loading="lazy">
+                <img src="assets/work-fal/product-1.jpg" alt="Person in black dress with green bag" loading="lazy">
             </div>
             <div class="product-item">
-                <img src="https://via.placeholder.com/300x400/f5f5f5/666666?text=Product+2" alt="Black handbag" loading="lazy">
+                <img src="assets/work-fal/product-2.jpg" alt="Black handbag" loading="lazy">
             </div>
             <div class="product-item">
-                <img src="https://via.placeholder.com/300x400/f5f5f5/666666?text=Product+3" alt="White shirt with black pattern" loading="lazy">
+                <img src="assets/work-fal/product-3.jpg" alt="White shirt with black pattern" loading="lazy">
             </div>
             <div class="product-item">
-                <img src="https://via.placeholder.com/300x400/f5f5f5/666666?text=Product+4" alt="Beige cream shoes" loading="lazy">
+                <img src="assets/work-fal/product-4.jpg" alt="Beige cream shoes" loading="lazy">
             </div>
         </section>
 
         <!-- Lifestyle Grid - 2 items -->
         <section class="lifestyle-grid">
             <div class="lifestyle-item">
-                <img src="https://via.placeholder.com/600x450/f5f5f5/666666?text=Lifestyle+1" alt="White shirt hanging in nature" loading="lazy">
+                <img src="assets/work-fal/lifestyle-1.jpg" alt="White shirt hanging in nature" loading="lazy">
             </div>
             <div class="lifestyle-item">
-                <img src="https://via.placeholder.com/600x450/f5f5f5/666666?text=Lifestyle+2" alt="Pink handbag in circular container" loading="lazy">
+                <img src="assets/work-fal/lifestyle-2.jpg" alt="Pink handbag in circular container" loading="lazy">
             </div>
         </section>
     </main>
 
-    <!-- Between Footer -->
+    <!-- Footer Component -->
     <footer class="between-footer">
         <div class="footer-content">
             <!-- Newsletter Section -->
